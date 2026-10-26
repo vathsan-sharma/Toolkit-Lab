@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "JSON Formatter - Toolkit Lab";
+const description = "Beautify, minify and validate JSON online. Runs in your browser, so your data stays private.";
+---
+<Base title={title} description={description} path="/tools/json-formatter.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <h1>JSON Formatter</h1>
+      <p class="lead">Paste JSON, then beautify it, minify it, or just check that it is valid.</p>
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="input">JSON input</label>
+        <textarea id="input" spellcheck="false" placeholder='&#123;"name": "example", "items": [1, 2, 3]&#125;'></textarea>
+
+        <label for="indent">Indent size</label>
+        <select id="indent" style="max-width:200px">
+          <option value="2" selected>2 spaces</option>
+          <option value="4">4 spaces</option>
+          <option value="tab">Tab</option>
+        </select>
+
+        <div class="row">
+          <button id="beautify">Beautify</button>
+          <button id="minify" class="secondary">Minify</button>
+          <button id="validate" class="secondary">Validate</button>
+          <button id="copy" class="secondary">Copy output</button>
+        </div>
+
+        <p id="status" class="note"></p>
+        <p id="error" class="error" hidden></p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const input = document.getElementById('input');
+    const indentSelect = document.getElementById('indent');
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
+
+    function parse() {
+      try {
+        const value = JSON.parse(input.value);
+        errorEl.hidden = true;
+        return value;
+      } catch (err) {
+        errorEl.textContent = 'Invalid JSON: ' + err.message;
+        errorEl.hidden = false;
+        statusEl.textContent = '';
+        return undefined;
+      }
+    }
+
+    function indentValue() {
+      const choice = indentSelect.value;
+      return choice === 'tab' ? '\t' : Number(choice);
+    }
+
+    function output(text) {
+      input.value = text;
+      statusEl.textContent = 'Done. Output is in the box above.';
+    }
+
+    document.getElementById('beautify').addEventListener('click', () => {
+      const data = parse();
+      if (data === undefined) return;
+      output(JSON.stringify(data, null, indentValue()));
+    });
+
+    document.getElementById('minify').addEventListener('click', () => {
+      const data = parse();
+      if (data === undefined) return;
+      output(JSON.stringify(data));
+    });
+
+    document.getElementById('validate').addEventListener('click', () => {
+      const data = parse();
+      if (data === undefined) return;
+      const type = Array.isArray(data) ? 'array' : typeof data;
+      errorEl.hidden = true;
+      statusEl.textContent = 'Valid JSON (' + type + ').';
+    });
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(input.value);
+        statusEl.textContent = 'Copied to clipboard.';
+      } catch (err) {
+        input.select();
+        document.execCommand('copy');
+        statusEl.textContent = 'Copied to clipboard.';
+      }
+    });
+  </script>
+</Base>

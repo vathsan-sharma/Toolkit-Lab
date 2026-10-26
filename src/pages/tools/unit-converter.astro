@@ -1,0 +1,143 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Unit Converter - Length, Weight and Temperature - Toolkit Lab";
+const description = "Convert length, weight and temperature units instantly. Metric, imperial and more, free and private.";
+---
+<Base title={title} description={description} path="/tools/unit-converter.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Unit Converter</p>
+        <h1>Unit Converter</h1>
+        <p class="lead">Type a value in either box to convert between units. Pick a category first.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="category">Category</label>
+        <select id="category"></select>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px;margin-top:6px">
+          <div>
+            <label for="fromValue">From</label>
+            <input type="number" id="fromValue" value="1" step="any">
+            <select id="fromUnit" style="margin-top:8px"></select>
+          </div>
+          <div>
+            <label for="toValue">To</label>
+            <input type="number" id="toValue" step="any">
+            <select id="toUnit" style="margin-top:8px"></select>
+          </div>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+        <p class="note" id="formula"></p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    // Linear units are stored as a factor to the base unit.
+    const categories = {
+      Length: {
+        base: 'm',
+        units: { m: ['Metres', 1], km: ['Kilometres', 1000], cm: ['Centimetres', 0.01], mm: ['Millimetres', 0.001],
+                 mi: ['Miles', 1609.344], yd: ['Yards', 0.9144], ft: ['Feet', 0.3048], in: ['Inches', 0.0254] }
+      },
+      Weight: {
+        base: 'kg',
+        units: { kg: ['Kilograms', 1], g: ['Grams', 0.001], mg: ['Milligrams', 0.000001],
+                 lb: ['Pounds', 0.45359237], oz: ['Ounces', 0.028349523125], st: ['Stone', 6.35029318] }
+      },
+      Temperature: {
+        base: 'C',
+        units: { C: ['Celsius', null], F: ['Fahrenheit', null], K: ['Kelvin', null] }
+      }
+    };
+
+    const categoryEl = document.getElementById('category');
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    const fromValue = document.getElementById('fromValue');
+    const toValue = document.getElementById('toValue');
+    const errorEl = document.getElementById('error');
+    const formulaEl = document.getElementById('formula');
+
+    Object.keys(categories).forEach(name => categoryEl.add(new Option(name, name)));
+
+    function fillUnits(name) {
+      const units = categories[name].units;
+      fromUnit.innerHTML = '';
+      toUnit.innerHTML = '';
+      Object.keys(units).forEach(code => {
+        fromUnit.add(new Option(units[code][0], code));
+        toUnit.add(new Option(units[code][0], code));
+      });
+      toUnit.selectedIndex = 1;
+    }
+
+    function toCelsius(value, unit) {
+      if (unit === 'C') return value;
+      if (unit === 'F') return (value - 32) * 5 / 9;
+      return value - 273.15;
+    }
+
+    function fromCelsius(value, unit) {
+      if (unit === 'C') return value;
+      if (unit === 'F') return value * 9 / 5 + 32;
+      return value + 273.15;
+    }
+
+    function convert() {
+      const name = categoryEl.value;
+      const cat = categories[name];
+      const value = parseFloat(fromValue.value);
+      if (!isFinite(value)) {
+        toValue.value = '';
+        formulaEl.textContent = '';
+        errorEl.textContent = 'Enter a number to convert.';
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
+
+      const from = fromUnit.value;
+      const to = toUnit.value;
+      let result;
+      if (name === 'Temperature') {
+        result = fromCelsius(toCelsius(value, from), to);
+      } else {
+        result = value * cat.units[from][1] / cat.units[to][1];
+      }
+
+      toValue.value = Number(result.toPrecision(10));
+      formulaEl.textContent = value + ' ' + from + ' = ' + Number(result.toPrecision(10)) + ' ' + to;
+    }
+
+    categoryEl.addEventListener('change', () => { fillUnits(categoryEl.value); convert(); });
+    [fromValue, fromUnit, toUnit].forEach(el => el.addEventListener('input', convert));
+    fromUnit.addEventListener('change', convert);
+    toUnit.addEventListener('change', convert);
+    toValue.addEventListener('input', () => {
+      const value = parseFloat(toValue.value);
+      if (!isFinite(value)) return;
+      const name = categoryEl.value;
+      const cat = categories[name];
+      const from = fromUnit.value;
+      const to = toUnit.value;
+      if (name === 'Temperature') {
+        fromValue.value = Number(fromCelsius(toCelsius(value, to), from).toPrecision(10));
+      } else {
+        fromValue.value = Number((value * cat.units[to][1] / cat.units[from][1]).toPrecision(10));
+      }
+      convert();
+    });
+
+    fillUnits('Length');
+    convert();
+  </script>
+</Base>

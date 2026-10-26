@@ -1,0 +1,113 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Online Stopwatch with Laps - Toolkit Lab";
+const description = "A simple online stopwatch with lap times. Start, pause, reset and record laps in your browser.";
+---
+<Base title={title} description={description} path="/tools/stopwatch.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Stopwatch</p>
+        <h1>Online Stopwatch</h1>
+        <p class="lead">Start the clock, record laps, and reset when you are done. Keyboard: Space starts or pauses, L records a lap.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel" style="text-align:center">
+        <div id="display" style="font-family:var(--serif);font-size:clamp(3rem,12vw,5.5rem);font-variant-numeric:tabular-nums;line-height:1.1;margin:12px 0 20px">00:00.00</div>
+        <div class="row" style="justify-content:center;margin-top:0">
+          <button id="startStop" type="button">Start</button>
+          <button id="lap" class="secondary" type="button" disabled>Lap</button>
+          <button id="reset" class="secondary" type="button">Reset</button>
+        </div>
+
+        <div style="text-align:left;margin-top:26px">
+          <ol id="laps" style="padding-left:0;list-style:none;margin:0;font-variant-numeric:tabular-nums"></ol>
+        </div>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const displayEl = document.getElementById('display');
+    const startStop = document.getElementById('startStop');
+    const lapBtn = document.getElementById('lap');
+    const resetBtn = document.getElementById('reset');
+    const lapsEl = document.getElementById('laps');
+
+    let elapsed = 0;      // milliseconds banked from earlier runs
+    let startedAt = null; // timestamp of the current run, or null when paused
+    let lastLapTotal = 0;
+    let frame = null;
+
+    function current() {
+      return elapsed + (startedAt === null ? 0 : performance.now() - startedAt);
+    }
+
+    function format(ms) {
+      const totalCs = Math.floor(ms / 10);
+      const cs = totalCs % 100;
+      const s = Math.floor(totalCs / 100) % 60;
+      const m = Math.floor(totalCs / 6000);
+      const pad = n => String(n).padStart(2, '0');
+      return pad(m) + ':' + pad(s) + '.' + pad(cs);
+    }
+
+    function tick() {
+      displayEl.textContent = format(current());
+      if (startedAt !== null) frame = requestAnimationFrame(tick);
+    }
+
+    function toggle() {
+      if (startedAt === null) {
+        startedAt = performance.now();
+        startStop.textContent = 'Pause';
+        lapBtn.disabled = false;
+        tick();
+      } else {
+        elapsed = current();
+        startedAt = null;
+        cancelAnimationFrame(frame);
+        startStop.textContent = 'Start';
+        tick();
+      }
+    }
+
+    function lap() {
+      const total = current();
+      const split = total - lastLapTotal;
+      lastLapTotal = total;
+      const li = document.createElement('li');
+      li.style.cssText = 'display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)';
+      li.innerHTML = '<span></span><span></span>';
+      li.firstChild.textContent = 'Lap ' + (lapsEl.children.length + 1);
+      li.lastChild.textContent = format(split) + '  (total ' + format(total) + ')';
+      lapsEl.prepend(li);
+    }
+
+    function reset() {
+      elapsed = 0;
+      startedAt = null;
+      lastLapTotal = 0;
+      cancelAnimationFrame(frame);
+      startStop.textContent = 'Start';
+      lapBtn.disabled = true;
+      lapsEl.innerHTML = '';
+      displayEl.textContent = '00:00.00';
+    }
+
+    startStop.addEventListener('click', toggle);
+    lapBtn.addEventListener('click', lap);
+    resetBtn.addEventListener('click', reset);
+
+    document.addEventListener('keydown', e => {
+      if (e.target.closest('input, textarea, select')) return;
+      if (e.code === 'Space') { e.preventDefault(); toggle(); }
+      else if (e.key.toLowerCase() === 'l' && !lapBtn.disabled) lap();
+    });
+  </script>
+</Base>

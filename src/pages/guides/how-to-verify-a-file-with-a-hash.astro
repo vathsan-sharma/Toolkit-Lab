@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Verify a Download with a Hash (SHA-256 Explained) - Toolkit Lab";
+const description = "What a hash is, how to check a downloaded file against the publisher's SHA-256 checksum, and why SHA-1 is no longer trusted for security.";
+---
+<Base title={title} description={description} path="/guides/how-to-verify-a-file-with-a-hash.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap article">
+      <p class="note"><a href="/guides.html">Guides</a> / Security basics</p>
+      <h1>How to Verify a Download with a Hash</h1>
+      <p class="lead">A hash is a short fingerprint calculated from a file. If even one byte changes, the fingerprint changes. Publishers often list a SHA-256 hash next to a download so you can check that the file arrived intact and unaltered.</p>
+
+      <h2>What a hash does and does not do</h2>
+      <p>A hash function turns any input, from a single word to a multi-gigabyte file, into a fixed-length string of characters. It is one-way, so you cannot rebuild the file from its hash. It is not encryption and does not hide anything. Its job is to detect changes.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <h2>How to check a download</h2>
+      <ol>
+        <li>Find the checksum on the publisher's official download page. Use the page you reached by typing the address yourself, not a link from an email or ad.</li>
+        <li>Calculate the hash of the file you downloaded. Choose SHA-256 unless the publisher says otherwise.</li>
+        <li>Compare the two strings character by character. If they match exactly, the file is what the publisher released. If they differ, do not run the file. Download it again from the official site.</li>
+      </ol>
+
+      <h2>Why SHA-1 is not enough</h2>
+      <p>SHA-1 is still listed by some tools, but researchers demonstrated practical collisions in 2017, where two different files share a hash. For checking an honest download by mistake, it still catches corruption. For security, where someone might deliberately swap a file, use SHA-256 or SHA-512.</p>
+
+      <h2>A note on MD5</h2>
+      <p>MD5 is even older and has known collisions, so it should not be used for security checks. You may still see MD5 checksums on older sites. Treat them as a basic corruption check only.</p>
+
+      <h2>Try it yourself</h2>
+      <p>The <a href="../tools/hash-generator.html">Hash Generator</a> calculates SHA-256, SHA-512, SHA-384 and SHA-1 for text or for a file. Files are read on your device and never uploaded.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+</Base>

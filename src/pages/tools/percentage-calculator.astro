@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Percentage Calculator - Toolkit Lab";
+const description = "Work out percentages: what is X% of Y, X is what percent of Y, and percentage change. Free and private.";
+---
+<Base title={title} description={description} path="/tools/percentage-calculator.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Percentage Calculator</p>
+        <h1>Percentage Calculator</h1>
+        <p class="lead">Three common percentage questions, answered as you type.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <h2 style="margin-top:0">What is X% of Y?</h2>
+        <div class="row" style="margin-top:8px">
+          <input type="number" id="a1" value="15" step="any" style="width:120px" aria-label="Percent">
+          <span class="note" style="margin:0">% of</span>
+          <input type="number" id="b1" value="200" step="any" style="width:140px" aria-label="Number">
+          <span class="note" style="margin:0">=</span>
+          <strong id="r1" style="font-size:1.2rem">-</strong>
+        </div>
+
+        <h2>X is what percent of Y?</h2>
+        <div class="row" style="margin-top:8px">
+          <input type="number" id="a2" value="45" step="any" style="width:120px" aria-label="Part">
+          <span class="note" style="margin:0">is what % of</span>
+          <input type="number" id="b2" value="180" step="any" style="width:140px" aria-label="Whole">
+          <span class="note" style="margin:0">=</span>
+          <strong id="r2" style="font-size:1.2rem">-</strong>
+        </div>
+
+        <h2>Percentage change from X to Y</h2>
+        <div class="row" style="margin-top:8px">
+          <span class="note" style="margin:0">From</span>
+          <input type="number" id="a3" value="80" step="any" style="width:120px" aria-label="Starting value">
+          <span class="note" style="margin:0">to</span>
+          <input type="number" id="b3" value="100" step="any" style="width:140px" aria-label="Ending value">
+          <span class="note" style="margin:0">=</span>
+          <strong id="r3" style="font-size:1.2rem">-</strong>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const fmt = n => Number(n.toPrecision(10)).toLocaleString(undefined, { maximumFractionDigits: 6 });
+    const num = id => parseFloat(document.getElementById(id).value);
+    const out = (id, text) => { document.getElementById(id).textContent = text; };
+
+    function update() {
+      const a1 = num('a1'), b1 = num('b1');
+      out('r1', isFinite(a1) && isFinite(b1) ? fmt(a1 / 100 * b1) : '-');
+
+      const a2 = num('a2'), b2 = num('b2');
+      out('r2', isFinite(a2) && isFinite(b2) && b2 !== 0 ? fmt(a2 / b2 * 100) + '%' : '-');
+
+      const a3 = num('a3'), b3 = num('b3');
+      const errorEl = document.getElementById('error');
+      if (isFinite(a3) && isFinite(b3) && a3 !== 0) {
+        const change = (b3 - a3) / Math.abs(a3) * 100;
+        out('r3', (change > 0 ? '+' : '') + fmt(change) + '%');
+        errorEl.hidden = true;
+      } else {
+        out('r3', '-');
+        errorEl.textContent = 'The starting value cannot be zero for a percentage change.';
+        errorEl.hidden = false;
+      }
+    }
+
+    document.querySelectorAll('input').forEach(input => input.addEventListener('input', update));
+    update();
+  </script>
+</Base>

@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Hash Generator: SHA-256, SHA-512 and More - Toolkit Lab";
+const description = "Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes for text or files. Runs in your browser; nothing is uploaded.";
+---
+<Base title={title} description={description} path="/tools/hash-generator.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Hash Generator</p>
+        <h1>Hash Generator</h1>
+        <p class="lead">Calculate a SHA hash of some text or a file. Useful for checking that a download is intact.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="algo">Algorithm</label>
+        <select id="algo">
+          <option value="SHA-256" selected>SHA-256</option>
+          <option value="SHA-512">SHA-512</option>
+          <option value="SHA-384">SHA-384</option>
+          <option value="SHA-1">SHA-1 (legacy, not for security)</option>
+        </select>
+
+        <label for="text">Text to hash</label>
+        <textarea id="text" rows="4" style="min-height:0" placeholder="Type or paste text"></textarea>
+
+        <label for="file">Or choose a file</label>
+        <input type="file" id="file">
+
+        <label for="result">Hash (hex)</label>
+        <textarea id="result" rows="2" readonly style="min-height:0;font-size:0.85rem;word-break:break-all"></textarea>
+
+        <div class="row">
+          <button id="copy" class="secondary" type="button">Copy hash</button>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+        <p class="note">MD5 is not offered because the browser's built-in crypto does not support it. Files are read on your device and never uploaded.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const algo = document.getElementById('algo');
+    const textEl = document.getElementById('text');
+    const fileEl = document.getElementById('file');
+    const result = document.getElementById('result');
+    const errorEl = document.getElementById('error');
+    let lastFile = null;
+
+    function toHex(buffer) {
+      return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function run() {
+      errorEl.hidden = true;
+      try {
+        if (lastFile) {
+          const data = await lastFile.arrayBuffer();
+          result.value = toHex(await crypto.subtle.digest(algo.value, data));
+        } else if (textEl.value) {
+          const data = new TextEncoder().encode(textEl.value);
+          result.value = toHex(await crypto.subtle.digest(algo.value, data));
+        } else {
+          result.value = '';
+        }
+      } catch (err) {
+        result.value = '';
+        errorEl.textContent = 'Could not calculate the hash. Your browser may not support this algorithm.';
+        errorEl.hidden = false;
+      }
+    }
+
+    textEl.addEventListener('input', () => {
+      if (textEl.value) { lastFile = null; fileEl.value = ''; }
+      run();
+    });
+    fileEl.addEventListener('change', () => {
+      lastFile = fileEl.files[0] || null;
+      if (lastFile) textEl.value = '';
+      run();
+    });
+    algo.addEventListener('change', run);
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      if (!result.value) return;
+      try { await navigator.clipboard.writeText(result.value); }
+      catch (err) { result.select(); document.execCommand('copy'); }
+    });
+  </script>
+</Base>

@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Convert PSD Files to PNG or JPG - Toolkit Lab";
+const description = "How to turn a Photoshop PSD file into a PNG or JPG, when to pick each format, and why some PSD files cannot be converted.";
+---
+<Base title={title} description={description} path="/guides/how-to-convert-psd-files-to-png-or-jpg.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap article">
+      <p class="note"><a href="/guides.html">Guides</a> / PSD conversion</p>
+      <h1>How to Convert PSD Files to PNG or JPG</h1>
+      <p class="lead">A PSD is Adobe Photoshop's working file. It keeps layers, masks and effects, which makes it large and hard to open outside Photoshop. A flat PNG or JPG is what you need for the web, email or a client preview.</p>
+
+      <h2>PNG or JPG?</h2>
+      <p>Pick the format based on what the image needs to do:</p>
+      <ul>
+        <li><strong>PNG</strong> keeps transparency and sharp edges. Use it for logos, icons, screenshots and anything with text or transparent areas.</li>
+        <li><strong>JPG</strong> gives smaller files for photos. It has no transparency, so any transparent area turns white or black.</li>
+      </ul>
+      <p>If you are not sure, use PNG. You can always compress it afterwards with our Image Compressor.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <h2>What the converter actually exports</h2>
+      <p>A PSD file contains a flattened preview of the whole design, which is what most converters read. This preview only exists if the file was saved with Photoshop's Maximize Compatibility option turned on, which is the default. Layer changes you make after saving will not show up in the export until you save the PSD again.</p>
+
+      <h2>Why a PSD may not convert</h2>
+      <ul>
+        <li><strong>No preview saved:</strong> Some files were saved with Maximize Compatibility turned off. Re-save the file in Photoshop with that option on, then convert again.</li>
+        <li><strong>Very large files:</strong> Huge canvases use a lot of memory. Close other browser tabs and try again, or export a smaller version from Photoshop.</li>
+        <li><strong>Not a real PSD:</strong> Check that the file ends in .psd and was not renamed from another format.</li>
+      </ul>
+
+      <h2>Try it yourself</h2>
+      <p>Choose a file in the <a href="../tools/psd-converter.html">PSD to PNG / JPG Converter</a>, pick an output format and download the result. The file is read in your browser and is never uploaded.</p>
+      <p class="note">Tip: for a print-quality export, use Photoshop's own export settings. This tool is for quick previews and web images.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+</Base>

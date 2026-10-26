@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Base64 Encoder and Decoder - Toolkit Lab";
+const description = "Encode text to Base64 or decode Base64 back to text. Works with UTF-8 and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/base64.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <h1>Base64 Encoder and Decoder</h1>
+      <p class="lead">Convert text to Base64 and back. Full UTF-8 support, so accented letters and emoji work.</p>
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="input">Input</label>
+        <textarea id="input" spellcheck="false" placeholder="Type or paste text here"></textarea>
+
+        <div class="row">
+          <button id="encode">Encode</button>
+          <button id="decode" class="secondary">Decode</button>
+          <button id="swap" class="secondary">Swap input and output</button>
+          <button id="copy" class="secondary">Copy output</button>
+        </div>
+
+        <label for="output">Output</label>
+        <textarea id="output" spellcheck="false" readonly></textarea>
+
+        <p id="error" class="error" hidden></p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const inputEl = document.getElementById('input');
+    const outputEl = document.getElementById('output');
+    const errorEl = document.getElementById('error');
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    function encodeUtf8(text) {
+      const bytes = new TextEncoder().encode(text);
+      let binary = '';
+      bytes.forEach(b => { binary += String.fromCharCode(b); });
+      return btoa(binary);
+    }
+
+    function decodeUtf8(base64) {
+      const binary = atob(base64.replace(/\s/g, ''));
+      const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
+      return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+    }
+
+    document.getElementById('encode').addEventListener('click', () => {
+      showError('');
+      outputEl.value = encodeUtf8(inputEl.value);
+    });
+
+    document.getElementById('decode').addEventListener('click', () => {
+      showError('');
+      try {
+        outputEl.value = decodeUtf8(inputEl.value);
+      } catch (err) {
+        outputEl.value = '';
+        showError('This is not valid Base64 encoded UTF-8 text.');
+      }
+    });
+
+    document.getElementById('swap').addEventListener('click', () => {
+      inputEl.value = outputEl.value;
+      outputEl.value = '';
+      showError('');
+    });
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      if (!outputEl.value) return;
+      try {
+        await navigator.clipboard.writeText(outputEl.value);
+      } catch (err) {
+        outputEl.select();
+        document.execCommand('copy');
+      }
+    });
+  </script>
+</Base>

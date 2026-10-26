@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "PDF to JPG: Save Each Page as an Image - Toolkit Lab";
+const description = "Convert each page of a PDF into a JPG image and download them. Runs in your browser and nothing is uploaded.";
+---
+<Base title={title} description={description} path="/tools/pdf-to-jpg.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / PDF to JPG</p>
+        <h1>PDF to JPG</h1>
+        <p class="lead">Turn each page of a PDF into a JPG image. Download one page at a time.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="file">PDF file</label>
+        <input type="file" id="file" accept="application/pdf,.pdf">
+
+        <label for="scale">Image size</label>
+        <select id="scale">
+          <option value="1">Standard (about 72 dpi)</option>
+          <option value="2" selected>Sharp (about 144 dpi)</option>
+          <option value="3">Very sharp (about 216 dpi, slower)</option>
+        </select>
+
+        <div class="row">
+          <button id="render" type="button" disabled>Convert pages</button>
+        </div>
+
+        <p id="status" class="note" hidden></p>
+        <p id="error" class="error" hidden></p>
+
+        <div id="pages" class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:20px"></div>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline type="module">
+    import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@6.4.299/build/pdf.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@6.4.299/build/pdf.worker.min.mjs';
+
+    const fileInput = document.getElementById('file');
+    const scaleSelect = document.getElementById('scale');
+    const renderBtn = document.getElementById('render');
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
+    const pagesEl = document.getElementById('pages');
+    let file = null;
+    let downloads = [];
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+      statusEl.hidden = !message;
+    }
+
+    function clearPages() {
+      downloads.forEach(url => URL.revokeObjectURL(url));
+      downloads = [];
+      pagesEl.innerHTML = '';
+    }
+
+    fileInput.addEventListener('change', () => {
+      showError('');
+      clearPages();
+      file = fileInput.files[0] || null;
+      renderBtn.disabled = !file;
+    });
+
+    renderBtn.addEventListener('click', async () => {
+      if (!file) return;
+      showError('');
+      clearPages();
+      renderBtn.disabled = true;
+      try {
+        const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+        const scale = Number(scaleSelect.value);
+        const base = file.name.replace(/\.pdf$/i, '');
+
+        for (let n = 1; n <= pdf.numPages; n++) {
+          setStatus('Converting page ' + n + ' of ' + pdf.numPages + '...');
+          const page = await pdf.getPage(n);
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+          const ctx = canvas.getContext('2d');
+          // White background so transparent areas do not turn black in JPG.
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          await page.render({ canvasContext: ctx, viewport }).promise;
+
+          const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+          const url = URL.createObjectURL(blob);
+          downloads.push(url);
+
+          const card = document.createElement('a');
+          card.href = url;
+          card.download = base + '-page-' + n + '.jpg';
+          card.className = 'card';
+          card.style.padding = '10px';
+          card.innerHTML = '<img alt="Page ' + n + '" style="width:100%;border-radius:6px;border:1px solid var(--border)"><p style="margin-top:8px;font-size:0.85rem">Page ' + n + ' (JPG)</p>';
+          card.querySelector('img').src = url;
+          pagesEl.appendChild(card);
+        }
+        setStatus('Done. Click a page to download it as a JPG.');
+      } catch (err) {
+        setStatus('');
+        showError('This PDF could not be converted. It may be password-protected or damaged.');
+      } finally {
+        renderBtn.disabled = !file;
+      }
+    });
+  </script>
+</Base>

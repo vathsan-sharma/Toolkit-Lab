@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Format and Validate JSON - Toolkit Lab";
+const description = "A practical guide to JSON syntax, the most common errors, and how to beautify, minify and validate JSON quickly.";
+---
+<Base title={title} description={description} path="/guides/how-to-format-and-validate-json.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap article">
+      <p class="note"><a href="/guides.html">Guides</a> / JSON</p>
+      <h1>How to Format and Validate JSON</h1>
+      <p class="lead">JSON is the most common format for sending data between web apps and APIs. When it breaks, the error message is often hard to read. This guide covers the rules and the fixes.</p>
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <h2>The basic rules of JSON</h2>
+      <p>JSON is strict. These rules catch most beginners:</p>
+      <ul>
+        <li>Keys and text values must use double quotes, not single quotes.</li>
+        <li>Keys must be quoted strings. Unquoted keys are invalid.</li>
+        <li>No trailing commas after the last item in an object or array.</li>
+        <li>No comments. JSON does not allow <code>//</code> or <code>/* */</code>.</li>
+        <li>Valid values are strings, numbers, <code>true</code>, <code>false</code>, <code>null</code>, arrays and objects.</li>
+      </ul>
+
+      <h2>Common errors and what they mean</h2>
+      <p>"Unexpected token" or "Expected property name" usually means a missing quote, a stray comma or a bracket that was never closed. Start at the position the error reports and look one or two characters before it. Most of the time the problem is just before that point.</p>
+
+      <h2>Beautify or minify?</h2>
+      <p>Beautifying adds indentation and line breaks so people can read the structure. Minifying removes all unnecessary whitespace to make the data smaller for transfer. Use beautified JSON while you develop and debug, and minified JSON in production when size matters.</p>
+
+      <h2>Validate before you send</h2>
+      <p>Validating checks that the text is correct JSON without changing it. It is a quick way to confirm a config file, an API payload or a data export before it causes problems in another system.</p>
+
+      <h2>Try it yourself</h2>
+      <p>Paste your data into the <a href="../tools/json-formatter.html">JSON Formatter</a> to beautify, minify or validate it. Everything runs in your browser, so sensitive API responses are never sent to a server.</p>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+</Base>

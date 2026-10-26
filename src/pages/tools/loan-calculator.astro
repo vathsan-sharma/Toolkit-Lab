@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Loan EMI Calculator - Monthly Payment and Interest - Toolkit Lab";
+const description = "Work out a loan's monthly EMI, total interest and total payment from the amount, rate and term. Free and private.";
+---
+<Base title={title} description={description} path="/tools/loan-calculator.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Loan EMI Calculator</p>
+        <h1>Loan EMI Calculator</h1>
+        <p class="lead">Enter the loan amount, interest rate and term to see your monthly payment and the total interest.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <label for="principal">Loan amount</label>
+            <input type="number" id="principal" value="250000" min="0" step="1000">
+          </div>
+          <div>
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" value="8.5" min="0" step="0.05">
+          </div>
+          <div>
+            <label for="years">Term (years)</label>
+            <input type="number" id="years" value="20" min="1" step="1">
+          </div>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+
+        <div class="stats">
+          <div class="stat"><strong id="emi">-</strong><span>Monthly payment</span></div>
+          <div class="stat"><strong id="interest">-</strong><span>Total interest</span></div>
+          <div class="stat"><strong id="total">-</strong><span>Total repaid</span></div>
+        </div>
+        <p class="note">This is an estimate. Lenders may add fees, insurance or different rounding.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const money = n => n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+
+    function update() {
+      const P = parseFloat(document.getElementById('principal').value);
+      const annual = parseFloat(document.getElementById('rate').value);
+      const years = parseFloat(document.getElementById('years').value);
+      const errorEl = document.getElementById('error');
+
+      if (!(P > 0) || !(annual >= 0) || !(years > 0)) {
+        errorEl.textContent = 'Enter a loan amount above zero, a rate of zero or more, and a term above zero.';
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
+
+      const n = Math.round(years * 12);
+      const r = annual / 100 / 12;
+      // Standard EMI formula; a zero rate is just principal divided by months.
+      const emi = r === 0 ? P / n : P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+      const total = emi * n;
+
+      document.getElementById('emi').textContent = money(emi);
+      document.getElementById('interest').textContent = money(total - P);
+      document.getElementById('total').textContent = money(total);
+    }
+
+    document.querySelectorAll('input').forEach(input => input.addEventListener('input', update));
+    update();
+  </script>
+</Base>

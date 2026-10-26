@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Word Counter - Toolkit Lab";
+const description = "Count words, characters, sentences and reading time for any text. Free and private.";
+---
+<Base title={title} description={description} path="/tools/word-counter.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <h1>Word Counter</h1>
+      <p class="lead">Paste or type your text to see live counts. Nothing is saved or sent anywhere.</p>
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="text">Your text</label>
+        <textarea id="text" placeholder="Start typing or paste text here..."></textarea>
+
+        <div class="stats">
+          <div class="stat"><strong id="words">0</strong><span>Words</span></div>
+          <div class="stat"><strong id="chars">0</strong><span>Characters</span></div>
+          <div class="stat"><strong id="charsNoSpace">0</strong><span>Characters (no spaces)</span></div>
+          <div class="stat"><strong id="sentences">0</strong><span>Sentences</span></div>
+          <div class="stat"><strong id="paragraphs">0</strong><span>Paragraphs</span></div>
+          <div class="stat"><strong id="reading">0 min</strong><span>Reading time</span></div>
+        </div>
+
+        <div class="row">
+          <button id="copy" class="secondary">Copy text</button>
+          <button id="clear" class="secondary">Clear</button>
+        </div>
+        <p class="note">Reading time assumes about 200 words per minute.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const textEl = document.getElementById('text');
+
+    function countWords(text) {
+      const trimmed = text.trim();
+      return trimmed ? trimmed.split(/\s+/).length : 0;
+    }
+
+    function update() {
+      const text = textEl.value;
+      const words = countWords(text);
+      const sentences = text.trim() ? (text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || []).length : 0;
+      const paragraphs = text.trim() ? text.trim().split(/\n\s*\n/).length : 0;
+
+      document.getElementById('words').textContent = words.toLocaleString();
+      document.getElementById('chars').textContent = text.length.toLocaleString();
+      document.getElementById('charsNoSpace').textContent = text.replace(/\s/g, '').length.toLocaleString();
+      document.getElementById('sentences').textContent = sentences.toLocaleString();
+      document.getElementById('paragraphs').textContent = paragraphs.toLocaleString();
+      const minutes = words / 200;
+      document.getElementById('reading').textContent = minutes < 1
+        ? (words ? '< 1 min' : '0 min')
+        : Math.round(minutes) + ' min';
+    }
+
+    textEl.addEventListener('input', update);
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(textEl.value);
+      } catch (err) {
+        textEl.select();
+        document.execCommand('copy');
+      }
+    });
+
+    document.getElementById('clear').addEventListener('click', () => {
+      textEl.value = '';
+      update();
+      textEl.focus();
+    });
+
+    update();
+  </script>
+</Base>
