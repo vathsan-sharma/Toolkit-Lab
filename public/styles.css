@@ -1030,3 +1030,10 @@ footer.site p { margin: 0 0 0 auto; }
 
 /* Long result text (dates, long names) wraps inside its result box at any width. */
 .stat strong { overflow-wrap: anywhere; }
+
+/* Related guides at the end of each guide. */
+.related { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border); }
+.related h2 { margin-top: 0; font-size: 1.2rem; }
+.related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.related a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.related a:hover { text-decoration: underline; }

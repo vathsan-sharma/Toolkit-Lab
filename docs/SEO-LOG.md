@@ -139,3 +139,8 @@ Total tools: 58. Total guides: 52.
 - [x] Shared phone rules: inline form columns stack, result figures fit
 - [x] Every tool has a "How to use" line under its introduction
 - [x] Re-check: all 58 tools load with no JavaScript errors
+
+## Phase 16: Guide quality pass
+- [x] Measured all 52 guides: 333 to 513 words each, none below 300
+- [x] Added a Related guides section (up to three guides on the same topic) to all 52 guides, linking them together
+- [x] Desktop tool pass: fixed overflow, date fields and result sizing
