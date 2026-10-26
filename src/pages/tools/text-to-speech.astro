@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Text to Speech: Read Text Aloud in Your Browser - Toolkit Lab";
+const description = "Paste text and have your browser read it aloud, with a choice of voice, speed and pitch. Free and private; the text is not sent to a server.";
+---
+<Base title={title} description={description} path="/tools/text-to-speech.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Text to Speech</p>
+      <h1>Text to Speech</h1>
+      <p class="lead">Paste or type text and press Play. Voices depend on the device and browser you use.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <label for="text">Text to read</label>
+      <textarea id="text" rows="6" spellcheck="false">Welcome to Toolkit Lab. Paste any text here and listen to it.</textarea>
+      <div class="grid" style="grid-template-columns:2fr 1fr 1fr;gap:14px">
+        <div><label for="voice">Voice</label><select id="voice"></select></div>
+        <div><label for="rate">Speed: <span id="rv">1</span>x</label><input type="range" id="rate" min="0.5" max="2" step="0.1" value="1" style="width:100%"></div>
+        <div><label for="pitch">Pitch: <span id="pv">1</span></label><input type="range" id="pitch" min="0.5" max="2" step="0.1" value="1" style="width:100%"></div>
+      </div>
+      <div class="row"><button id="play" type="button">Play</button><button id="stop" type="button" class="secondary">Stop</button></div>
+      <p id="error" class="error" hidden></p>
+      <p class="note">If no voices appear, your browser does not support speech output. The text is spoken by your device, so nothing is sent to a server.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var errorEl = document.getElementById('error');
+  var voiceEl = document.getElementById('voice');
+  if (!('speechSynthesis' in window)) { errorEl.textContent = 'Your browser does not support reading text aloud.'; errorEl.hidden = false; return; }
+  function loadVoices() {
+    var voices = speechSynthesis.getVoices();
+    voiceEl.innerHTML = '';
+    voices.forEach(function (v, i) { var o = document.createElement('option'); o.value = i; o.textContent = v.name + ' (' + v.lang + ')'; voiceEl.appendChild(o); });
+  }
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+  document.getElementById('rate').addEventListener('input', function (e) { document.getElementById('rv').textContent = e.target.value; });
+  document.getElementById('pitch').addEventListener('input', function (e) { document.getElementById('pv').textContent = e.target.value; });
+  document.getElementById('play').addEventListener('click', function () {
+    var text = document.getElementById('text').value;
+    if (!text.trim()) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var voices = speechSynthesis.getVoices();
+    if (voices[voiceEl.value]) u.voice = voices[voiceEl.value];
+    u.rate = parseFloat(document.getElementById('rate').value);
+    u.pitch = parseFloat(document.getElementById('pitch').value);
+    speechSynthesis.speak(u);
+  });
+  document.getElementById('stop').addEventListener('click', function () { speechSynthesis.cancel(); });
+})();
+  </script>
+</Base>

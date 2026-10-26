@@ -121,3 +121,9 @@ Total tools: 49. Total guides: 43.
 - [x] Running Pace Calculator, Remove Duplicate Lines, Dice Roller
 - [x] How to Calculate Running Pace, How to Remove Duplicate Lines from a List, Are Dice Rolls Really Random?
 Total tools: 52. Total guides: 46.
+
+## Phase 13: More tools and guides
+- [x] Mean Median and Mode Calculator, Fuel Economy Converter, Text to Speech
+- [x] Mean Median and Mode Explained, How to Convert MPG to Litres per 100 km, How Text to Speech Works in Your Browser
+- [x] Fixed a wrong claim in the fuel guide (both 8 to 7 and 12 to 11 save one litre per 100 km)
+Total tools: 55. Total guides: 49.

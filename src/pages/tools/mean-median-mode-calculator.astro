@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Mean, Median and Mode Calculator - Toolkit Lab";
+const description = "Work out the mean, median, mode, range and count of a list of numbers. Paste numbers separated by commas, spaces or new lines. Free and private.";
+---
+<Base title={title} description={description} path="/tools/mean-median-mode-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Mean, Median and Mode</p>
+      <h1>Mean, Median and Mode Calculator</h1>
+      <p class="lead">Paste a list of numbers to see its average, middle value, most common value and range.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <label for="nums">Numbers (separated by commas, spaces or new lines)</label>
+      <textarea id="nums" rows="5" spellcheck="false">4, 8, 15, 15, 16, 23, 42</textarea>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="mean">-</strong><span>Mean (average)</span></div>
+        <div class="stat"><strong id="median">-</strong><span>Median</span></div>
+        <div class="stat"><strong id="mode">-</strong><span>Mode</span></div>
+        <div class="stat"><strong id="range">-</strong><span>Range</span></div>
+        <div class="stat"><strong id="count">-</strong><span>Count</span></div>
+      </div>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  function fmt(n) { return Number(n.toPrecision(10)).toString(); }
+  function update() {
+    var raw = document.getElementById('nums').value.split(/[\s,;]+/).filter(function (x) { return x !== ''; });
+    var errorEl = document.getElementById('error');
+    var nums = raw.map(Number);
+    if (!nums.length || nums.some(function (n) { return !isFinite(n); })) { errorEl.textContent = 'Enter only numbers, separated by commas, spaces or new lines.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var sorted = nums.slice().sort(function (a, b) { return a - b; });
+    var sum = nums.reduce(function (a, b) { return a + b; }, 0);
+    var mid = Math.floor(sorted.length / 2);
+    var median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+    var counts = {}, best = 0, modes = [];
+    nums.forEach(function (n) { counts[n] = (counts[n] || 0) + 1; });
+    Object.keys(counts).forEach(function (k) { if (counts[k] > best) best = counts[k]; });
+    Object.keys(counts).forEach(function (k) { if (counts[k] === best) modes.push(Number(k)); });
+    document.getElementById('mean').textContent = fmt(sum / nums.length);
+    document.getElementById('median').textContent = fmt(median);
+    document.getElementById('mode').textContent = best === 1 ? 'None' : modes.map(fmt).join(', ');
+    document.getElementById('range').textContent = fmt(sorted[sorted.length - 1] - sorted[0]);
+    document.getElementById('count').textContent = nums.length;
+  }
+  document.getElementById('nums').addEventListener('input', update);
+  update();
+})();
+  </script>
+</Base>

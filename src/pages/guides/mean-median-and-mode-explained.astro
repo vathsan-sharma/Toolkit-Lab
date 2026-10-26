@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Mean, Median and Mode: Which Average Should You Use? - Toolkit Lab";
+const description = "The difference between mean, median and mode, when each is the better summary of a list of numbers, and how outliers change the result.";
+---
+<Base title={title} description={description} path="/guides/mean-median-and-mode-explained.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Statistics</p>
+    <h1>Mean, Median and Mode: Which Average Should You Use?</h1>
+    <p class="lead">"Average" usually means the mean, but the median and mode are also averages. Each one describes a list of numbers differently, and choosing the right one avoids a misleading picture.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Mean</h2>
+<p>Add all the values and divide by how many there are. The numbers 4, 8, 15, 15, 16, 23 and 42 add up to 123, and 123 ÷ 7 is about 17.57.</p>
+<h2>Median</h2>
+<p>Sort the numbers and take the middle one. With 7 values, the median is the fourth one, which is 15. With an even count, the median is the average of the two middle values.</p>
+<h2>Mode</h2>
+<p>The mode is the value that appears most often. In the same list, 15 appears twice and the other values once, so the mode is 15. A list where every value appears once has no mode.</p>
+<h2>Why outliers matter</h2>
+<p>Add one very large value, such as 400, and the mean jumps, while the median barely moves. That is why incomes and house prices are usually reported as medians.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/mean-median-mode-calculator.html">Mean, Median and Mode Calculator</a> works out all three, plus the range and count, from any list you paste.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

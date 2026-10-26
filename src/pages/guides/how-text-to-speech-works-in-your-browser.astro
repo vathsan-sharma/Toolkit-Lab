@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How Text to Speech Works in Your Browser - Toolkit Lab";
+const description = "How browsers read text aloud using the device voices, what affects the sound, and how to use text to speech for reading, checking and accessibility.";
+---
+<Base title={title} description={description} path="/guides/how-text-to-speech-works-in-your-browser.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Accessibility</p>
+    <h1>How Text to Speech Works in Your Browser</h1>
+    <p class="lead">Text to speech turns written words into spoken audio. Browsers provide it through the voices installed on your device, so the sound and the number of voices depend on your system.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Where the voice comes from</h2>
+<p>Most browsers do not include their own voices. They use the speech engine built into your operating system, so the same page can sound different on a laptop and a phone.</p>
+<h2>What you can change</h2>
+<ul>
+<li>Voice: pick from the list of voices available on your device.</li>
+<li>Speed: slower speeds help with careful reading, and faster ones help with quick checks.</li>
+<li>Pitch: a small change can make a voice easier to listen to for long periods.</li>
+</ul>
+<h2>Good uses</h2>
+<p>Listening to a draft to catch awkward sentences, following text while you do something else, and helping people who find reading on screen tiring.</p>
+<h2>Privacy</h2>
+<p>When the voice is on your device, the text does not need to leave it. Check the settings of any online service before you paste sensitive text anywhere else.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/text-to-speech.html">Text to Speech</a> tool reads any text you paste, using the voices on your device.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>
