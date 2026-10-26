@@ -1,0 +1,148 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "PSD to PNG and JPG Converter - Toolkit Lab";
+const description = "Convert Photoshop PSD files to PNG or JPG in your browser. Your file stays on your device.";
+---
+<Base title={title} description={description} path="/tools/psd-converter.html">
+  <Fragment slot="head">
+    <script is:inline src="https://cdn.jsdelivr.net/npm/ag-psd@31.0.3/dist/bundle.js" defer></script>
+  </Fragment>
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / PSD Converter</p>
+        <h1>PSD to PNG and JPG Converter</h1>
+        <p class="lead">Turn a Photoshop file into a PNG or JPG. This uses the flattened preview saved inside the PSD. Nothing is uploaded.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="file">Photoshop file (.psd)</label>
+        <input type="file" id="file" accept=".psd,image/vnd.adobe.photoshop">
+
+        <label for="format">Output format</label>
+        <select id="format">
+          <option value="image/png" selected>PNG (keeps transparency)</option>
+          <option value="image/jpeg">JPG (white background)</option>
+        </select>
+
+        <div class="row">
+          <button id="convert" disabled>Convert</button>
+          <a id="download" class="button secondary" hidden>Download</a>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+
+        <div class="stats" id="stats" hidden>
+          <div class="stat"><strong id="dims">-</strong><span>Dimensions</span></div>
+          <div class="stat"><strong id="layers">-</strong><span>Layers in file</span></div>
+          <div class="stat"><strong id="outSize">-</strong><span>Output size</span></div>
+        </div>
+
+        <div class="preview"><img id="preview" alt="" hidden></div>
+        <p class="note">Very large files can take a while. If a PSD was saved without its preview, the converter cannot produce an image.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const fileInput = document.getElementById('file');
+    const convertBtn = document.getElementById('convert');
+    const formatSelect = document.getElementById('format');
+    const errorEl = document.getElementById('error');
+    const downloadLink = document.getElementById('download');
+    const preview = document.getElementById('preview');
+    const statsEl = document.getElementById('stats');
+
+    let selectedFile = null;
+    let downloadUrl = null;
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    fileInput.addEventListener('change', () => {
+      showError('');
+      downloadLink.hidden = true;
+      statsEl.hidden = true;
+      preview.hidden = true;
+      selectedFile = fileInput.files[0] || null;
+      convertBtn.disabled = !selectedFile;
+      if (selectedFile && !/\.psd$/i.test(selectedFile.name)) {
+        showError('Please choose a .psd file.');
+        convertBtn.disabled = true;
+      }
+    });
+
+    function canvasToBlob(canvas, type) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Could not create the image.')), type, 0.92);
+      });
+    }
+
+    convertBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+      showError('');
+      convertBtn.disabled = true;
+      convertBtn.textContent = 'Converting...';
+
+      try {
+        if (!window.agPsd) {
+          throw new Error('The PSD reader could not load. Check your internet connection and try again.');
+        }
+        const buffer = await selectedFile.arrayBuffer();
+        const psd = window.agPsd.readPsd(buffer, { skipThumbnail: true });
+
+        if (!psd.canvas) {
+          throw new Error('This PSD has no flattened preview saved, so it cannot be converted to an image.');
+        }
+
+        let canvas = psd.canvas;
+        if (formatSelect.value === 'image/jpeg') {
+          // JPG has no transparency, so paint a white background first.
+          canvas = document.createElement('canvas');
+          canvas.width = psd.canvas.width;
+          canvas.height = psd.canvas.height;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(psd.canvas, 0, 0);
+        }
+
+        const blob = await canvasToBlob(canvas, formatSelect.value);
+        if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+        downloadUrl = URL.createObjectURL(blob);
+
+        const ext = formatSelect.value === 'image/jpeg' ? 'jpg' : 'png';
+        downloadLink.href = downloadUrl;
+        downloadLink.download = selectedFile.name.replace(/\.psd$/i, '') + '.' + ext;
+        downloadLink.hidden = false;
+
+        document.getElementById('dims').textContent = psd.width + ' x ' + psd.height;
+        document.getElementById('layers').textContent = String((psd.children || []).length);
+        document.getElementById('outSize').textContent = formatBytes(blob.size);
+        statsEl.hidden = false;
+
+        preview.src = downloadUrl;
+        preview.alt = 'Converted image preview';
+        preview.hidden = false;
+      } catch (err) {
+        showError(err.message || 'Something went wrong while converting this file.');
+      } finally {
+        convertBtn.disabled = !selectedFile;
+        convertBtn.textContent = 'Convert';
+      }
+    });
+  </script>
+</Base>

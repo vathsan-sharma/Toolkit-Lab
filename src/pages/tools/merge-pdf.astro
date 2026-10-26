@@ -1,0 +1,131 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Merge PDF Files Online - Toolkit Lab";
+const description = "Combine several PDF files into one, in the order you choose. Runs in your browser and nothing is uploaded.";
+---
+<Base title={title} description={description} path="/tools/merge-pdf.html">
+  <Fragment slot="head">
+    <script is:inline src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+  </Fragment>
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Merge PDF</p>
+        <h1>Merge PDF</h1>
+        <p class="lead">Add two or more PDF files, put them in the order you want, and download one combined file.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="files">PDF files</label>
+        <input type="file" id="files" accept="application/pdf,.pdf" multiple>
+
+        <ol id="list" style="list-style:none;padding:0;margin:16px 0 0"></ol>
+
+        <div class="row">
+          <button id="merge" type="button" disabled>Merge and download</button>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+        <p class="note">Files are combined on your device. Encrypted PDFs that need a password cannot be merged.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const filesInput = document.getElementById('files');
+    const list = document.getElementById('list');
+    const mergeBtn = document.getElementById('merge');
+    const errorEl = document.getElementById('error');
+    let items = [];
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    function render() {
+      list.innerHTML = '';
+      items.forEach((file, i) => {
+        const li = document.createElement('li');
+        li.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--surface)';
+        const name = document.createElement('span');
+        name.style.flex = '1';
+        name.textContent = (i + 1) + '. ' + file.name;
+        const up = document.createElement('button');
+        up.className = 'secondary';
+        up.type = 'button';
+        up.textContent = 'Up';
+        up.disabled = i === 0;
+        up.addEventListener('click', () => move(i, -1));
+        const down = document.createElement('button');
+        down.className = 'secondary';
+        down.type = 'button';
+        down.textContent = 'Down';
+        down.disabled = i === items.length - 1;
+        down.addEventListener('click', () => move(i, 1));
+        const remove = document.createElement('button');
+        remove.className = 'secondary';
+        remove.type = 'button';
+        remove.textContent = 'Remove';
+        remove.addEventListener('click', () => { items.splice(i, 1); render(); });
+        li.append(name, up, down, remove);
+        list.appendChild(li);
+      });
+      mergeBtn.disabled = items.length < 2;
+    }
+
+    function move(index, step) {
+      const target = index + step;
+      if (target < 0 || target >= items.length) return;
+      [items[index], items[target]] = [items[target], items[index]];
+      render();
+    }
+
+    filesInput.addEventListener('change', () => {
+      showError('');
+      const chosen = Array.from(filesInput.files).filter(f => /\.pdf$/i.test(f.name) || f.type === 'application/pdf');
+      if (chosen.length !== filesInput.files.length) showError('Some files were skipped because they are not PDFs.');
+      items = items.concat(chosen);
+      filesInput.value = '';
+      render();
+    });
+
+    mergeBtn.addEventListener('click', async () => {
+      if (!window.PDFLib) {
+        showError('The PDF library could not load. Check your internet connection and try again.');
+        return;
+      }
+      showError('');
+      mergeBtn.disabled = true;
+      mergeBtn.textContent = 'Merging...';
+      try {
+        const { PDFDocument } = window.PDFLib;
+        const merged = await PDFDocument.create();
+        for (const file of items) {
+          const source = await PDFDocument.load(await file.arrayBuffer(), { ignoreEncryption: false });
+          const pages = await merged.copyPages(source, source.getPageIndices());
+          pages.forEach(page => merged.addPage(page));
+        }
+        const bytes = await merged.save();
+        const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'merged.pdf';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      } catch (err) {
+        showError('Could not merge these files. One of them may be password-protected or damaged.');
+      } finally {
+        mergeBtn.textContent = 'Merge and download';
+        mergeBtn.disabled = items.length < 2;
+      }
+    });
+
+    render();
+  </script>
+</Base>

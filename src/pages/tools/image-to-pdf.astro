@@ -1,0 +1,158 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "JPG and PNG to PDF Converter - Toolkit Lab";
+const description = "Turn JPG and PNG images into one PDF, one image per page, in the order you choose. Runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/image-to-pdf.html">
+  <Fragment slot="head">
+    <script is:inline src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+  </Fragment>
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / JPG and PNG to PDF</p>
+        <h1>JPG and PNG to PDF</h1>
+        <p class="lead">Add photos or scans, arrange them, and save them as a single PDF with one image per page.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="files">Images (JPG or PNG)</label>
+        <input type="file" id="files" accept="image/jpeg,image/png,.jpg,.jpeg,.png" multiple>
+
+        <ol id="list" style="list-style:none;padding:0;margin:16px 0 0"></ol>
+
+        <label for="fit">Page size</label>
+        <select id="fit">
+          <option value="fit" selected>Fit to each image</option>
+          <option value="a4">A4</option>
+          <option value="letter">US Letter</option>
+        </select>
+
+        <div class="row">
+          <button id="convert" type="button" disabled>Create PDF and download</button>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const filesInput = document.getElementById('files');
+    const list = document.getElementById('list');
+    const convertBtn = document.getElementById('convert');
+    const fitSelect = document.getElementById('fit');
+    const errorEl = document.getElementById('error');
+    let items = [];
+
+    const SIZES = { a4: [595.28, 841.89], letter: [612, 792] };
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    function render() {
+      list.innerHTML = '';
+      items.forEach((file, i) => {
+        const li = document.createElement('li');
+        li.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--surface)';
+        const name = document.createElement('span');
+        name.style.flex = '1';
+        name.textContent = (i + 1) + '. ' + file.name;
+        const up = document.createElement('button');
+        up.className = 'secondary';
+        up.type = 'button';
+        up.textContent = 'Up';
+        up.disabled = i === 0;
+        up.addEventListener('click', () => move(i, -1));
+        const down = document.createElement('button');
+        down.className = 'secondary';
+        down.type = 'button';
+        down.textContent = 'Down';
+        down.disabled = i === items.length - 1;
+        down.addEventListener('click', () => move(i, 1));
+        const remove = document.createElement('button');
+        remove.className = 'secondary';
+        remove.type = 'button';
+        remove.textContent = 'Remove';
+        remove.addEventListener('click', () => { items.splice(i, 1); render(); });
+        li.append(name, up, down, remove);
+        list.appendChild(li);
+      });
+      convertBtn.disabled = items.length === 0;
+    }
+
+    function move(index, step) {
+      const target = index + step;
+      if (target < 0 || target >= items.length) return;
+      [items[index], items[target]] = [items[target], items[index]];
+      render();
+    }
+
+    filesInput.addEventListener('change', () => {
+      showError('');
+      const chosen = Array.from(filesInput.files).filter(f => /^image\/(jpeg|png)$/.test(f.type) || /\.(jpe?g|png)$/i.test(f.name));
+      if (chosen.length !== filesInput.files.length) showError('Only JPG and PNG images can be added.');
+      items = items.concat(chosen);
+      filesInput.value = '';
+      render();
+    });
+
+    convertBtn.addEventListener('click', async () => {
+      if (!window.PDFLib) {
+        showError('The PDF library could not load. Check your internet connection and try again.');
+        return;
+      }
+      showError('');
+      convertBtn.disabled = true;
+      try {
+        const { PDFDocument } = window.PDFLib;
+        const pdf = await PDFDocument.create();
+        const fixed = SIZES[fitSelect.value];
+        const margin = 24;
+
+        for (const file of items) {
+          const bytes = await file.arrayBuffer();
+          const isPng = /png$/i.test(file.name) || file.type === 'image/png';
+          const image = isPng ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
+
+          let pageW, pageH;
+          if (fixed) {
+            pageW = fixed[0];
+            pageH = fixed[1];
+          } else {
+            pageW = image.width + margin * 2;
+            pageH = image.height + margin * 2;
+          }
+          const page = pdf.addPage([pageW, pageH]);
+
+          // Scale the image to fit inside the page, keeping its proportions.
+          const scale = Math.min((pageW - margin * 2) / image.width, (pageH - margin * 2) / image.height, fixed ? 1 : Infinity);
+          const w = image.width * scale;
+          const h = image.height * scale;
+          page.drawImage(image, { x: (pageW - w) / 2, y: (pageH - h) / 2, width: w, height: h });
+        }
+
+        const out = await pdf.save();
+        const url = URL.createObjectURL(new Blob([out], { type: 'application/pdf' }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'images.pdf';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      } catch (err) {
+        showError('One of the images could not be read. Make sure it is a valid JPG or PNG.');
+      } finally {
+        convertBtn.disabled = items.length === 0;
+      }
+    });
+
+    render();
+  </script>
+</Base>

@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Rotate PDF Pages Online - Toolkit Lab";
+const description = "Rotate every page of a PDF by 90, 180 or 270 degrees and download the result. Runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/rotate-pdf.html">
+  <Fragment slot="head">
+    <script is:inline src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+  </Fragment>
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Rotate PDF</p>
+        <h1>Rotate PDF</h1>
+        <p class="lead">Turn every page of a PDF on its side or upside down, then download the corrected file.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="file">PDF file</label>
+        <input type="file" id="file" accept="application/pdf,.pdf">
+
+        <label for="angle">Rotation (clockwise)</label>
+        <select id="angle">
+          <option value="90" selected>90 degrees</option>
+          <option value="180">180 degrees</option>
+          <option value="270">270 degrees (90 counter-clockwise)</option>
+        </select>
+
+        <div class="row">
+          <button id="rotate" type="button" disabled>Rotate and download</button>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+        <p class="note">Every page is rotated by the same amount. Existing page content is not changed.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const fileInput = document.getElementById('file');
+    const angleSelect = document.getElementById('angle');
+    const rotateBtn = document.getElementById('rotate');
+    const errorEl = document.getElementById('error');
+    let file = null;
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    fileInput.addEventListener('change', () => {
+      showError('');
+      file = fileInput.files[0] || null;
+      rotateBtn.disabled = !file;
+    });
+
+    rotateBtn.addEventListener('click', async () => {
+      if (!file) return;
+      if (!window.PDFLib) {
+        showError('The PDF library could not load. Check your internet connection and try again.');
+        return;
+      }
+      showError('');
+      rotateBtn.disabled = true;
+      try {
+        const { PDFDocument, degrees } = window.PDFLib;
+        const doc = await PDFDocument.load(await file.arrayBuffer());
+        const angle = parseInt(angleSelect.value, 10);
+        doc.getPages().forEach(page => {
+          // Add to the existing rotation so pages that were already turned keep their orientation.
+          page.setRotation(degrees((page.getRotation().angle + angle) % 360));
+        });
+        const bytes = await doc.save();
+        const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = file.name.replace(/\.pdf$/i, '') + '-rotated.pdf';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      } catch (err) {
+        showError('This PDF could not be rotated. It may be password-protected or damaged.');
+      } finally {
+        rotateBtn.disabled = !file;
+      }
+    });
+  </script>
+</Base>

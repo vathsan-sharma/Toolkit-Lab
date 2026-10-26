@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Count Days Between Two Dates - Toolkit Lab";
+const description = "How to count the days between two dates, add or subtract days, and avoid common mistakes with leap years and inclusive counts.";
+---
+<Base title={title} description={description} path="/guides/how-to-count-days-between-two-dates.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap article">
+      <p class="note"><a href="/guides.html">Guides</a> / Dates</p>
+      <h1>How to Count Days Between Two Dates</h1>
+      <p class="lead">Counting days sounds simple until you need an exact answer for a contract, a deadline or a visa. A few rules keep the count accurate.</p>
+
+      <h2>Subtract the dates</h2>
+      <p>The number of days between two dates is the later date minus the earlier date. Calendars store dates as counts of days, so this subtraction is exact. For example, from 1 January to 1 March is 59 days in a non-leap year: 31 days in January, then 28 days in February.</p>
+
+      <h2>Count inclusively or exclusively</h2>
+      <p>Be clear about whether the start date counts. Most date calculators, including ours, give the gap between the dates. If a notice says "within 30 days of 1 May", the count may include 1 May itself, which makes the deadline one day earlier than a simple subtraction suggests. When the stakes are high, check the wording of the rule or ask the organisation which method it uses.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <h2>Leap years</h2>
+      <p>February has 29 days in a leap year. A year is a leap year if it is divisible by 4, except century years, which must also be divisible by 400. So 2024 was a leap year, 2100 will not be, and 2000 was. A calculator handles this automatically, which is one reason to use one rather than counting on your fingers.</p>
+
+      <h2>Adding and subtracting days</h2>
+      <p>To find a future date, add the number of days to the starting date. To find an earlier one, enter a negative number. Remember that business days, which skip weekends and holidays, are a different calculation and need their own count.</p>
+
+      <h2>Try it yourself</h2>
+      <p>The <a href="../tools/date-calculator.html">Date Calculator</a> shows the days between two dates in days and weeks, and finds the date a set number of days from another, including the day of the week.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+</Base>

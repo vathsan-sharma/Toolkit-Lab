@@ -1,0 +1,104 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "QR Code Generator - Toolkit Lab";
+const description = "Create a QR code from a link or text, then download it as a PNG. Generated in your browser.";
+---
+<Base title={title} description={description} path="/tools/qr-code-generator.html">
+  <Fragment slot="head">
+    <script is:inline src="https://cdn.jsdelivr.net/npm/qr-creator@1.0.0/dist/qr-creator.min.js" defer></script>
+  </Fragment>
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / QR Code Generator</p>
+        <h1>QR Code Generator</h1>
+        <p class="lead">Type a link or some text and get a QR code you can download. Nothing is sent to a server.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="text">Link or text</label>
+        <textarea id="text" rows="3" style="min-height:0" placeholder="https://example.com">https://example.com</textarea>
+
+        <label for="size">Size: <span id="sizeValue">256</span> px</label>
+        <input type="range" id="size" min="128" max="512" step="16" value="256" style="width:100%">
+
+        <label for="ec">Error correction</label>
+        <select id="ec">
+          <option value="L">Low (smallest code)</option>
+          <option value="M" selected>Medium</option>
+          <option value="Q">Quartile</option>
+          <option value="H">High (best if a logo may cover it)</option>
+        </select>
+
+        <div class="row">
+          <button id="download" class="secondary" type="button">Download PNG</button>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+        <div class="preview" style="text-align:center;margin-top:20px">
+          <canvas id="canvas" width="256" height="256" style="max-width:100%;height:auto;border-radius:8px;background:#fff"></canvas>
+        </div>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const textEl = document.getElementById('text');
+    const sizeEl = document.getElementById('size');
+    const ecEl = document.getElementById('ec');
+    const canvas = document.getElementById('canvas');
+    const errorEl = document.getElementById('error');
+
+    function draw() {
+      const text = textEl.value.trim();
+      const size = Number(sizeEl.value);
+      document.getElementById('sizeValue').textContent = size;
+      canvas.width = size;
+      canvas.height = size;
+      if (!text) {
+        errorEl.textContent = 'Enter a link or some text first.';
+        errorEl.hidden = false;
+        return;
+      }
+      if (!window.QrCreator) {
+        errorEl.textContent = 'The QR library could not load. Check your internet connection and try again.';
+        errorEl.hidden = false;
+        return;
+      }
+      try {
+        window.QrCreator.render({
+          text: text,
+          radius: 0,
+          ecLevel: ecEl.value,
+          fill: '#1c1917',
+          background: '#ffffff',
+          size: size
+        }, canvas);
+        errorEl.hidden = true;
+      } catch (err) {
+        errorEl.textContent = 'This text is too long for a QR code. Try a shorter link or lower the error correction.';
+        errorEl.hidden = false;
+      }
+    }
+
+    sizeEl.addEventListener('input', draw);
+    textEl.addEventListener('input', draw);
+    ecEl.addEventListener('change', draw);
+
+    document.getElementById('download').addEventListener('click', () => {
+      if (!textEl.value.trim() || errorEl.hidden === false) return;
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'qr-code.png';
+      link.click();
+    });
+
+    // The library loads after the page, so draw once it is ready.
+    window.addEventListener('load', draw);
+  </script>
+</Base>

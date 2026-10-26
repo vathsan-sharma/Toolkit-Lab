@@ -1,0 +1,6 @@
+{
+  "cleanUrls": false,
+  "redirects": [
+    { "source": "/guides/index.html", "destination": "/guides.html", "permanent": true }
+  ]
+}

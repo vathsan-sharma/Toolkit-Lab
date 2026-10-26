@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How a Loan EMI Is Calculated and Why Interest Front-Loads - Toolkit Lab";
+const description = "How the EMI formula works for a reducing-balance loan, why early payments mostly cover interest, and how the term changes the total cost.";
+---
+<Base title={title} description={description} path="/guides/how-a-loan-emi-is-calculated.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap article">
+      <p class="note"><a href="/guides.html">Guides</a> / Loans</p>
+      <h1>How a Loan EMI Is Calculated</h1>
+      <p class="lead">An equated monthly instalment (EMI) is the fixed amount you pay each month to repay a loan. It stays the same every month, but the split between interest and principal changes over time.</p>
+
+      <h2>The formula</h2>
+      <p>For a loan of principal P, a monthly interest rate r (the annual rate divided by 12, as a decimal) and n monthly payments, the EMI is:</p>
+      <p><code>EMI = P × r × (1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)</code></p>
+      <p>If the rate is zero, the EMI is simply the principal divided by the number of months.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <h2>A worked example</h2>
+      <p>Borrowing 250,000 at 8.5% a year over 20 years gives a monthly payment of about 2,169.56. Over the full term you repay about 520,694, so the interest alone comes to about 270,694. Interest is the largest cost of a long loan.</p>
+
+      <h2>Why early payments are mostly interest</h2>
+      <p>Interest is charged on the balance that remains, not on the original amount. In the first years, the balance is high, so most of each payment goes to interest. Over time more goes to principal. This is why paying a little extra early, or refinancing, saves more than the same extra payment later.</p>
+
+      <h2>How the term changes the cost</h2>
+      <p>A longer term lowers the monthly payment but raises the total interest, because the balance stays high for longer. A shorter term does the reverse. Compare the total repaid, not just the monthly figure, before choosing.</p>
+
+      <h2>Check the real offer</h2>
+      <p>Lenders may charge processing fees, insurance or other costs that this simple calculation leaves out. Ask for the full schedule of payments and the total cost before you sign.</p>
+
+      <h2>Try it yourself</h2>
+      <p>The <a href="../tools/loan-calculator.html">Loan EMI Calculator</a> shows the monthly payment, total interest and total repaid for any amount, rate and term.</p>
+
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+</Base>

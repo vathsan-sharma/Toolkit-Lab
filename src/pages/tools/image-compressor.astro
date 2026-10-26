@@ -1,0 +1,172 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Image Compressor - Toolkit Lab";
+const description = "Compress and convert JPEG, PNG and WebP images in your browser. Files stay on your device.";
+---
+<Base title={title} description={description} path="/tools/image-compressor.html">
+<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <div class="wrap">
+      <h1>Image Compressor</h1>
+      <p class="lead">Pick an image, choose a format and quality, then download the smaller file. Nothing is uploaded.</p>
+      <div class="ad-slot" aria-label="Advertisement"></div>
+
+      <div class="panel">
+        <label for="file">Image file (JPEG, PNG or WebP)</label>
+        <input type="file" id="file" accept="image/jpeg,image/png,image/webp">
+
+        <label for="format">Output format</label>
+        <select id="format">
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/webp" selected>WebP</option>
+          <option value="image/png">PNG (lossless, quality ignored)</option>
+        </select>
+
+        <label for="quality">Quality: <span id="qualityValue">80</span>%</label>
+        <input type="range" id="quality" min="10" max="100" value="80" style="width:100%">
+
+        <label for="maxWidth">Max width in pixels (0 keeps original size)</label>
+        <input type="number" id="maxWidth" min="0" value="0">
+
+        <div class="row">
+          <button id="compress" disabled>Compress</button>
+          <a id="download" class="button secondary" hidden download="compressed">Download</a>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+
+        <div class="stats" id="stats" hidden>
+          <div class="stat"><strong id="origSize">-</strong><span>Original</span></div>
+          <div class="stat"><strong id="newSize">-</strong><span>Compressed</span></div>
+          <div class="stat"><strong id="saved">-</strong><span>Saved</span></div>
+        </div>
+
+        <div class="preview"><img id="preview" alt="" hidden></div>
+        <p class="note">Tip: WebP usually gives the smallest files for photos. PNG is best for screenshots with text.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement"></div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+    const fileInput = document.getElementById('file');
+    const formatSelect = document.getElementById('format');
+    const quality = document.getElementById('quality');
+    const qualityValue = document.getElementById('qualityValue');
+    const maxWidth = document.getElementById('maxWidth');
+    const compressBtn = document.getElementById('compress');
+    const downloadLink = document.getElementById('download');
+    const errorEl = document.getElementById('error');
+    const statsEl = document.getElementById('stats');
+    const preview = document.getElementById('preview');
+
+    let selectedFile = null;
+    let downloadUrl = null;
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    quality.addEventListener('input', () => {
+      qualityValue.textContent = quality.value;
+    });
+
+    fileInput.addEventListener('change', () => {
+      showError('');
+      downloadLink.hidden = true;
+      statsEl.hidden = true;
+      selectedFile = fileInput.files[0] || null;
+      compressBtn.disabled = !selectedFile;
+      if (selectedFile && !selectedFile.type.startsWith('image/')) {
+        showError('That file is not an image.');
+        compressBtn.disabled = true;
+      }
+    });
+
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => resolve({ img, url });
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error('Could not read this image.'));
+        };
+        img.src = url;
+      });
+    }
+
+    function canvasToBlob(canvas, type, q) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => {
+          if (blob) resolve(blob);
+          else reject(new Error('This browser cannot export that format.'));
+        }, type, q);
+      });
+    }
+
+    compressBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+      showError('');
+      compressBtn.disabled = true;
+
+      try {
+        const { img, url } = await loadImage(selectedFile);
+        const limit = parseInt(maxWidth.value, 10) || 0;
+        let width = img.naturalWidth;
+        let height = img.naturalHeight;
+        if (limit > 0 && width > limit) {
+          height = Math.round(height * (limit / width));
+          width = limit;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        // Fill white so transparent PNGs look right when converted to JPEG.
+        if (formatSelect.value === 'image/jpeg') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, width, height);
+        }
+        ctx.drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(url);
+
+        const type = formatSelect.value;
+        const blob = await canvasToBlob(canvas, type, Number(quality.value) / 100);
+
+        if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+        downloadUrl = URL.createObjectURL(blob);
+
+        const ext = type.split('/')[1];
+        const baseName = selectedFile.name.replace(/\.[^.]+$/, '');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = baseName + '-compressed.' + ext;
+        downloadLink.hidden = false;
+
+        document.getElementById('origSize').textContent = formatBytes(selectedFile.size);
+        document.getElementById('newSize').textContent = formatBytes(blob.size);
+        const savedPct = selectedFile.size > 0
+          ? Math.max(0, Math.round((1 - blob.size / selectedFile.size) * 100))
+          : 0;
+        document.getElementById('saved').textContent = savedPct + '%';
+        statsEl.hidden = false;
+
+        preview.src = downloadUrl;
+        preview.alt = 'Compressed preview';
+        preview.hidden = false;
+      } catch (err) {
+        showError(err.message);
+      } finally {
+        compressBtn.disabled = false;
+      }
+    });
+  </script>
+</Base>
