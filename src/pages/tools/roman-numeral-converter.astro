@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Roman Numeral Converter: Numbers to Roman and Back - Toolkit Lab";
+const description = "Convert numbers from 1 to 3999 into Roman numerals, or read a Roman numeral back as a number. Free and private, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/roman-numeral-converter.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Roman Numeral Converter</p>
+      <h1>Roman Numeral Converter</h1>
+      <p class="lead">Type a number or a Roman numeral and the other form appears. Works from 1 to 3999.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="num">Number (1 to 3999)</label><input type="number" id="num" min="1" max="3999" step="1" value="1994"></div>
+        <div><label for="roman">Roman numeral</label><input type="text" id="roman" spellcheck="false" placeholder="for example MCMXCIV"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <p class="note">Roman numerals use I, V, X, L, C, D and M. A smaller symbol before a larger one is subtracted, as in IV for 4.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var VALUES = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+  function toRoman(n) {
+    var s = '';
+    for (var i = 0; i < VALUES.length; i++) { while (n >= VALUES[i][0]) { s += VALUES[i][1]; n -= VALUES[i][0]; } }
+    return s;
+  }
+  function fromRoman(text) {
+    var s = text.toUpperCase().trim();
+    if (!/^[MDCLXVI]+$/.test(s)) return null;
+    var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, total = 0;
+    for (var i = 0; i < s.length; i++) {
+      var v = map[s[i]], next = i + 1 < s.length ? map[s[i + 1]] : 0;
+      total += v < next ? -v : v;
+    }
+    // Reject values that do not round-trip, such as IIII or VX.
+    return toRoman(total) === s ? total : null;
+  }
+  var numEl = document.getElementById('num');
+  var romanEl = document.getElementById('roman');
+  var errorEl = document.getElementById('error');
+  numEl.addEventListener('input', function () {
+    var n = parseInt(numEl.value, 10);
+    if (!(n >= 1 && n <= 3999)) { romanEl.value = ''; errorEl.textContent = 'Enter a whole number from 1 to 3999.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true; romanEl.value = toRoman(n);
+  });
+  romanEl.addEventListener('input', function () {
+    if (!romanEl.value.trim()) { errorEl.hidden = true; return; }
+    var n = fromRoman(romanEl.value);
+    if (n === null) { errorEl.textContent = 'That is not a valid Roman numeral.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true; numEl.value = n;
+  });
+  numEl.dispatchEvent(new Event('input'));
+})();
+  </script>
+</Base>

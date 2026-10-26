@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Typing Speed Test: Words Per Minute and Accuracy - Toolkit Lab";
+const description = "Measure your typing speed in words per minute and your accuracy. Type the passage, and see your result when you finish. Free, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/typing-speed-test.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Typing Speed Test</p>
+      <h1>Typing Speed Test</h1>
+      <p class="lead">Type the passage below as fast and as accurately as you can. The timer starts with your first key press.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <p id="prompt" style="font-family:var(--serif);font-size:1.2rem;line-height:1.7;background:var(--surface-2);border-radius:8px;padding:14px;user-select:none"></p>
+      <label for="typed">Start typing here</label>
+      <textarea id="typed" rows="5" spellcheck="false" placeholder="Start typing the passage above"></textarea>
+      <div class="row"><button id="restart" type="button" class="secondary">New passage</button></div>
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><strong id="wpm">-</strong><span>Words per minute</span></div>
+        <div class="stat"><strong id="acc">-</strong><span>Accuracy</span></div>
+        <div class="stat"><strong id="secs">-</strong><span>Seconds</span></div>
+      </div>
+      <p class="note">Words per minute counts every five characters as one word, including spaces. Accuracy is the share of characters typed correctly.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var PASSAGES = [
+    'The quick brown fox jumps over the lazy dog while the sun slowly sets behind the quiet hills.',
+    'Good tools save time when they are simple, fast and honest about what they do with your data.',
+    'Practice a little every day, and you will notice that your fingers move faster and make fewer mistakes.',
+    'A clear plan, a short list of tasks and a steady pace will usually beat a rush at the last minute.'
+  ];
+  var promptEl = document.getElementById('prompt');
+  var typedEl = document.getElementById('typed');
+  var statsEl = document.getElementById('stats');
+  var passage = '', startedAt = null;
+  function newPassage() {
+    passage = PASSAGES[Math.floor(Math.random() * PASSAGES.length)];
+    promptEl.textContent = passage;
+    typedEl.value = ''; typedEl.disabled = false; startedAt = null; statsEl.hidden = true;
+    typedEl.focus();
+  }
+  typedEl.addEventListener('input', function () {
+    if (startedAt === null && typedEl.value.length > 0) startedAt = Date.now();
+    var typed = typedEl.value;
+    if (typed.length >= passage.length) {
+      typedEl.disabled = true;
+      var seconds = Math.max(1, (Date.now() - startedAt) / 1000);
+      var correct = 0;
+      for (var i = 0; i < passage.length; i++) { if (typed[i] === passage[i]) correct++; }
+      var words = passage.length / 5;
+      document.getElementById('wpm').textContent = Math.round(words / (seconds / 60));
+      document.getElementById('acc').textContent = Math.round(correct / passage.length * 100) + '%';
+      document.getElementById('secs').textContent = seconds.toFixed(1);
+      statsEl.hidden = false;
+    }
+  });
+  // Pasting the passage would make the score meaningless, so block paste.
+  typedEl.addEventListener('paste', function (e) { e.preventDefault(); });
+  document.getElementById('restart').addEventListener('click', newPassage);
+  newPassage();
+})();
+  </script>
+</Base>

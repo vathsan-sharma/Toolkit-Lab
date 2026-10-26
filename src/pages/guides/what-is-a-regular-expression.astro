@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "What Is a Regular Expression? A Beginner Guide - Toolkit Lab";
+const description = "What a regular expression (regex) is, the building blocks such as character classes, quantifiers and anchors, and why email regex patterns are tricky.";
+---
+<Base title={title} description={description} path="/guides/what-is-a-regular-expression.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Developer basics</p>
+    <h1>What Is a Regular Expression? A Beginner Guide</h1>
+    <p class="lead">A regular expression, or regex, is a short pattern that describes text. Programmers use regex to search, check and rewrite text in code, editors and spreadsheets.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>The building blocks</h2>
+<ul>
+<li><strong>Literal text:</strong> cat matches the letters c, a and t.</li>
+<li><strong>Character classes:</strong> \d matches a digit, \w matches a letter, digit or underscore, and [aeiou] matches any one listed character.</li>
+<li><strong>Quantifiers:</strong> + means one or more, * means zero or more, and {2,4} means between two and four.</li>
+<li><strong>Anchors:</strong> ^ matches the start of the text and $ matches the end. \b matches a word boundary.</li>
+</ul>
+<h2>Flags</h2>
+<p>Flags change how the pattern works. g finds every match rather than the first, i ignores upper and lower case, and m makes ^ and $ match at each line.</p>
+<h2>Why email patterns are tricky</h2>
+<p>Email addresses have many valid forms, and a short pattern will either reject some real addresses or accept some invalid ones. A simple pattern is fine for spotting a likely address in text. For checking that an address works, send a confirmation email instead.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/regex-tester.html">Regex Tester</a> highlights each match in your text as you type. Your text is not sent to a server.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

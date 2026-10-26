@@ -82,3 +82,17 @@ Total tools: 36. Total guides: 31.
 - Keyword research again when Semrush units are available
 - Owner: submit sitemap in Google Search Console and Bing Webmaster Tools; verify both properties
 - Owner: ask for AdSense review status once traffic starts
+
+## Phase 8: More tools and guides
+- [x] Roman Numeral Converter (in Text and developer tools)
+- [x] Image to Base64 (in Images and media)
+- [x] Regex Tester (in Text and developer tools)
+- [x] Typing Speed Test (in Text and developer tools)
+- [x] How Roman Numerals Work
+- [x] What Is a Regular Expression? A Beginner Guide
+- [x] How to Measure Your Typing Speed and Accuracy
+Total tools: 40. Total guides: 34.
+Bugs found by browser tests and fixed: regex default pattern had doubled backslashes; typing test allowed pasting.
+
+## Owner actions
+- [!] Google Search Console verification: add the TXT record google-site-verification=... to the DNS for toolkitlab.xyz, then verify.

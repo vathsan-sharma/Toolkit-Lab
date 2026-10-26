@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How Roman Numerals Work - Toolkit Lab";
+const description = "The seven Roman numeral letters, the subtraction rule for numbers like IV and XC, and how to read or write a number such as 1994.";
+---
+<Base title={title} description={description} path="/guides/how-roman-numerals-work.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Number systems</p>
+    <h1>How Roman Numerals Work</h1>
+    <p class="lead">Roman numerals use seven letters to write numbers. They still appear on clocks, book chapters, film dates and monuments, so it helps to know how to read them.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>The seven letters</h2>
+<p>I is 1, V is 5, X is 10, L is 50, C is 100, D is 500 and M is 1000. Larger numbers are built by adding letters together, so VI is 6 and XV is 15.</p>
+<h2>The subtraction rule</h2>
+<p>When a smaller letter comes before a larger one, it is subtracted. IV is 4, IX is 9, XL is 40, XC is 90, CD is 400 and CM is 900. Only these six pairs use subtraction.</p>
+<h2>Reading 1994</h2>
+<p>Split the number into thousands, hundreds, tens and units: 1000 is M, 900 is CM, 90 is XC and 4 is IV. Together they make MCMXCIV. Read it left to right, adding each part.</p>
+<h2>Limits</h2>
+<p>Traditional Roman numerals have no zero and no symbol for numbers above 3999 in standard form. Repeating a letter is limited to three times, so 4 is IV rather than IIII. Our converter follows these standard forms.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/roman-numeral-converter.html">Roman Numeral Converter</a> converts in both directions and rejects forms that break the rules.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

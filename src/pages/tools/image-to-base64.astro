@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Image to Base64 Converter: Data URI for HTML and CSS - Toolkit Lab";
+const description = "Convert a small image into a Base64 data URI for embedding in HTML or CSS. Shows the size increase. Runs in your browser; nothing is uploaded.";
+---
+<Base title={title} description={description} path="/tools/image-to-base64.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Image to Base64</p>
+      <h1>Image to Base64 Converter</h1>
+      <p class="lead">Turn an image into a text string you can paste into HTML or CSS. The file stays on your device.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <label for="file">Image (PNG, JPG, WebP, GIF or SVG)</label>
+      <input type="file" id="file" accept="image/*">
+      <label for="out">Data URI</label>
+      <textarea id="out" rows="6" readonly spellcheck="false"></textarea>
+      <div class="row"><button id="copy" type="button" class="secondary">Copy</button></div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><strong id="orig">-</strong><span>Original file</span></div>
+        <div class="stat"><strong id="len">-</strong><span>Text length</span></div>
+        <div class="stat"><strong id="growth">-</strong><span>Size increase</span></div>
+      </div>
+      <p class="note">Base64 makes data about a third larger. Embed only small images, such as icons, and link to larger ones.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var fileEl = document.getElementById('file');
+  var out = document.getElementById('out');
+  var errorEl = document.getElementById('error');
+  function bytes(n) { return n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : (n / 1048576).toFixed(2) + ' MB'; }
+  fileEl.addEventListener('change', function () {
+    errorEl.hidden = true;
+    var file = fileEl.files[0];
+    if (!file) return;
+    if (!/^image\//.test(file.type)) { errorEl.textContent = 'Choose an image file.'; errorEl.hidden = false; return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      out.value = reader.result;
+      document.getElementById('orig').textContent = bytes(file.size);
+      document.getElementById('len').textContent = out.value.length.toLocaleString();
+      document.getElementById('growth').textContent = '+' + Math.round((out.value.length / file.size - 1) * 100) + '%';
+      document.getElementById('stats').hidden = false;
+    };
+    reader.onerror = function () { errorEl.textContent = 'This file could not be read.'; errorEl.hidden = false; };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('copy').addEventListener('click', function () {
+    if (out.value) navigator.clipboard.writeText(out.value).catch(function () {});
+  });
+})();
+  </script>
+</Base>

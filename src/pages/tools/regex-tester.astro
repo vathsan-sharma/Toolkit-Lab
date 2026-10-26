@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Regex Tester: Test Regular Expressions Online - Toolkit Lab";
+const description = "Test a regular expression against sample text, see every match highlighted, and check flags such as case-insensitive and global. Free, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/regex-tester.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Regex Tester</p>
+      <h1>Regex Tester</h1>
+      <p class="lead">Write a pattern, add the text to test, and see each match highlighted. Matching runs in your browser.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <div class="grid" style="grid-template-columns:3fr 1fr;gap:14px">
+        <div><label for="pattern">Pattern</label><input type="text" id="pattern" spellcheck="false" value="\b\w+@\w+\.\w+\b"></div>
+        <div><label for="flags">Flags</label><input type="text" id="flags" spellcheck="false" value="gi"></div>
+      </div>
+      <label for="text">Test text</label>
+      <textarea id="text" rows="6" spellcheck="false">Contact sales@example.com or SUPPORT@toolkitlab.xyz for help.</textarea>
+      <p id="error" class="error" hidden></p>
+      <label>Result</label>
+      <div id="result" style="white-space:pre-wrap;word-break:break-word;border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--surface-2);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:0.92rem;line-height:1.7;min-height:4rem"></div>
+      <p class="note" id="count"></p>
+      <p class="note">Flags: g finds all matches, i ignores case, m treats each line as a start and end, s lets the dot match new lines. Only letters g, i, m, s, u and y are allowed.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var patternEl = document.getElementById('pattern');
+  var flagsEl = document.getElementById('flags');
+  var textEl = document.getElementById('text');
+  var resultEl = document.getElementById('result');
+  var errorEl = document.getElementById('error');
+  var countEl = document.getElementById('count');
+  function run() {
+    errorEl.hidden = true;
+    var flags = flagsEl.value.replace(/[^gimsuy]/g, '');
+    var re;
+    try { re = new RegExp(patternEl.value, flags.indexOf('g') === -1 ? flags + 'g' : flags); }
+    catch (err) { errorEl.textContent = 'This pattern is not valid: ' + err.message; errorEl.hidden = false; resultEl.textContent = textEl.value; countEl.textContent = ''; return; }
+    var text = textEl.value, last = 0, matches = 0, m;
+    resultEl.textContent = '';
+    re.lastIndex = 0;
+    while ((m = re.exec(text)) !== null) {
+      if (m[0] === '') { re.lastIndex++; if (re.lastIndex > text.length) break; continue; }
+      resultEl.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var mark = document.createElement('mark');
+      mark.textContent = m[0];
+      mark.style.background = 'var(--accent-soft)';
+      mark.style.color = 'var(--text)';
+      mark.style.borderRadius = '3px';
+      resultEl.appendChild(mark);
+      last = m.index + m[0].length;
+      matches++;
+    }
+    resultEl.appendChild(document.createTextNode(text.slice(last)));
+    countEl.textContent = matches + ' match' + (matches === 1 ? '' : 'es') + ' found.';
+  }
+  [patternEl, flagsEl, textEl].forEach(function (el) { el.addEventListener('input', run); });
+  run();
+})();
+  </script>
+</Base>

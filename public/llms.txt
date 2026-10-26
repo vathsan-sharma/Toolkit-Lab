@@ -1,6 +1,6 @@
 # Toolkit Lab
 
-> Toolkit Lab is a free website with 36 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
+> Toolkit Lab is a free website with 40 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
 
 ## Tools
 - [Merge PDF](https://www.toolkitlab.xyz/tools/merge-pdf.html): combine PDF files in any order
@@ -38,6 +38,10 @@
 - [GST Calculator](https://www.toolkitlab.xyz/tools/gst-calculator.html): add or remove GST
 - [Unix Timestamp Converter](https://www.toolkitlab.xyz/tools/unix-timestamp-converter.html): epoch time and dates
 - [URL Slug Generator](https://www.toolkitlab.xyz/tools/url-slug-generator.html): clean URL slugs from titles
+- [Roman Numeral Converter](https://www.toolkitlab.xyz/tools/roman-numeral-converter.html)
+- [Regex Tester](https://www.toolkitlab.xyz/tools/regex-tester.html): test regular expressions
+- [Typing Speed Test](https://www.toolkitlab.xyz/tools/typing-speed-test.html): words per minute and accuracy
+- [Image to Base64](https://www.toolkitlab.xyz/tools/image-to-base64.html): data URI for small images
 - [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
 
 ## Guides
