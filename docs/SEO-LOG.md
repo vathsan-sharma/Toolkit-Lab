@@ -160,5 +160,6 @@ Total tools: 58. Total guides: 52.
 - [x] Larger text and controls; money in the visitor's currency
 - [x] Sales Tax and VAT Calculator replaces GST (redirect from the old address)
 - [x] Plainer names for 16 technical tools and 11 guide titles. Web addresses unchanged for search.
-- [ ] Rewrite the guide introductions and body text in plainer English (next)
+- [x] Rewrote the opening paragraph of 13 technical guides in plainer English
+- [ ] Plainer body text in the technical guides (the subject terms such as Base64 and SHA-256 remain, with plain explanations)
 - [ ] Edge-case test of calculators with empty, zero, negative and very large numbers (not finished)
