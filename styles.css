@@ -516,6 +516,9 @@ footer.site p { margin: 0 0 0 auto; }
 
 .palette.open { opacity: 1; }
 
+/* The hidden attribute must win over display: flex, or a closed palette blocks every click. */
+.palette[hidden] { display: none; }
+
 .palette-box {
   width: 100%;
   max-width: 560px;
