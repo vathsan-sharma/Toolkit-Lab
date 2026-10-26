@@ -110,3 +110,9 @@ Bugs found by browser tests and fixed: regex default pattern had doubled backsla
 - [x] Fixed: three text tools were placed in the Images section on the home page; moved to Text and developer tools
 - [x] Fixed: section counts on the home page and the Calculators category page
 Total tools: 46. Total guides: 40. Category pages: 4.
+
+## Phase 11: More tools and guides
+- [x] Time Duration Calculator, Number Base Converter, Simple Interest Calculator
+- [x] How to Calculate the Time Between Two Times, Binary Decimal and Hexadecimal Explained, Simple vs Compound Interest
+- [x] Fixed a worked example in the time guide (22:00 to 06:00 is 8 hours)
+Total tools: 49. Total guides: 43.

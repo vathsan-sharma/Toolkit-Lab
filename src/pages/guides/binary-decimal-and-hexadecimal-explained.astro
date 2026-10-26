@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Binary, Decimal and Hexadecimal Explained - Toolkit Lab";
+const description = "What the binary, decimal, hexadecimal and octal number bases mean, how each digit is worth a power of its base, and how to convert between them.";
+---
+<Base title={title} description={description} path="/guides/binary-decimal-and-hexadecimal-explained.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Number systems</p>
+    <h1>Binary, Decimal and Hexadecimal Explained</h1>
+    <p class="lead">Computers store numbers in binary, people usually count in decimal, and programmers often read hexadecimal. They are four ways of writing the same values.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Decimal (base 10)</h2>
+<p>Each digit is worth a power of 10. 255 means 2 × 100, plus 5 × 10, plus 5 × 1.</p>
+<h2>Binary (base 2)</h2>
+<p>Only the digits 0 and 1 are used, and each place is a power of 2. 255 is 11111111, which is 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1. A byte is eight binary digits, so it can store values from 0 to 255.</p>
+<h2>Hexadecimal (base 16)</h2>
+<p>Hex uses 0 to 9 and A to F, where A is 10 and F is 15. Each hex digit stands for four binary digits, so 255 is FF. Hex is common in colour codes, memory addresses and error messages.</p>
+<h2>Octal (base 8)</h2>
+<p>Octal uses digits 0 to 7 and was once used in some computer systems. 255 is 377 in octal.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/number-base-converter.html">Number Base Converter</a> shows all four forms of a number at once, and you can type in any of them.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

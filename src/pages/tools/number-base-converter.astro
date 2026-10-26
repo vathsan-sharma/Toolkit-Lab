@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Number Base Converter: Binary, Decimal, Hex and Octal - Toolkit Lab";
+const description = "Convert a number between binary, decimal, hexadecimal and octal. Type in any base and see the others update. Free and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/number-base-converter.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Number Base Converter</p>
+      <h1>Number Base Converter</h1>
+      <p class="lead">Type a number in any base and see its binary, decimal, hexadecimal and octal forms at once.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="dec">Decimal</label><input type="text" id="dec" value="255" spellcheck="false"></div>
+        <div><label for="bin">Binary</label><input type="text" id="bin" spellcheck="false"></div>
+        <div><label for="hex">Hexadecimal</label><input type="text" id="hex" spellcheck="false"></div>
+        <div><label for="oct">Octal</label><input type="text" id="oct" spellcheck="false"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <p class="note">Edit any box. Hexadecimal uses 0 to 9 and A to F. Only whole, non-negative numbers are supported.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var fields = { dec: 10, bin: 2, hex: 16, oct: 8 };
+  var errorEl = document.getElementById('error');
+  var active = false;
+  function setAll(value, except) {
+    Object.keys(fields).forEach(function (id) {
+      if (id !== except) document.getElementById(id).value = value.toString(fields[id]).toUpperCase();
+    });
+  }
+  Object.keys(fields).forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      var raw = document.getElementById(id).value.trim();
+      if (raw === '') { errorEl.hidden = true; return; }
+      var n = parseInt(raw, fields[id]);
+      var valid = new RegExp('^[' + '0123456789ABCDEF'.slice(0, fields[id] === 10 ? 10 : fields[id]) + ']+$', 'i').test(raw);
+      if (!valid || isNaN(n)) { errorEl.textContent = 'That is not a valid ' + id + ' number.'; errorEl.hidden = false; return; }
+      errorEl.hidden = true;
+      setAll(n, id);
+    });
+  });
+  setAll(255, 'dec');
+  document.getElementById('dec').value = '255';
+})();
+  </script>
+</Base>

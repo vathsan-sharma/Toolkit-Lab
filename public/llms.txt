@@ -1,6 +1,6 @@
 # Toolkit Lab
 
-> Toolkit Lab is a free website with 46 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
+> Toolkit Lab is a free website with 49 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
 
 ## Categories
 - [PDF tools](https://www.toolkitlab.xyz/pdf-tools.html)
@@ -54,6 +54,9 @@
 - [Fraction Calculator](https://www.toolkitlab.xyz/tools/fraction-calculator.html): add, subtract, multiply and divide fractions
 - [Speed, Distance and Time Calculator](https://www.toolkitlab.xyz/tools/speed-distance-time-calculator.html)
 - [Salary to Hourly Pay Converter](https://www.toolkitlab.xyz/tools/salary-to-hourly-converter.html)
+- [Time Duration Calculator](https://www.toolkitlab.xyz/tools/time-duration-calculator.html): hours between two times
+- [Number Base Converter](https://www.toolkitlab.xyz/tools/number-base-converter.html): binary, decimal, hex and octal
+- [Simple Interest Calculator](https://www.toolkitlab.xyz/tools/simple-interest-calculator.html)
 - [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
 
 ## Guides

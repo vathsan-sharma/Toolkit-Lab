@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Simple Interest Calculator: Interest on a Loan or Deposit - Toolkit Lab";
+const description = "Work out simple interest from a principal, an annual rate and a term, and see the total to repay or receive. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/simple-interest-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Simple Interest Calculator</p>
+      <h1>Simple Interest Calculator</h1>
+      <p class="lead">Simple interest is charged only on the original amount, not on interest already earned.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div><label for="p">Principal</label><input type="number" id="p" min="0" step="100" value="1000"></div>
+        <div><label for="r">Annual rate (%)</label><input type="number" id="r" min="0" step="0.1" value="5"></div>
+        <div><label for="t">Years</label><input type="number" id="t" min="0" step="0.5" value="3"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="int">-</strong><span>Interest</span></div>
+        <div class="stat"><strong id="tot">-</strong><span>Total at the end</span></div>
+      </div>
+      <p class="note">Formula: interest = principal × rate × years. Many loans and some savings use this method; check your agreement for the exact terms.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  function update() {
+    var P = parseFloat(document.getElementById('p').value), r = parseFloat(document.getElementById('r').value), t = parseFloat(document.getElementById('t').value);
+    var errorEl = document.getElementById('error');
+    if (!(P >= 0) || !(r >= 0) || !(t >= 0)) { errorEl.textContent = 'Enter values of zero or more.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var interest = P * r / 100 * t;
+    document.getElementById('int').textContent = money(interest);
+    document.getElementById('tot').textContent = money(P + interest);
+  }
+  document.querySelectorAll('input').forEach(function (el) { el.addEventListener('input', update); });
+  update();
+})();
+  </script>
+</Base>

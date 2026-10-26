@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Calculate the Time Between Two Times - Toolkit Lab";
+const description = "How to work out hours and minutes between two times, handle shifts that cross midnight, and convert the result to decimal hours for timesheets.";
+---
+<Base title={title} description={description} path="/guides/how-to-calculate-time-between-two-times.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Time</p>
+    <h1>How to Calculate the Time Between Two Times</h1>
+    <p class="lead">Subtracting one clock time from another is simple until a shift crosses midnight or you need decimal hours for a timesheet. A few rules cover both cases.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Subtract the start from the end</h2>
+<p>Convert both times to minutes after midnight, then subtract. 09:30 is 570 minutes and 17:15 is 1,035 minutes, so the difference is 465 minutes, which is 7 hours and 45 minutes.</p>
+<h2>Shifts that cross midnight</h2>
+<p>If the end time is earlier than the start, add 24 hours to the end. A shift from 22:00 to 06:00 is 8 hours. Add 24 hours to 06:00, which gives 1,800 minutes, and subtract 22:00, which is 1,320 minutes. The difference is 480 minutes, or 8 hours.</p>
+<h2>Decimal hours for timesheets</h2>
+<p>Divide the minutes by 60. 7 hours and 45 minutes is 7.75 hours. A 15-minute break is 0.25 hours, so it is easy to subtract. Many payroll systems use decimal hours, so check which format your employer uses.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/time-duration-calculator.html">Time Duration Calculator</a> handles overnight shifts and shows hours and minutes plus decimal hours.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Time Duration Calculator: Hours Between Two Times - Toolkit Lab";
+const description = "Work out the time between a start and an end time, including overnight shifts, and see it as hours and minutes or decimal hours. Free and private.";
+---
+<Base title={title} description={description} path="/tools/time-duration-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Time Duration Calculator</p>
+      <h1>Time Duration Calculator</h1>
+      <p class="lead">Enter a start and end time to see how long it lasts. If the end is earlier than the start, the time is taken to run past midnight.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="start">Start time</label><input type="time" id="start" value="09:30"></div>
+        <div><label for="end">End time</label><input type="time" id="end" value="17:15"></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong id="hm">-</strong><span>Hours and minutes</span></div>
+        <div class="stat"><strong id="dec">-</strong><span>Decimal hours</span></div>
+      </div>
+      <p class="note">Useful for timesheets, shifts and billing. Break time is not subtracted unless you calculate it separately.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  function update() {
+    var s = document.getElementById('start').value.split(':'), e = document.getElementById('end').value.split(':');
+    if (s.length < 2 || e.length < 2) { return; }
+    var start = (+s[0]) * 60 + (+s[1]), end = (+e[0]) * 60 + (+e[1]);
+    if (end < start) end += 24 * 60;
+    var mins = end - start, h = Math.floor(mins / 60), m = mins % 60;
+    document.getElementById('hm').textContent = h + 'h ' + (m < 10 ? '0' : '') + m + 'm';
+    document.getElementById('dec').textContent = (mins / 60).toFixed(2);
+  }
+  document.querySelectorAll('input').forEach(function (el) { el.addEventListener('input', update); });
+  update();
+})();
+  </script>
+</Base>
