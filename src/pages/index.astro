@@ -1,176 +1,96 @@
 ---
 import Base from '../layouts/Base.astro';
-const title = "Toolkit Lab - Free Online Tools";
-const description = "Free browser-based tools: compress images, count words, format JSON, encode Base64, convert text case, generate passwords and calculate BMI. Your data never leaves your device.";
+const title = "Toolkit Lab - Free Online Tools for PDFs, Images, Calculators and Text";
+const description = "Free browser-based tools: merge and split PDFs, compress images, convert video to MP3, calculate loans and percentages, format JSON and more. Your files never leave your device.";
 ---
 <Base title={title} description={description} path="/">
-<aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
-    <div class="wrap">
-      <section class="hero">
-        <span class="eyebrow">Free &middot; Private &middot; No sign-up</span>
-        <h1>Everyday tools that just work</h1>
-        <p class="lead">Compress, convert, count, format and calculate, right in your browser. Your files and text never leave your device.</p>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Free &middot; Private &middot; No sign-up</span>
+      <h1>Everyday tools that just work</h1>
+      <p class="lead">Merge PDFs, compress images, run the numbers and tidy up text. Everything runs in your browser, so your files and data stay on your device.</p>
 
-        <div class="search-field">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="filter" type="search" placeholder="Find a tool or guide..." aria-label="Filter tools and guides" autocomplete="off">
-        </div>
-      </section>
-      <div class="ad-slot" aria-label="Advertisement"></div>
+      <div class="search-field">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="filter" type="search" placeholder="Search tools and guides, for example PDF or password" aria-label="Search tools and guides" autocomplete="off">
+      </div>
 
-      <section id="tools" data-filter-group>
-        <div class="section-head">
-          <h2>Tools</h2>
-          <span class="note">23 tools</span>
-        </div>
-        <div class="grid">
-          <a class="card" data-searchable href="tools/image-compressor.html" data-reveal>
-            <span class="card-icon">IMG</span>
-            <h3>Image Compressor</h3>
-            <p>Shrink JPEG, PNG and WebP files and convert between formats.</p>
-          </a>
-          <a class="card" data-searchable href="tools/word-counter.html" data-reveal>
-            <span class="card-icon">Aa</span>
-            <h3>Word Counter</h3>
-            <p>Words, characters, sentences and estimated reading time, live.</p>
-          </a>
-          <a class="card" data-searchable href="tools/json-formatter.html" data-reveal>
-            <span class="card-icon">&#123; &#125;</span>
-            <h3>JSON Formatter</h3>
-            <p>Beautify, minify and validate JSON with clear error messages.</p>
-          </a>
-          <a class="card" data-searchable href="tools/base64.html" data-reveal>
-            <span class="card-icon">64</span>
-            <h3>Base64 Encoder</h3>
-            <p>Encode text to Base64 and decode it back, with full UTF-8 support.</p>
-          </a>
-          <a class="card" data-searchable href="tools/case-converter.html" data-reveal>
-            <span class="card-icon">Tt</span>
-            <h3>Case Converter</h3>
-            <p>Switch text to UPPERCASE, Title Case, camelCase, snake_case and more.</p>
-          </a>
-          <a class="card" data-searchable href="tools/password-generator.html" data-reveal>
-            <span class="card-icon">***</span>
-            <h3>Password Generator</h3>
-            <p>Create strong random passwords. Generated on your device, never stored.</p>
-          </a>
-          <a class="card" data-searchable href="tools/bmi-calculator.html" data-reveal>
-            <span class="card-icon">BMI</span>
-            <h3>BMI Calculator</h3>
-            <p>Work out your Body Mass Index in metric or imperial units.</p>
-          </a>
-          <a class="card" data-searchable href="tools/psd-converter.html" data-reveal>
-            <span class="card-icon">PSD</span>
-            <h3>PSD to PNG / JPG</h3>
-            <p>Convert Photoshop files to PNG or JPG. Your file stays on your device.</p>
-          </a>
-          <a class="card" data-searchable href="tools/unit-converter.html" data-reveal>
-            <span class="card-icon">kg</span>
-            <h3>Unit Converter</h3>
-            <p>Convert length, weight and temperature between metric and imperial units.</p>
-          </a>
-          <a class="card" data-searchable href="tools/color-converter.html" data-reveal>
-            <span class="card-icon">#</span>
-            <h3>Color Converter</h3>
-            <p>Switch between HEX, RGB and HSL with a live color preview.</p>
-          </a>
-          <a class="card" data-searchable href="tools/date-calculator.html" data-reveal>
-            <span class="card-icon">📅</span>
-            <h3>Date Calculator</h3>
-            <p>Count the days between two dates, or add and subtract days.</p>
-          </a>
-          <a class="card" data-searchable href="tools/percentage-calculator.html" data-reveal>
-            <span class="card-icon">%</span>
-            <h3>Percentage Calculator</h3>
-            <p>Find percentages, what share a number is, and percentage change.</p>
-          </a>
-          <a class="card" data-searchable href="tools/qr-code-generator.html" data-reveal>
-            <span class="card-icon">QR</span>
-            <h3>QR Code Generator</h3>
-            <p>Turn a link or text into a QR code and download it as a PNG.</p>
-          </a>
-          <a class="card" data-searchable href="tools/hash-generator.html" data-reveal>
-            <span class="card-icon">#A</span>
-            <h3>Hash Generator</h3>
-            <p>Calculate SHA-256, SHA-512 and other hashes for text or files.</p>
-          </a>
-          <a class="card" data-searchable href="tools/loan-calculator.html" data-reveal>
-            <span class="card-icon">EMI</span>
-            <h3>Loan EMI Calculator</h3>
-            <p>See the monthly payment and total interest on a loan.</p>
-          </a>
-          <a class="card" data-searchable href="tools/lorem-ipsum-generator.html" data-reveal>
-            <span class="card-icon">Lo</span>
-            <h3>Lorem Ipsum Generator</h3>
-            <p>Placeholder text in paragraphs, sentences or words for mockups.</p>
-          </a>
-          <a class="card" data-searchable href="tools/stopwatch.html" data-reveal>
-            <span class="card-icon">00</span>
-            <h3>Online Stopwatch</h3>
-            <p>Start, pause and record laps. Space and L keys work too.</p>
-          </a>
-          <a class="card" data-searchable href="tools/merge-pdf.html" data-reveal>
-            <span class="card-icon">PDF</span>
-            <h3>Merge PDF</h3>
-            <p>Combine several PDF files into one, in the order you choose.</p>
-          </a>
-          <a class="card" data-searchable href="tools/split-pdf.html" data-reveal>
-            <span class="card-icon">PDF</span>
-            <h3>Split PDF</h3>
-            <p>Pull selected pages out of a PDF into a new file.</p>
-          </a>
-          <a class="card" data-searchable href="tools/rotate-pdf.html" data-reveal>
-            <span class="card-icon">PDF</span>
-            <h3>Rotate PDF</h3>
-            <p>Turn every page of a PDF by 90, 180 or 270 degrees.</p>
-          </a>
-          <a class="card" data-searchable href="tools/image-to-pdf.html" data-reveal>
-            <span class="card-icon">IMG</span>
-            <h3>JPG and PNG to PDF</h3>
-            <p>Put photos or scans into one PDF, one image per page.</p>
-          </a>
-          <a class="card" data-searchable href="tools/pdf-to-jpg.html" data-reveal>
-            <span class="card-icon">JPG</span>
-            <h3>PDF to JPG</h3>
-            <p>Save each page of a PDF as a JPG image.</p>
-          </a>
-          <a class="card" data-searchable href="tools/video-to-mp3.html" data-reveal>
-            <span class="card-icon">MP3</span>
-            <h3>Video to MP3</h3>
-            <p>Extract the audio from a video you own and save it as MP3.</p>
-          </a>
-        </div>
-      </section>
+      <ul class="chips" aria-label="Popular tools">
+        <li><a href="/tools/merge-pdf.html">Merge PDF</a></li>
+        <li><a href="/tools/image-compressor.html">Compress image</a></li>
+        <li><a href="/tools/video-to-mp3.html">Video to MP3</a></li>
+        <li><a href="/tools/loan-calculator.html">Loan EMI</a></li>
+        <li><a href="/tools/password-generator.html">Password generator</a></li>
+      </ul>
 
-      <section data-filter-group>
-        <div class="section-head">
-          <h2>Guides</h2>
-          <a href="guides.html">See all guides &rarr;</a>
-        </div>
-        <div class="grid">
-          <a class="card" data-searchable href="guides/how-to-compress-images-for-the-web.html" data-reveal>
-            <span class="card-icon">01</span>
-            <h3>How to Compress Images for the Web</h3>
-            <p>Format, quality and size settings explained.</p>
-          </a>
-          <a class="card" data-searchable href="guides/how-to-create-a-strong-password.html" data-reveal>
-            <span class="card-icon">02</span>
-            <h3>How to Create a Strong Password</h3>
-            <p>Why length and uniqueness matter most.</p>
-          </a>
-          <a class="card" data-searchable href="guides/what-is-base64-and-when-to-use-it.html" data-reveal>
-            <span class="card-icon">03</span>
-            <h3>What Is Base64?</h3>
-            <p>How the encoding works and where you will see it.</p>
-          </a>
-        </div>
-      </section>
+      <dl class="hero-stats">
+        <div><dt>Tools</dt><dd>23</dd></div>
+        <div><dt>Guides</dt><dd>17</dd></div>
+        <div><dt>Files uploaded</dt><dd>0</dd></div>
+        <div><dt>Price</dt><dd>Free</dd></div>
+      </dl>
+    </section>
 
-      <p id="filter-empty" class="empty-state" hidden>No tools or guides match that search. Try &ldquo;image&rdquo; or &ldquo;password&rdquo;.</p>
+    <section id="tools" data-filter-group>
+      <div class="section-head"><h2>PDF tools</h2><span class="note">5 tools</span></div>
+      <div class="grid">
+        <a class="card" data-searchable href="/tools/merge-pdf.html" data-reveal><span class="card-icon">PDF</span><h3>Merge PDF</h3><p>Combine several PDF files into one, in the order you choose.</p></a>
+        <a class="card" data-searchable href="/tools/split-pdf.html" data-reveal><span class="card-icon">PDF</span><h3>Split PDF</h3><p>Pull selected pages out of a PDF into a new file.</p></a>
+        <a class="card" data-searchable href="/tools/rotate-pdf.html" data-reveal><span class="card-icon">PDF</span><h3>Rotate PDF</h3><p>Turn every page of a PDF by 90, 180 or 270 degrees.</p></a>
+        <a class="card" data-searchable href="/tools/image-to-pdf.html" data-reveal><span class="card-icon">IMG</span><h3>JPG and PNG to PDF</h3><p>Put photos or scans into one PDF, one image per page.</p></a>
+        <a class="card" data-searchable href="/tools/pdf-to-jpg.html" data-reveal><span class="card-icon">JPG</span><h3>PDF to JPG</h3><p>Save each page of a PDF as a JPG image.</p></a>
+      </div>
+    </section>
 
-      <!-- AdSense: place your ad unit code here once your site is approved. -->
-      <div class="ad-slot" aria-label="Advertisement"></div>
-    </div>
-    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+    <section data-filter-group>
+      <div class="section-head"><h2>Images and media</h2><span class="note">3 tools</span></div>
+      <div class="grid">
+        <a class="card" data-searchable href="/tools/image-compressor.html" data-reveal><span class="card-icon">IMG</span><h3>Image Compressor</h3><p>Shrink JPEG, PNG and WebP files and convert between formats.</p></a>
+        <a class="card" data-searchable href="/tools/psd-converter.html" data-reveal><span class="card-icon">PSD</span><h3>PSD to PNG / JPG</h3><p>Convert Photoshop files to PNG or JPG. Your file stays on your device.</p></a>
+        <a class="card" data-searchable href="/tools/video-to-mp3.html" data-reveal><span class="card-icon">MP3</span><h3>Video to MP3</h3><p>Extract the audio from a video you own and save it as MP3.</p></a>
+      </div>
+    </section>
 
+    <section data-filter-group>
+      <div class="section-head"><h2>Calculators</h2><span class="note">5 tools</span></div>
+      <div class="grid">
+        <a class="card" data-searchable href="/tools/loan-calculator.html" data-reveal><span class="card-icon">EMI</span><h3>Loan EMI Calculator</h3><p>See the monthly payment and total interest on a loan.</p></a>
+        <a class="card" data-searchable href="/tools/bmi-calculator.html" data-reveal><span class="card-icon">BMI</span><h3>BMI Calculator</h3><p>Work out your Body Mass Index in metric or imperial units.</p></a>
+        <a class="card" data-searchable href="/tools/percentage-calculator.html" data-reveal><span class="card-icon">%</span><h3>Percentage Calculator</h3><p>Find percentages, what share a number is, and percentage change.</p></a>
+        <a class="card" data-searchable href="/tools/date-calculator.html" data-reveal><span class="card-icon">DAY</span><h3>Date Calculator</h3><p>Count the days between two dates, or add and subtract days.</p></a>
+        <a class="card" data-searchable href="/tools/unit-converter.html" data-reveal><span class="card-icon">kg</span><h3>Unit Converter</h3><p>Convert length, weight and temperature between metric and imperial units.</p></a>
+      </div>
+    </section>
+
+    <section data-filter-group>
+      <div class="section-head"><h2>Text and developer tools</h2><span class="note">10 tools</span></div>
+      <div class="grid">
+        <a class="card" data-searchable href="/tools/word-counter.html" data-reveal><span class="card-icon">Aa</span><h3>Word Counter</h3><p>Words, characters, sentences and estimated reading time, live.</p></a>
+        <a class="card" data-searchable href="/tools/case-converter.html" data-reveal><span class="card-icon">Tt</span><h3>Case Converter</h3><p>Switch text to UPPERCASE, Title Case, camelCase, snake_case and more.</p></a>
+        <a class="card" data-searchable href="/tools/json-formatter.html" data-reveal><span class="card-icon">&#123; &#125;</span><h3>JSON Formatter</h3><p>Beautify, minify and validate JSON with clear error messages.</p></a>
+        <a class="card" data-searchable href="/tools/base64.html" data-reveal><span class="card-icon">64</span><h3>Base64 Encoder</h3><p>Encode text to Base64 and decode it back, with full UTF-8 support.</p></a>
+        <a class="card" data-searchable href="/tools/lorem-ipsum-generator.html" data-reveal><span class="card-icon">Lo</span><h3>Lorem Ipsum Generator</h3><p>Placeholder text in paragraphs, sentences or words for mockups.</p></a>
+        <a class="card" data-searchable href="/tools/hash-generator.html" data-reveal><span class="card-icon">#A</span><h3>Hash Generator</h3><p>Calculate SHA-256, SHA-512 and other hashes for text or files.</p></a>
+        <a class="card" data-searchable href="/tools/password-generator.html" data-reveal><span class="card-icon">***</span><h3>Password Generator</h3><p>Create strong random passwords. Generated on your device, never stored.</p></a>
+        <a class="card" data-searchable href="/tools/qr-code-generator.html" data-reveal><span class="card-icon">QR</span><h3>QR Code Generator</h3><p>Turn a link or text into a QR code and download it as a PNG.</p></a>
+        <a class="card" data-searchable href="/tools/color-converter.html" data-reveal><span class="card-icon">#</span><h3>Color Converter</h3><p>Switch between HEX, RGB and HSL with a live color preview.</p></a>
+        <a class="card" data-searchable href="/tools/stopwatch.html" data-reveal><span class="card-icon">00</span><h3>Online Stopwatch</h3><p>Start, pause and record laps. Space and L keys work too.</p></a>
+      </div>
+    </section>
+
+    <section data-filter-group>
+      <div class="section-head"><h2>Guides</h2><a href="/guides.html">See all 17 guides &rarr;</a></div>
+      <div class="grid">
+        <a class="card" data-searchable href="guides/how-to-compress-images-for-the-web.html" data-reveal><span class="card-icon">01</span><h3>How to Compress Images for the Web</h3><p>Format, quality and size settings explained.</p></a>
+        <a class="card" data-searchable href="guides/how-to-create-a-strong-password.html" data-reveal><span class="card-icon">02</span><h3>How to Create a Strong Password</h3><p>Why length and uniqueness matter most.</p></a>
+        <a class="card" data-searchable href="guides/how-a-loan-emi-is-calculated.html" data-reveal><span class="card-icon">03</span><h3>How a Loan EMI Is Calculated</h3><p>The EMI formula and why early payments are mostly interest.</p></a>
+      </div>
+    </section>
+
+    <p id="filter-empty" class="empty-state" hidden>No tools or guides match that search. Try &ldquo;image&rdquo; or &ldquo;password&rdquo;.</p>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
 </Base>

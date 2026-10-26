@@ -645,3 +645,60 @@ footer.site p { margin: 0 0 0 auto; }
   .wrap { padding: 0 16px; }
   .grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- Home page: chips, stats and section rhythm ---------- */
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 18px 0 0;
+}
+
+.chips a {
+  display: inline-block;
+  padding: 6px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.chips a:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 36px 0 0;
+  padding: 0;
+}
+
+.hero-stats div {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.hero-stats dt {
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-stats dd {
+  margin: 4px 0 0;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
