@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "URL Slug Generator: Turn a Title into a Web Address - Toolkit Lab";
+const description = "Turn a page title into a clean, lowercase URL slug with hyphens. Removes accents and symbols. Free and private, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/url-slug-generator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / URL Slug Generator</p>
+      <h1>URL Slug Generator</h1>
+      <p class="lead">Type a title and get a short, clean slug for a web address.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <label for="title">Title</label>
+      <input type="text" id="title" value="How to Create a Strong Password (2026 Guide)!">
+      <label for="slug">Slug</label>
+      <input type="text" id="slug" readonly>
+      <div class="row"><button id="copy" type="button" class="secondary">Copy slug</button></div>
+      <p class="note">Slugs use lowercase letters, numbers and hyphens. Keep them short and describe the page. Search engines read them as part of the address.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  function slugify(text) {
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  var titleEl = document.getElementById('title');
+  var slugEl = document.getElementById('slug');
+  function update() { slugEl.value = slugify(titleEl.value); }
+  titleEl.addEventListener('input', update);
+  document.getElementById('copy').addEventListener('click', function () {
+    if (slugEl.value) navigator.clipboard.writeText(slugEl.value).catch(function () {});
+  });
+  update();
+})();
+  </script>
+</Base>

@@ -64,6 +64,16 @@ Total guides: 25
 - [x] How to Split a Bill Fairly, Including the Tip
 Total tools: 32. Total guides: 28.
 
+## Phase 7: More tools and guides
+- [x] SIP Calculator (in Calculators)
+- [x] GST Calculator (in Calculators)
+- [x] Unix Timestamp Converter (in Text and developer tools)
+- [x] URL Slug Generator (in Text and developer tools)
+- [x] How a SIP (Monthly Investment Plan) Works
+- [x] How GST Is Calculated: Adding and Removing Tax
+- [x] What Is a Unix Timestamp? Epoch Time Explained
+Total tools: 36. Total guides: 31.
+
 ## Log (continued)
 - Added BreadcrumbList data, the og:image, two tools and two guides. Tested both tools in the browser.
 

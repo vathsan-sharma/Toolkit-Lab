@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How GST Is Calculated: Adding and Removing Tax - Toolkit Lab";
+const description = "How goods and services tax is calculated when it is added to a price, and how to work backwards from a total that already includes it.";
+---
+<Base title={title} description={description} path="/guides/how-gst-is-calculated.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Tax basics</p>
+    <h1>How GST Is Calculated: Adding and Removing Tax</h1>
+    <p class="lead">GST is a tax added to the price of many goods and services. Sometimes you start with a price before tax, and sometimes you start with a total that already includes it. The two directions use different formulas.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Adding GST to a price</h2>
+<p>Multiply the price before tax by the GST rate, then add the result. A price of 1,000 with an 18% rate gives a GST amount of 180, and a total of 1,180.</p>
+<h2>Removing GST from a total</h2>
+<p>If the price already includes GST, divide it by 1 plus the rate. A total of 1,180 at 18% gives a price before GST of 1,000, and a GST amount of 180. Do not subtract 18% of the total, because that gives the wrong answer.</p>
+<h2>Check the rate</h2>
+<p>Different goods and services can have different rates, and rules change. Check the rate that applies to your item in your country before you use a figure for a bill, invoice or return.</p>
+<h2>Rounding</h2>
+<p>Tax amounts are often rounded to the nearest cent or paisa. Small differences can appear if you round at different steps, so follow the rounding rules your invoice system uses.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/gst-calculator.html">GST Calculator</a> works in both directions and shows the price before GST, the GST amount and the total.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

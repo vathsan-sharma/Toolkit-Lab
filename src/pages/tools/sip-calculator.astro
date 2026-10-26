@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "SIP Calculator: Monthly Investment Growth - Toolkit Lab";
+const description = "Estimate how a monthly SIP investment grows at an expected annual return over a number of years. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/sip-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / SIP Calculator</p>
+      <h1>SIP Calculator</h1>
+      <p class="lead">See how much a fixed monthly investment could grow at an assumed yearly return.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div><label for="monthly">Monthly investment</label><input type="number" id="monthly" min="0" step="100" value="5000"></div>
+        <div><label for="rate">Expected return (% a year)</label><input type="number" id="rate" min="0" step="0.1" value="12"></div>
+        <div><label for="years">Years</label><input type="number" id="years" min="1" step="1" value="10"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="invested">-</strong><span>Total invested</span></div>
+        <div class="stat"><strong id="value">-</strong><span>Estimated value</span></div>
+        <div class="stat"><strong id="gain">-</strong><span>Estimated gain</span></div>
+      </div>
+      <p class="note">This assumes the same return every year, with each payment made at the end of its month. Real returns vary and can be negative, so this is an illustration only.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  function update() {
+    var P = parseFloat(document.getElementById('monthly').value);
+    var annual = parseFloat(document.getElementById('rate').value);
+    var years = parseFloat(document.getElementById('years').value);
+    var errorEl = document.getElementById('error');
+    if (!(P >= 0) || !(annual >= 0) || !(years >= 1)) { errorEl.textContent = 'Enter a monthly amount of zero or more, a return of zero or more, and at least one year.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var i = annual / 100 / 12;
+    var n = Math.round(years * 12);
+    // Future value of a series of monthly payments: P * ((1 + i)^n - 1) / i
+    var value = i === 0 ? P * n : P * (Math.pow(1 + i, n) - 1) / i;
+    var invested = P * n;
+    document.getElementById('invested').textContent = money(invested);
+    document.getElementById('value').textContent = money(value);
+    document.getElementById('gain').textContent = money(value - invested);
+  }
+  document.querySelectorAll('input').forEach(function (el) { el.addEventListener('input', update); });
+  update();
+})();
+  </script>
+</Base>

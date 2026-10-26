@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "What Is a Unix Timestamp? Epoch Time Explained - Toolkit Lab";
+const description = "What Unix epoch time is, how seconds since 1 January 1970 represent a date, and the common mistakes with seconds versus milliseconds.";
+---
+<Base title={title} description={description} path="/guides/what-is-a-unix-timestamp.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Developer basics</p>
+    <h1>What Is a Unix Timestamp? Epoch Time Explained</h1>
+    <p class="lead">A Unix timestamp counts the seconds since 1 January 1970 at 00:00 UTC. Computers use it because a single number is easy to store, compare and calculate with.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Examples</h2>
+<ul>
+<li>0 is 1 January 1970 at 00:00:00 UTC, the start of the epoch.</li>
+<li>1,000,000,000 is 9 September 2001 at 01:46:40 UTC.</li>
+</ul>
+<h2>Seconds or milliseconds?</h2>
+<p>Many systems use seconds, but JavaScript and some databases use milliseconds. A millisecond value looks about a thousand times larger. If a date shows as the year 50000, the value is probably in milliseconds.</p>
+<h2>Time zones</h2>
+<p>A Unix timestamp is always in UTC, so it does not change with time zones. Convert it to local time only when you display it to a person.</p>
+<h2>The 2038 limit</h2>
+<p>Systems that store the timestamp in a signed 32-bit integer run out at 2,147,483,647, which is 19 January 2038 at 03:14:07 UTC. Modern systems use 64-bit numbers, which avoid the limit.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/unix-timestamp-converter.html">Unix Timestamp Converter</a> turns a timestamp into a date and a date into a timestamp, with times shown in UTC.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

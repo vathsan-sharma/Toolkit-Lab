@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Unix Timestamp Converter: Epoch to Date and Back - Toolkit Lab";
+const description = "Convert a Unix timestamp in seconds to a readable UTC date, or convert a date to its Unix timestamp. Free and private.";
+---
+<Base title={title} description={description} path="/tools/unix-timestamp-converter.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Unix Timestamp Converter</p>
+      <h1>Unix Timestamp Converter</h1>
+      <p class="lead">Turn a Unix epoch timestamp into a date, or a date into a timestamp. Times are shown in UTC.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <label for="ts">Unix timestamp (seconds since 1 January 1970 UTC)</label>
+      <input type="number" id="ts" step="1" value="1793004000">
+      <div class="row"><button id="now" type="button" class="secondary">Use current time</button></div>
+      <label for="dt">Date and time (UTC)</label>
+      <input type="datetime-local" id="dt">
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="iso">-</strong><span>ISO 8601 (UTC)</span></div>
+        <div class="stat"><strong id="human">-</strong><span>Readable (UTC)</span></div>
+        <div class="stat"><strong id="back">-</strong><span>Timestamp for the date above</span></div>
+      </div>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var tsEl = document.getElementById('ts');
+  var dtEl = document.getElementById('dt');
+  var errorEl = document.getElementById('error');
+  function showFromTs() {
+    var s = parseFloat(tsEl.value);
+    if (!isFinite(s)) { errorEl.textContent = 'Enter a number of seconds.'; errorEl.hidden = false; return; }
+    var d = new Date(s * 1000);
+    if (isNaN(d.getTime())) { errorEl.textContent = 'That timestamp is outside the range of dates.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    document.getElementById('iso').textContent = d.toISOString();
+    document.getElementById('human').textContent = d.toUTCString();
+    dtEl.value = d.toISOString().slice(0, 16);
+    document.getElementById('back').textContent = Math.floor(d.getTime() / 1000);
+  }
+  function showFromDate() {
+    if (!dtEl.value) return;
+    var ms = Date.parse(dtEl.value + 'Z');
+    if (isNaN(ms)) { errorEl.textContent = 'Enter a valid date and time.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    tsEl.value = Math.floor(ms / 1000);
+    document.getElementById('back').textContent = Math.floor(ms / 1000);
+    var d = new Date(ms);
+    document.getElementById('iso').textContent = d.toISOString();
+    document.getElementById('human').textContent = d.toUTCString();
+  }
+  tsEl.addEventListener('input', showFromTs);
+  dtEl.addEventListener('input', showFromDate);
+  document.getElementById('now').addEventListener('click', function () {
+    tsEl.value = Math.floor(Date.now() / 1000);
+    showFromTs();
+  });
+  showFromTs();
+})();
+  </script>
+</Base>
