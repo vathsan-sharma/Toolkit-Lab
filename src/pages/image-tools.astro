@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Free Online Image Tools: Compress, Resize and Convert - Toolkit Lab";
+const description = "Free online image tools: compress photos, resize to a file size in KB, convert between JPG, PNG and WebP, and more. Nothing is uploaded.";
+---
+<Base title={title} description={description} path="/image-tools.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Home</a> / Image Tools</p>
+      <h1>Free image tools for photos and graphics</h1>
+      <p class="lead">Image tools help you make photos fit a website, an upload form or an email. Shrink a large file, set a pixel size, or aim for a target size in KB, then download the result. Each tool works on your device, so your pictures stay private.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+    <section class="block">
+      <div class="grid">
+        <a class="card" href="/tools/image-compressor.html"><span class="card-icon">IMA</span><h3>Image Compressor</h3><p>Shrink JPEG, PNG and WebP files and convert between formats.</p></a>
+        <a class="card" href="/tools/image-resizer.html"><span class="card-icon">IMA</span><h3>Image Resizer</h3><p>Resize by pixels, keep the aspect ratio, or aim for a target size in KB.</p></a>
+        <a class="card" href="/tools/image-converter.html"><span class="card-icon">IMA</span><h3>Image Converter</h3><p>Convert between JPG, PNG and WebP, with quality control.</p></a>
+        <a class="card" href="/tools/psd-converter.html"><span class="card-icon">PSD</span><h3>PSD to PNG / JPG</h3><p>Convert Photoshop files to PNG or JPG.</p></a>
+        <a class="card" href="/tools/image-to-base64.html"><span class="card-icon">IMA</span><h3>Image to Base64</h3><p>Turn a small image into a data URI for HTML or CSS.</p></a>
+        <a class="card" href="/tools/video-to-mp3.html"><span class="card-icon">VID</span><h3>Video to MP3</h3><p>Extract the audio from a video you own and save it as MP3.</p></a>
+      </div>
+    </section>
+    <section class="block faq-block" style="grid-template-columns:1fr">
+      <h2 class="block-title" style="text-align:left">Questions</h2>
+      <div class="faq">
+        <details><summary>Which format is smallest?</summary><p>For photos, WebP or JPG is usually smaller than PNG. PNG suits graphics with transparency or sharp text.</p></details>
+        <details><summary>Will compression reduce quality?</summary><p>Lossy formats remove some detail. Compare the result at full size before you use it.</p></details>
+      </div>
+    </section>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

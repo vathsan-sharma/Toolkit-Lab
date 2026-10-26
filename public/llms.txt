@@ -2,6 +2,12 @@
 
 > Toolkit Lab is a free website with 43 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
 
+## Categories
+- [PDF tools](https://www.toolkitlab.xyz/pdf-tools.html)
+- [Image tools](https://www.toolkitlab.xyz/image-tools.html)
+- [Calculators](https://www.toolkitlab.xyz/calculators.html)
+- [Text and developer tools](https://www.toolkitlab.xyz/text-and-developer-tools.html)
+
 ## Tools
 - [Merge PDF](https://www.toolkitlab.xyz/tools/merge-pdf.html): combine PDF files in any order
 - [Split PDF](https://www.toolkitlab.xyz/tools/split-pdf.html): extract selected pages from a PDF

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Free Online Calculators: Loans, Tax, Dates and More - Toolkit Lab";
+const description = "Free online calculators: loan EMI, SIP and compound interest, GST, discounts, tips, BMI, dates, age, percentages and unit conversion.";
+---
+<Base title={title} description={description} path="/calculators.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Home</a> / Calculators</p>
+      <h1>Free calculators for money, dates and measurements</h1>
+      <p class="lead">Calculators answer quick questions about money, time and measurements. Work out a monthly loan payment, see how a regular investment could grow, add GST to a price, or find the discount on a sale. The numbers stay on your device, and the tools show the assumptions they use.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+    <section class="block">
+      <div class="grid">
+        <a class="card" href="/tools/loan-calculator.html"><span class="card-icon">LOA</span><h3>Loan EMI Calculator</h3><p>See the monthly payment and total interest on a loan.</p></a>
+        <a class="card" href="/tools/sip-calculator.html"><span class="card-icon">SIP</span><h3>SIP Calculator</h3><p>See how a fixed monthly investment could grow at an assumed return.</p></a>
+        <a class="card" href="/tools/compound-interest-calculator.html"><span class="card-icon">COM</span><h3>Compound Interest Calculator</h3><p>See how savings grow with interest added over time.</p></a>
+        <a class="card" href="/tools/gst-calculator.html"><span class="card-icon">GST</span><h3>GST Calculator</h3><p>Add GST to a price, or remove it from a total.</p></a>
+        <a class="card" href="/tools/discount-calculator.html"><span class="card-icon">DIS</span><h3>Discount Calculator</h3><p>Work out the sale price, the saving and the total with tax.</p></a>
+        <a class="card" href="/tools/tip-calculator.html"><span class="card-icon">TIP</span><h3>Tip Calculator</h3><p>Work out the tip, the total and each person's share.</p></a>
+        <a class="card" href="/tools/bmi-calculator.html"><span class="card-icon">BMI</span><h3>BMI Calculator</h3><p>Work out your Body Mass Index in metric or imperial units.</p></a>
+        <a class="card" href="/tools/percentage-calculator.html"><span class="card-icon">PER</span><h3>Percentage Calculator</h3><p>Find percentages, what share a number is and percentage change.</p></a>
+        <a class="card" href="/tools/date-calculator.html"><span class="card-icon">DAT</span><h3>Date Calculator</h3><p>Count the days between two dates, or add and subtract days.</p></a>
+        <a class="card" href="/tools/age-calculator.html"><span class="card-icon">AGE</span><h3>Age Calculator</h3><p>Work out your exact age in years, months and days.</p></a>
+        <a class="card" href="/tools/unit-converter.html"><span class="card-icon">UNI</span><h3>Unit Converter</h3><p>Convert length, weight and temperature between metric and imperial.</p></a>
+      </div>
+    </section>
+    <section class="block faq-block" style="grid-template-columns:1fr">
+      <h2 class="block-title" style="text-align:left">Questions</h2>
+      <div class="faq">
+        <details><summary>Are these financial advice?</summary><p>No. They are estimates with simple formulas. Check the assumptions and ask a qualified adviser before making decisions.</p></details>
+        <details><summary>Do they store my numbers?</summary><p>No. Everything is calculated in your browser.</p></details>
+      </div>
+    </section>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

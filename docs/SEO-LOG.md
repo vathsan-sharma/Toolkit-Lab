@@ -98,3 +98,8 @@ Bugs found by browser tests and fixed: regex default pattern had doubled backsla
 - [x] Google Search Console: TXT verification record added in Vercel DNS (checked live via 8.8.8.8 and 1.1.1.1). Sitemap submitted (owner confirmed).
 - [~] Bing Webmaster Tools: owner says added. Confirm the property is verified and the sitemap is submitted.
 - [ ] Check Search Console Pages report in about a week, and fix any errors listed.
+
+## Phase 9: Category landing pages
+- [x] /pdf-tools.html, /image-tools.html, /calculators.html, /text-and-developer-tools.html, each with a unique intro, tool grid and questions
+- [x] Linked from the home page section headings, search and llms.txt. Included in the sitemap automatically.
+- [ ] Check Search Console in about a week for these pages.

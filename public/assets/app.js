@@ -71,6 +71,10 @@
   /* ---------- Command palette (Ctrl/Cmd + K) ---------- */
   var ENTRIES = [
     { title: 'Home', kind: 'Page', href: 'index.html' },
+    { title: 'PDF Tools', kind: 'Category', href: 'pdf-tools.html' },
+    { title: 'Image Tools', kind: 'Category', href: 'image-tools.html' },
+    { title: 'Calculators', kind: 'Category', href: 'calculators.html' },
+    { title: 'Text and Developer Tools', kind: 'Category', href: 'text-and-developer-tools.html' },
     { title: 'Image Compressor', kind: 'Tool', href: 'tools/image-compressor.html' },
     { title: 'Word Counter', kind: 'Tool', href: 'tools/word-counter.html' },
     { title: 'JSON Formatter', kind: 'Tool', href: 'tools/json-formatter.html' },
