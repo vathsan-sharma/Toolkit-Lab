@@ -1,7 +1,21 @@
 ---
 const { title, description, path } = Astro.props;
-const canonical = 'https://toolkitlab.xyz' + path;
-const favicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E";
+const origin = 'https://www.toolkitlab.xyz';
+const canonical = origin + path;
+const isTool = path.startsWith('/tools/');
+const isGuide = path.startsWith('/guides/');
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Toolkit Lab', url: origin + '/', inLanguage: 'en' },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: 'Toolkit Lab', url: origin + '/', logo: origin + '/favicon.svg' },
+  isTool && { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: title.split(' - ')[0], url: canonical, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any (web browser)', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, description },
+  isGuide && { '@context': 'https://schema.org', '@type': 'Article', headline: title.split(' - ')[0], description, url: canonical, publisher: { '@type': 'Organization', name: 'Toolkit Lab' }, inLanguage: 'en' },
+  path === '/' && { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
+    { '@type': 'Question', name: 'Are my files uploaded anywhere?', acceptedAnswer: { '@type': 'Answer', text: 'No. The tools run in your browser, so your files and text stay on your device.' } },
+    { '@type': 'Question', name: 'Do I need an account?', acceptedAnswer: { '@type': 'Answer', text: 'No. You can use every tool without signing up.' } },
+    { '@type': 'Question', name: 'Is it free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. All tools are free to use.' } }
+  ] }
+].filter(Boolean);
+const favicon = "/favicon.svg";
 ---
 <!doctype html>
 <html lang="en">
@@ -13,6 +27,9 @@ const favicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' vi
     <meta name="google-adsense-account" content="ca-pub-1766259744738866">
     <link rel="canonical" href={canonical}>
     <meta property="og:site_name" content="Toolkit Lab">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
     <meta property="og:url" content={canonical}>
     <link rel="icon" href={favicon}>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +39,7 @@ const favicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' vi
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1766259744738866" crossorigin="anonymous"></script>
     <script is:inline src="/assets/app.js" defer></script>
     <slot name="head" />
+    {schema.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)}></script>)}
   </head>
   <body>
     <header class="site">

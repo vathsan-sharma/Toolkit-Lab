@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://toolkitlab.xyz',
+  site: 'https://www.toolkitlab.xyz',
   // Emit name.html files, so every existing .html link keeps working.
-  build: { format: 'file' }
+  build: { format: 'file' },
+  integrations: [sitemap()]
 });

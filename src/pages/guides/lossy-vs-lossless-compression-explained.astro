@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Lossy vs Lossless Compression: What Changes in Your Images - Toolkit Lab";
+const description = "The difference between lossy and lossless image compression, which formats use each, and how to choose a quality setting without visible damage.";
+---
+<Base title={title} description={description} path="/guides/lossy-vs-lossless-compression-explained.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Image compression</p>
+    <h1>Lossy vs Lossless Compression: What Changes in Your Images</h1>
+    <p class="lead">Image files shrink in two different ways. Lossless compression keeps every pixel exactly. Lossy compression throws away detail that the eye is unlikely to notice, and the file gets much smaller.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Lossless compression</h2>
+<p>Lossless methods find patterns in the data and store them more compactly. When the file is opened, every pixel is restored exactly. PNG is lossless. WebP and other formats also offer lossless modes. Lossless files are usually larger, which is why they suit screenshots, text and logos.</p>
+<h2>Lossy compression</h2>
+<p>Lossy methods, such as those used for JPEG and lossy WebP, discard information that is hard to see. Smaller files come at the cost of some detail, and at low quality you may see blocky patches or blurred edges. Lossy compression suits photographs.</p>
+<h2>Choosing a quality setting</h2>
+<ul>
+<li>For photos, 70 to 85 is a common range. Compare the result at full size before you publish.</li>
+<li>Below about 60, artifacts become visible on most photos.</li>
+<li>For images with text or hard edges, lossy compression shows more damage. Prefer PNG or lossless WebP.</li>
+</ul>
+<h2>Do not compress twice</h2>
+<p>Each lossy save removes more detail. Keep the original file, and compress from it each time you need a smaller version.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/image-compressor.html">Image Compressor</a> lets you choose the format and quality, and shows the file size before and after.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

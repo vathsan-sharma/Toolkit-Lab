@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Is It Safe to Merge PDF Files Online? - Toolkit Lab";
+const description = "Whether online PDF merge tools upload your files, what to check before using one, and how to merge PDFs without sending them anywhere.";
+---
+<Base title={title} description={description} path="/guides/is-it-safe-to-merge-pdf-files-online.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / PDF privacy</p>
+    <h1>Is It Safe to Merge PDF Files Online?</h1>
+    <p class="lead">Many online PDF tools send your files to a server to combine them. That can be fine for a public brochure, but it is worth checking before you upload a contract, a payslip or an ID document.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>How most online merge tools work</h2>
+<p>Most websites that merge PDFs upload the files to their servers, combine them there, and let you download the result. Some delete the files after a short time, and others keep them longer. The details are usually in their privacy policy.</p>
+<h2>What to check before you upload</h2>
+<ul>
+<li>Does the site say whether files are uploaded, and where they are stored?</li>
+<li>How long are files kept, and can you delete them yourself?</li>
+<li>Is the site secured with HTTPS, and does it name the company behind it?</li>
+</ul>
+<h2>How Toolkit Lab works</h2>
+<p>The <a href="/tools/merge-pdf.html">Merge PDF</a> tool loads a small library into your browser and combines the pages on your device. Your files are not sent to our servers. You can check this yourself: open your browser's developer tools, switch to the network tab, merge a file, and see that no upload request is made.</p>
+<h2>Sensitive documents</h2>
+<p>For highly confidential documents, a desktop PDF app or the built-in tools on your computer keep the files entirely local. Whatever tool you use, check that you can access the merged file and delete the originals when you are finished.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

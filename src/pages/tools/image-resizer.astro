@@ -1,0 +1,182 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Image Resizer: Resize Photos and Set a Target File Size - Toolkit Lab";
+const description = "Resize JPG, PNG and WebP images by pixels or percentage, keep the aspect ratio, and aim for a target file size in KB. Runs in your browser, nothing is uploaded.";
+---
+<Base title={title} description={description} path="/tools/image-resizer.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Image Resizer</p>
+      <h1>Image Resizer</h1>
+      <p class="lead">Set a new width or height, or a target file size in KB. The aspect ratio stays the same unless you turn it off.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+    <div class="panel">
+      <label for="file">Image (JPG, PNG or WebP)</label>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp">
+      <p id="info" class="note" hidden></p>
+
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label for="width">Width (px)</label>
+          <input type="number" id="width" min="1" step="1" disabled>
+        </div>
+        <div>
+          <label for="height">Height (px)</label>
+          <input type="number" id="height" min="1" step="1" disabled>
+        </div>
+      </div>
+      <label style="font-weight:500"><input type="checkbox" id="lock" checked> Keep aspect ratio</label>
+
+      <label for="target">Target file size in KB (optional)</label>
+      <input type="number" id="target" min="1" step="1" placeholder="for example 200">
+      <p class="note">Leave empty to keep the quality setting below. For JPG and WebP, a target makes the tool lower the quality until the file fits. PNG cannot be reduced that way.</p>
+
+      <label for="format">Output format</label>
+      <select id="format">
+        <option value="image/jpeg" selected>JPG</option>
+        <option value="image/webp">WebP</option>
+        <option value="image/png">PNG</option>
+      </select>
+
+      <label for="quality">Quality: <span id="qualityValue">85</span>%</label>
+      <input type="range" id="quality" min="10" max="100" value="85" style="width:100%">
+
+      <div class="row">
+        <button id="resize" type="button" disabled>Resize</button>
+        <a id="download" class="button secondary" hidden>Download</a>
+      </div>
+
+      <p id="error" class="error" hidden></p>
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><strong id="dims">-</strong><span>New size</span></div>
+        <div class="stat"><strong id="outSize">-</strong><span>File size</span></div>
+        <div class="stat"><strong id="quality2">-</strong><span>Quality used</span></div>
+      </div>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+  (function () {
+    var fileInput = document.getElementById('file');
+    var widthEl = document.getElementById('width');
+    var heightEl = document.getElementById('height');
+    var lock = document.getElementById('lock');
+    var targetEl = document.getElementById('target');
+    var formatEl = document.getElementById('format');
+    var qualityEl = document.getElementById('quality');
+    var resizeBtn = document.getElementById('resize');
+    var downloadLink = document.getElementById('download');
+    var errorEl = document.getElementById('error');
+    var infoEl = document.getElementById('info');
+    var statsEl = document.getElementById('stats');
+    var img = null;
+    var ratio = 1;
+    var sourceName = 'image';
+    var downloadUrl = null;
+
+    function showError(message) { errorEl.textContent = message; errorEl.hidden = !message; }
+    function bytesText(n) { return n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : (n / 1048576).toFixed(2) + ' MB'; }
+
+    qualityEl.addEventListener('input', function () {
+      document.getElementById('qualityValue').textContent = qualityEl.value;
+    });
+
+    widthEl.addEventListener('input', function () {
+      if (lock.checked && widthEl.value) heightEl.value = Math.max(1, Math.round(widthEl.value / ratio));
+    });
+    heightEl.addEventListener('input', function () {
+      if (lock.checked && heightEl.value) widthEl.value = Math.max(1, Math.round(heightEl.value * ratio));
+    });
+
+    fileInput.addEventListener('change', function () {
+      showError('');
+      statsEl.hidden = true;
+      downloadLink.hidden = true;
+      var file = fileInput.files[0];
+      resizeBtn.disabled = true;
+      if (!file) return;
+      var url = URL.createObjectURL(file);
+      var image = new Image();
+      image.onload = function () {
+        img = image;
+        ratio = image.naturalWidth / image.naturalHeight;
+        sourceName = file.name.replace(/\.[^.]+$/, '');
+        widthEl.value = image.naturalWidth;
+        heightEl.value = image.naturalHeight;
+        widthEl.disabled = false;
+        heightEl.disabled = false;
+        resizeBtn.disabled = false;
+        infoEl.textContent = file.name + ': ' + image.naturalWidth + ' x ' + image.naturalHeight + ' px, ' + bytesText(file.size);
+        infoEl.hidden = false;
+        URL.revokeObjectURL(url);
+      };
+      image.onerror = function () {
+        URL.revokeObjectURL(url);
+        showError('This file could not be read as an image.');
+      };
+      image.src = url;
+    });
+
+    function render(width, height, type, quality) {
+      var canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext('2d');
+      if (type === 'image/jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, width, height); }
+      ctx.drawImage(img, 0, 0, width, height);
+      return new Promise(function (resolve) { canvas.toBlob(resolve, type, quality); });
+    }
+
+    resizeBtn.addEventListener('click', async function () {
+      if (!img) return;
+      showError('');
+      var width = parseInt(widthEl.value, 10);
+      var height = parseInt(heightEl.value, 10);
+      if (!(width > 0) || !(height > 0)) { showError('Enter a width and height above zero.'); return; }
+      var type = formatEl.value;
+      var quality = Number(qualityEl.value) / 100;
+      var target = parseInt(targetEl.value, 10) * 1024;
+      resizeBtn.disabled = true;
+      try {
+        var blob = await render(width, height, type, quality);
+        var usedQuality = quality;
+        if (target > 0 && type !== 'image/png') {
+          // Binary search the quality until the file fits the target size.
+          var lo = 0.05, hi = quality, best = null;
+          for (var i = 0; i < 8; i++) {
+            var mid = (lo + hi) / 2;
+            var candidate = await render(width, height, type, mid);
+            if (candidate.size <= target) { best = candidate; usedQuality = mid; lo = mid; }
+            else { hi = mid; }
+          }
+          blob = best || (await render(width, height, type, 0.05));
+          usedQuality = best ? usedQuality : 0.05;
+        }
+        if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+        downloadUrl = URL.createObjectURL(blob);
+        var ext = type === 'image/jpeg' ? 'jpg' : type === 'image/webp' ? 'webp' : 'png';
+        downloadLink.href = downloadUrl;
+        downloadLink.download = sourceName + '-' + width + 'x' + height + '.' + ext;
+        downloadLink.hidden = false;
+        document.getElementById('dims').textContent = width + ' x ' + height;
+        document.getElementById('outSize').textContent = bytesText(blob.size);
+        document.getElementById('quality2').textContent = type === 'image/png' ? 'Lossless' : Math.round(usedQuality * 100) + '%';
+        statsEl.hidden = false;
+        if (target > 0 && type !== 'image/png' && blob.size > target) {
+          showError('Could not reach that size even at the lowest quality. Try a smaller width or height.');
+        }
+      } catch (err) {
+        showError('The image could not be resized. Try a different format.');
+      } finally {
+        resizeBtn.disabled = false;
+      }
+    });
+  })();
+</script>
+</Base>

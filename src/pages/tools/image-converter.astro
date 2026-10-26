@@ -1,0 +1,113 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Image Converter: JPG, PNG and WebP Online - Toolkit Lab";
+const description = "Convert images between JPG, PNG and WebP in your browser. Choose the quality, keep transparency with PNG or WebP, and download. Nothing is uploaded.";
+---
+<Base title={title} description={description} path="/tools/image-converter.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Image Converter</p>
+      <h1>Image Converter</h1>
+      <p class="lead">Turn a JPG, PNG or WebP into another format. Pick JPG for smaller photos, PNG to keep transparency, or WebP for small web images.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+    <div class="panel">
+      <label for="file">Image (JPG, PNG or WebP)</label>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp">
+
+      <label for="format">Convert to</label>
+      <select id="format">
+        <option value="image/webp" selected>WebP</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/png">PNG</option>
+      </select>
+
+      <label for="quality">Quality: <span id="qualityValue">90</span>%</label>
+      <input type="range" id="quality" min="10" max="100" value="90" style="width:100%">
+      <p class="note">Quality only applies to JPG and WebP. PNG is lossless.</p>
+
+      <div class="row">
+        <button id="convert" type="button" disabled>Convert</button>
+        <a id="download" class="button secondary" hidden>Download</a>
+      </div>
+
+      <p id="error" class="error" hidden></p>
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><strong id="dims">-</strong><span>Size in pixels</span></div>
+        <div class="stat"><strong id="before">-</strong><span>Original</span></div>
+        <div class="stat"><strong id="after">-</strong><span>Converted</span></div>
+      </div>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+  (function () {
+    var fileInput = document.getElementById('file');
+    var formatEl = document.getElementById('format');
+    var qualityEl = document.getElementById('quality');
+    var convertBtn = document.getElementById('convert');
+    var downloadLink = document.getElementById('download');
+    var errorEl = document.getElementById('error');
+    var file = null;
+    var downloadUrl = null;
+
+    function showError(message) { errorEl.textContent = message; errorEl.hidden = !message; }
+    function bytesText(n) { return n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : (n / 1048576).toFixed(2) + ' MB'; }
+
+    qualityEl.addEventListener('input', function () {
+      document.getElementById('qualityValue').textContent = qualityEl.value;
+    });
+
+    fileInput.addEventListener('change', function () {
+      showError('');
+      downloadLink.hidden = true;
+      document.getElementById('stats').hidden = true;
+      file = fileInput.files[0] || null;
+      convertBtn.disabled = !file;
+    });
+
+    convertBtn.addEventListener('click', function () {
+      if (!file) return;
+      showError('');
+      convertBtn.disabled = true;
+      var url = URL.createObjectURL(file);
+      var image = new Image();
+      image.onload = function () {
+        URL.revokeObjectURL(url);
+        var type = formatEl.value;
+        var canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        var ctx = canvas.getContext('2d');
+        if (type === 'image/jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+        ctx.drawImage(image, 0, 0);
+        canvas.toBlob(function (blob) {
+          convertBtn.disabled = false;
+          if (!blob) { showError('Your browser cannot save that format.'); return; }
+          if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+          downloadUrl = URL.createObjectURL(blob);
+          var ext = type === 'image/jpeg' ? 'jpg' : type === 'image/webp' ? 'webp' : 'png';
+          downloadLink.href = downloadUrl;
+          downloadLink.download = file.name.replace(/\.[^.]+$/, '') + '.' + ext;
+          downloadLink.hidden = false;
+          document.getElementById('dims').textContent = canvas.width + ' x ' + canvas.height;
+          document.getElementById('before').textContent = bytesText(file.size);
+          document.getElementById('after').textContent = bytesText(blob.size);
+          document.getElementById('stats').hidden = false;
+        }, type, Number(qualityEl.value) / 100);
+      };
+      image.onerror = function () {
+        URL.revokeObjectURL(url);
+        convertBtn.disabled = false;
+        showError('This file could not be read as an image.');
+      };
+      image.src = url;
+    });
+  })();
+</script>
+</Base>

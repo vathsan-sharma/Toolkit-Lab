@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Age Calculator: Exact Age in Years, Months and Days - Toolkit Lab";
+const description = "Work out your exact age in years, months and days from your date of birth, and count the days until your next birthday. Free and private.";
+---
+<Base title={title} description={description} path="/tools/age-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Age Calculator</p>
+      <h1>Age Calculator</h1>
+      <p class="lead">Enter a date of birth to see the exact age in years, months and days, and how long until the next birthday.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+    <div class="panel">
+      <label for="dob">Date of birth</label>
+      <input type="date" id="dob">
+
+      <label for="on">Age on this date</label>
+      <input type="date" id="on">
+      <p class="note">Leave the second date as today to see your current age.</p>
+
+      <p id="error" class="error" hidden></p>
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><strong id="years">-</strong><span>Years</span></div>
+        <div class="stat"><strong id="months">-</strong><span>Months</span></div>
+        <div class="stat"><strong id="days">-</strong><span>Days</span></div>
+        <div class="stat"><strong id="nextBday">-</strong><span>Days to next birthday</span></div>
+        <div class="stat"><strong id="totalDays">-</strong><span>Total days lived</span></div>
+      </div>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+<script is:inline>
+  (function () {
+    var DAY = 24 * 60 * 60 * 1000;
+    function parse(value) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || '');
+      return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+    }
+
+    function update() {
+      var dob = parse(document.getElementById('dob').value);
+      var on = parse(document.getElementById('on').value);
+      var errorEl = document.getElementById('error');
+      var stats = document.getElementById('stats');
+      if (!dob || !on) { stats.hidden = true; errorEl.hidden = true; return; }
+      if (dob > on) {
+        stats.hidden = true;
+        errorEl.textContent = 'The date of birth must be before the date you are checking.';
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
+
+      // Count whole years, then months, then days, borrowing from the month before when needed.
+      var years = on.getFullYear() - dob.getFullYear();
+      var months = on.getMonth() - dob.getMonth();
+      var days = on.getDate() - dob.getDate();
+      if (days < 0) {
+        months -= 1;
+        days += new Date(on.getFullYear(), on.getMonth(), 0).getDate();
+      }
+      if (months < 0) { years -= 1; months += 12; }
+
+      // Next birthday: this year's birthday if still ahead, otherwise next year's.
+      var next = new Date(on.getFullYear(), dob.getMonth(), dob.getDate());
+      if (next < on) next = new Date(on.getFullYear() + 1, dob.getMonth(), dob.getDate());
+      var toNext = Math.round((next - on) / DAY);
+
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('days').textContent = days;
+      document.getElementById('nextBday').textContent = toNext;
+      document.getElementById('totalDays').textContent = Math.round((on - dob) / DAY).toLocaleString();
+      stats.hidden = false;
+    }
+
+    var today = new Date();
+    var iso = function (d) { return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+    document.getElementById('on').value = iso(today);
+    document.getElementById('dob').addEventListener('input', update);
+    document.getElementById('on').addEventListener('input', update);
+    update();
+  })();
+</script>
+</Base>

@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Calculate Your Exact Age in Years, Months and Days - Toolkit Lab";
+const description = "How to work out an exact age in years, months and days, why the month borrowing rule matters, and how to count the days to your next birthday.";
+---
+<Base title={title} description={description} path="/guides/how-to-calculate-your-exact-age.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Dates</p>
+    <h1>How to Calculate Your Exact Age in Years, Months and Days</h1>
+    <p class="lead">Your age in years is easy to work out, but an exact age also includes months and days. The calculation needs one careful rule for borrowing from the previous month.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Count the years, months and days</h2>
+<p>Subtract the birth year from the current year, the birth month from the current month, and the birth day from the current day. If a result is negative, borrow: subtract one from the month or year above it, and add the length of the previous month to the day count.</p>
+<h2>A worked example</h2>
+<p>Someone born on 15 May 1990 checks their age on 26 October 2026. Years: 2026 minus 1990 is 36. Months: October minus May is 5. Days: 26 minus 15 is 11. No borrowing is needed, so the exact age is 36 years, 5 months and 11 days.</p>
+<h2>Days to the next birthday</h2>
+<p>Find the next birthday, which is this year's date if it has not passed yet, otherwise next year's. Then count the days from today to that date. For the example above, the next birthday is 15 May 2027, which is 201 days away.</p>
+<h2>Why the borrowing rule matters</h2>
+<p>If the checking date falls before the birthday in its month, a simple subtraction gives the wrong day count. Borrowing from the previous month fixes this. Months have different lengths, so the borrowed amount depends on which month it is.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/age-calculator.html">Age Calculator</a> does this for any date of birth and checking date, and it shows the total number of days lived too.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

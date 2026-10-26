@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Resize an Image to a Specific File Size - Toolkit Lab";
+const description = "How to make an image fit a file size limit in KB, such as 20 KB for a form or 200 KB for an upload, while keeping it sharp.";
+---
+<Base title={title} description={description} path="/guides/how-to-resize-an-image-to-a-file-size.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Image resizing</p>
+    <h1>How to Resize an Image to a Specific File Size</h1>
+    <p class="lead">Forms and upload pages often set a file size limit, such as 20 KB, 100 KB or 2 MB. You can meet that limit by changing the size in pixels, the quality setting, or both.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Why file size limits exist</h2>
+<p>Application forms, government portals and content systems often cap the size of each upload. A photo straight from a phone can be several megabytes, far above a 100 KB limit.</p>
+<h2>Step 1: reduce the pixel size first</h2>
+<p>A photo that will be shown at 600 pixels wide does not need 4000 pixels. Lowering the width and height usually removes the most data, so do this first. Keep the aspect ratio locked so the picture is not stretched.</p>
+<h2>Step 2: set a target size</h2>
+<p>Enter the limit in KB in the target field. For JPG and WebP, the tool lowers the quality step by step until the file fits, and it stops at the highest quality that still meets the target. PNG files do not shrink this way, so choose JPG or WebP for small targets.</p>
+<h2>What to expect</h2>
+<ul>
+<li>Very small targets can make photos look blocky. If that happens, reduce the pixel size a little and try again.</li>
+<li>Images with large areas of flat colour, such as logos, compress well. Busy photos need more data.</li>
+<li>Always keep your original file. Each save at a lower quality removes more detail.</li>
+</ul>
+<h2>Try it yourself</h2>
+<p>Open the <a href="/tools/image-resizer.html">Image Resizer</a>, choose your photo, enter the size and target, and download the result. The image is processed on your device and is not uploaded.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

@@ -1,0 +1,38 @@
+# Toolkit Lab
+
+> Toolkit Lab is a free website with 26 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
+
+## Tools
+- [Merge PDF](https://www.toolkitlab.xyz/tools/merge-pdf.html): combine PDF files in any order
+- [Split PDF](https://www.toolkitlab.xyz/tools/split-pdf.html): extract selected pages from a PDF
+- [Rotate PDF](https://www.toolkitlab.xyz/tools/rotate-pdf.html): rotate all pages by 90, 180 or 270 degrees
+- [JPG and PNG to PDF](https://www.toolkitlab.xyz/tools/image-to-pdf.html): one image per PDF page
+- [PDF to JPG](https://www.toolkitlab.xyz/tools/pdf-to-jpg.html): save each PDF page as a JPG
+- [Image Compressor](https://www.toolkitlab.xyz/tools/image-compressor.html): shrink JPEG, PNG and WebP files
+- [Image Resizer](https://www.toolkitlab.xyz/tools/image-resizer.html): resize images and aim for a target file size
+- [Image Converter](https://www.toolkitlab.xyz/tools/image-converter.html): convert between JPG, PNG and WebP
+- [PSD to PNG / JPG](https://www.toolkitlab.xyz/tools/psd-converter.html): convert Photoshop files
+- [Video to MP3](https://www.toolkitlab.xyz/tools/video-to-mp3.html): extract audio from a video file on your device
+- [Loan EMI Calculator](https://www.toolkitlab.xyz/tools/loan-calculator.html): monthly payment and total interest
+- [BMI Calculator](https://www.toolkitlab.xyz/tools/bmi-calculator.html): body mass index
+- [Percentage Calculator](https://www.toolkitlab.xyz/tools/percentage-calculator.html)
+- [Date Calculator](https://www.toolkitlab.xyz/tools/date-calculator.html): days between dates
+- [Age Calculator](https://www.toolkitlab.xyz/tools/age-calculator.html): exact age in years, months and days
+- [Unit Converter](https://www.toolkitlab.xyz/tools/unit-converter.html): length, weight and temperature
+- [Word Counter](https://www.toolkitlab.xyz/tools/word-counter.html)
+- [Case Converter](https://www.toolkitlab.xyz/tools/case-converter.html)
+- [JSON Formatter](https://www.toolkitlab.xyz/tools/json-formatter.html)
+- [Base64 Encoder](https://www.toolkitlab.xyz/tools/base64.html)
+- [Lorem Ipsum Generator](https://www.toolkitlab.xyz/tools/lorem-ipsum-generator.html)
+- [Hash Generator](https://www.toolkitlab.xyz/tools/hash-generator.html): SHA-256, SHA-512 and more
+- [Password Generator](https://www.toolkitlab.xyz/tools/password-generator.html)
+- [QR Code Generator](https://www.toolkitlab.xyz/tools/qr-code-generator.html)
+- [Color Converter](https://www.toolkitlab.xyz/tools/color-converter.html): HEX, RGB and HSL
+- [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
+
+## Guides
+- [All guides](https://www.toolkitlab.xyz/guides.html)
+
+## Policies
+- [Privacy Policy](https://www.toolkitlab.xyz/privacy.html)
+- [About](https://www.toolkitlab.xyz/about.html)
