@@ -335,5 +335,54 @@
     revealTargets.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* ---------- Shared tool actions: Reset and Copy results ---------- */
+  document.querySelectorAll('.panel').forEach(function (panel) {
+    var stats = panel.querySelector('.stats');
+    if (stats) { stats.setAttribute('role', 'status'); stats.setAttribute('aria-live', 'polite'); }
+
+    // Tools with a file picker keep their file, so skip Reset there.
+    var hasFile = !!panel.querySelector('input[type=file]');
+    var fields = Array.prototype.slice.call(panel.querySelectorAll('input, select, textarea'))
+      .filter(function (el) { return el.type !== 'file' && el.type !== 'button' && el.id !== 'filter'; });
+    var row = document.createElement('div');
+    row.className = 'row tool-actions';
+
+    if (fields.length && !hasFile) {
+      var start = fields.map(function (el) { return [el, el.type === 'checkbox' ? el.checked : el.value]; });
+      var reset = document.createElement('button');
+      reset.type = 'button';
+      reset.className = 'secondary';
+      reset.textContent = 'Reset';
+      reset.addEventListener('click', function () {
+        start.forEach(function (pair) {
+          var el = pair[0], v = pair[1];
+          if (el.type === 'checkbox') el.checked = v; else el.value = v;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        toast('Reset to the starting values');
+      });
+      row.appendChild(reset);
+    }
+
+    if (stats && stats.querySelector('.stat')) {
+      var copy = document.createElement('button');
+      copy.type = 'button';
+      copy.className = 'secondary';
+      copy.textContent = 'Copy results';
+      copy.addEventListener('click', function () {
+        var lines = Array.prototype.slice.call(stats.querySelectorAll('.stat')).filter(function (st) {
+          return !st.closest('[hidden]');
+        }).map(function (st) {
+          return st.querySelector('span').textContent + ': ' + st.querySelector('strong').textContent;
+        });
+        if (lines.length && navigator.clipboard) navigator.clipboard.writeText(lines.join('\n')).catch(function () {});
+      });
+      row.appendChild(copy);
+    }
+
+    if (row.childNodes.length) panel.appendChild(row);
+  });
+
   paintThemeButtons();
 })();

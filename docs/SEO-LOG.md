@@ -149,3 +149,8 @@ Total tools: 58. Total guides: 52.
 - [x] All 52 guides have a Worked example with numbers checked by hand, and three FAQs
 - [x] FAQPage structured data on every guide (validated, 260 blocks across the site)
 - [ ] Owner: spot-check the worked examples against your own figures before publishing widely
+
+## Phase 18: Shared tool actions
+- [x] Reset button on every tool with inputs (restores starting values; skipped on tools with a file picker)
+- [x] Copy results button on every tool with a results panel
+- [x] Result areas announce changes to screen readers (aria-live)

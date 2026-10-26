@@ -1049,3 +1049,5 @@ footer.site p { margin: 0 0 0 auto; }
 .faq-list summary::after { content: "+"; color: var(--accent); font-size: 1.2rem; line-height: 1; }
 .faq-list details[open] summary::after { content: "−"; }
 .faq-list details p { margin: 10px 0 0; color: var(--muted); font-size: 0.95rem; }
+
+.tool-actions { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
