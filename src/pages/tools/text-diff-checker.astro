@@ -1,0 +1,113 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Text Diff Checker: Compare Two Texts Line by Line - Toolkit Lab";
+const description = "Paste two versions of a text and see which lines were added, removed or unchanged. Useful for comparing drafts, code and documents. Runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/text-diff-checker.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Text Diff Checker</p>
+      <h1>Text Diff Checker</h1>
+      <p class="lead">Paste the original text on the left and the new version on the right. Lines that were added, removed or unchanged are marked below.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+    <div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label for="before">Original</label>
+          <textarea id="before" rows="10" placeholder="Paste the original text"></textarea>
+        </div>
+        <div>
+          <label for="after">New version</label>
+          <textarea id="after" rows="10" placeholder="Paste the new text"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <button id="compare" type="button">Compare</button>
+        <button id="clear" type="button" class="secondary">Clear</button>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><strong id="added">0</strong><span>Lines added</span></div>
+        <div class="stat"><strong id="removed">0</strong><span>Lines removed</span></div>
+        <div class="stat"><strong id="same">0</strong><span>Lines unchanged</span></div>
+      </div>
+      <pre id="result" style="white-space:pre-wrap;word-break:break-word;margin-top:18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:0.88rem;line-height:1.6" hidden></pre>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+    (function () {
+      var MAX_LINES = 2000;
+      var beforeEl = document.getElementById('before');
+      var afterEl = document.getElementById('after');
+      var resultEl = document.getElementById('result');
+      var errorEl = document.getElementById('error');
+
+      // Longest common subsequence on lines gives the minimal set of changes.
+      function diff(a, b) {
+        var n = a.length, m = b.length;
+        var table = [];
+        for (var i = 0; i <= n; i++) { table.push(new Array(m + 1).fill(0)); }
+        for (i = n - 1; i >= 0; i--) {
+          for (var j = m - 1; j >= 0; j--) {
+            table[i][j] = a[i] === b[j] ? table[i + 1][j + 1] + 1 : Math.max(table[i + 1][j], table[i][j + 1]);
+          }
+        }
+        var out = [];
+        i = 0; j = 0;
+        while (i < n && j < m) {
+          if (a[i] === b[j]) { out.push({ type: 'same', text: a[i] }); i++; j++; }
+          else if (table[i + 1][j] >= table[i][j + 1]) { out.push({ type: 'removed', text: a[i] }); i++; }
+          else { out.push({ type: 'added', text: b[j] }); j++; }
+        }
+        while (i < n) { out.push({ type: 'removed', text: a[i++] }); }
+        while (j < m) { out.push({ type: 'added', text: b[j++] }); }
+        return out;
+      }
+
+      var colours = { added: 'rgba(22,163,74,0.18)', removed: 'rgba(220,38,38,0.16)', same: 'transparent' };
+      var marks = { added: '+ ', removed: '- ', same: '  ' };
+
+      document.getElementById('compare').addEventListener('click', function () {
+        errorEl.hidden = true;
+        var a = beforeEl.value.split('\n');
+        var b = afterEl.value.split('\n');
+        if (a.length > MAX_LINES || b.length > MAX_LINES) {
+          errorEl.textContent = 'Each text can have up to ' + MAX_LINES + ' lines. Split the text and compare the parts.';
+          errorEl.hidden = false;
+          return;
+        }
+        var changes = diff(a, b);
+        var counts = { added: 0, removed: 0, same: 0 };
+        resultEl.innerHTML = '';
+        changes.forEach(function (c) {
+          counts[c.type]++;
+          var line = document.createElement('div');
+          line.style.background = colours[c.type];
+          line.style.padding = '0 8px';
+          line.textContent = marks[c.type] + c.text;
+          resultEl.appendChild(line);
+        });
+        document.getElementById('added').textContent = counts.added;
+        document.getElementById('removed').textContent = counts.removed;
+        document.getElementById('same').textContent = counts.same;
+        document.getElementById('stats').hidden = false;
+        resultEl.hidden = false;
+      });
+
+      document.getElementById('clear').addEventListener('click', function () {
+        beforeEl.value = ''; afterEl.value = '';
+        resultEl.hidden = true; resultEl.innerHTML = '';
+        document.getElementById('stats').hidden = true;
+        errorEl.hidden = true;
+      });
+    })();
+  </script>
+</Base>

@@ -1,6 +1,6 @@
 # Toolkit Lab
 
-> Toolkit Lab is a free website with 26 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
+> Toolkit Lab is a free website with 28 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
 
 ## Tools
 - [Merge PDF](https://www.toolkitlab.xyz/tools/merge-pdf.html): combine PDF files in any order
@@ -28,6 +28,8 @@
 - [Password Generator](https://www.toolkitlab.xyz/tools/password-generator.html)
 - [QR Code Generator](https://www.toolkitlab.xyz/tools/qr-code-generator.html)
 - [Color Converter](https://www.toolkitlab.xyz/tools/color-converter.html): HEX, RGB and HSL
+- [Text Diff Checker](https://www.toolkitlab.xyz/tools/text-diff-checker.html): compare two texts line by line
+- [Discount Calculator](https://www.toolkitlab.xyz/tools/discount-calculator.html): sale price, savings and tax
 - [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
 
 ## Guides

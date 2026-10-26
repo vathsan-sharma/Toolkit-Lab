@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Calculate a Discount and Sale Price - Toolkit Lab";
+const description = "How to work out a sale price from a percentage discount, how much you save, and how sales tax changes the final total.";
+---
+<Base title={title} description={description} path="/guides/how-to-calculate-a-discount-and-sale-price.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Shopping maths</p>
+    <h1>How to Calculate a Discount and Sale Price</h1>
+    <p class="lead">A 25% discount sounds simple, but it is easy to mix up the saving with the price you pay. A short calculation shows both, and tells you the total once tax is added.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>The two numbers you need</h2>
+<p>The saving is the original price multiplied by the discount percentage, divided by 100. The sale price is the original price minus that saving. For an 80 item with 25% off, the saving is 20 and the sale price is 60.</p>
+<h2>A quick check</h2>
+<p>A discount of 50% always halves the price, and a discount of 10% takes one tenth off. If your answer does not match these shortcuts, recheck the arithmetic.</p>
+<h2>Discounts and tax</h2>
+<p>In most places, sales tax is added to the discounted price, not the original one. For example, a sale price of 60 with 8% tax costs 64.80 in total. Check the rules where you live, because some places handle it differently.</p>
+<h2>Stacked discounts</h2>
+<p>Two discounts applied one after the other do not add together. Take 20% off, then 10% off the new price. A 100 item becomes 80, then 72. That is a total discount of 28%, not 30%.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/discount-calculator.html">Discount Calculator</a> shows the sale price, the saving and the total with tax as you type.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

@@ -2,6 +2,7 @@
 const { title, description, path } = Astro.props;
 const origin = 'https://www.toolkitlab.xyz';
 const canonical = origin + path;
+const ogImage = origin + '/og-image.png';
 const isTool = path.startsWith('/tools/');
 const isGuide = path.startsWith('/guides/');
 const schema = [
@@ -9,6 +10,16 @@ const schema = [
   { '@context': 'https://schema.org', '@type': 'Organization', name: 'Toolkit Lab', url: origin + '/', logo: origin + '/favicon.svg' },
   isTool && { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: title.split(' - ')[0], url: canonical, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any (web browser)', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, description },
   isGuide && { '@context': 'https://schema.org', '@type': 'Article', headline: title.split(' - ')[0], description, url: canonical, publisher: { '@type': 'Organization', name: 'Toolkit Lab' }, inLanguage: 'en' },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: path === '/' ? [] : [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: origin + '/' },
+      isTool && { '@type': 'ListItem', position: 2, name: 'Tools', item: origin + '/index.html#tools' },
+      isGuide && { '@type': 'ListItem', position: 2, name: 'Guides', item: origin + '/guides.html' },
+      { '@type': 'ListItem', position: 3, name: title.split(' - ')[0], item: canonical }
+    ].filter(Boolean)
+  },
   path === '/' && { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
     { '@type': 'Question', name: 'Are my files uploaded anywhere?', acceptedAnswer: { '@type': 'Answer', text: 'No. The tools run in your browser, so your files and text stay on your device.' } },
     { '@type': 'Question', name: 'Do I need an account?', acceptedAnswer: { '@type': 'Answer', text: 'No. You can use every tool without signing up.' } },
@@ -30,6 +41,9 @@ const favicon = "/favicon.svg";
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:type" content="website">
+    <meta property="og:image" content={ogImage}>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content={ogImage}>
     <meta property="og:url" content={canonical}>
     <link rel="icon" href={favicon}>
     <link rel="preconnect" href="https://fonts.googleapis.com">

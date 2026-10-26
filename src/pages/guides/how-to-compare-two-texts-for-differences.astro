@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Compare Two Texts for Differences - Toolkit Lab";
+const description = "How to spot what changed between two versions of a document, contract or code file, line by line, with a diff checker.";
+---
+<Base title={title} description={description} path="/guides/how-to-compare-two-texts-for-differences.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Text comparison</p>
+    <h1>How to Compare Two Texts for Differences</h1>
+    <p class="lead">When two drafts of a document look almost the same, a line-by-line comparison shows exactly what changed. It is faster and more reliable than reading both versions side by side.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>What a diff shows</h2>
+<p>A diff compares two texts line by line and marks each line as added, removed or unchanged. The method finds the longest run of matching lines, then treats everything else as a change. That is why a moved paragraph shows up as a removal and an addition.</p>
+<h2>Steps to compare</h2>
+<ol>
+<li>Copy the older version into the Original box.</li>
+<li>Copy the newer version into the New version box.</li>
+<li>Press Compare. Lines starting with a plus sign were added, lines with a minus sign were removed, and lines with two spaces are unchanged.</li>
+</ol>
+<h2>Tips for better results</h2>
+<ul>
+<li>Remove formatting before you compare, because bullet symbols and smart quotes can make identical lines look different.</li>
+<li>Compare one section at a time when the texts are very long.</li>
+<li>Check the counts at the top. A large number of changes may mean the wrong versions were pasted.</li>
+</ul>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/text-diff-checker.html">Text Diff Checker</a> runs in your browser. The text you paste is not saved or sent anywhere.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>
