@@ -6,34 +6,88 @@ const description = "Free browser-based tools: merge and split PDFs, compress im
 <Base title={title} description={description} path="/">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <div class="wrap">
-    <section class="hero">
-      <span class="eyebrow">Free &middot; Private &middot; No sign-up</span>
-      <h1>Everyday tools that just work</h1>
-      <p class="lead">Merge PDFs, compress images, run the numbers and tidy up text. Everything runs in your browser, so your files and data stay on your device.</p>
 
-      <div class="search-field">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="filter" type="search" placeholder="Search tools and guides, for example PDF or password" aria-label="Search tools and guides" autocomplete="off">
+    <!-- Hero -->
+    <section class="hero-grid">
+      <div>
+        <span class="pill">23 free tools &middot; No sign-up</span>
+        <h1>Free tools that work right in your browser</h1>
+        <p class="lead">Merge PDFs, compress images, run the numbers and tidy up text. Your files stay on your device, so nothing is uploaded.</p>
+        <div class="cta-row">
+          <a class="btn" href="#tools">Browse all tools</a>
+          <a class="btn btn-ghost" href="/tools/merge-pdf.html">Merge a PDF</a>
+        </div>
+        <div class="search-field">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="filter" type="search" placeholder="Search tools and guides" aria-label="Search tools and guides" autocomplete="off">
+        </div>
+        <p class="note">0 files uploaded by our tools. Everything runs on your device.</p>
       </div>
 
-      <ul class="chips" aria-label="Popular tools">
-        <li><a href="/tools/merge-pdf.html">Merge PDF</a></li>
-        <li><a href="/tools/image-compressor.html">Compress image</a></li>
-        <li><a href="/tools/video-to-mp3.html">Video to MP3</a></li>
-        <li><a href="/tools/loan-calculator.html">Loan EMI</a></li>
-        <li><a href="/tools/password-generator.html">Password generator</a></li>
-      </ul>
-
-      <dl class="hero-stats">
-        <div><dt>Tools</dt><dd>23</dd></div>
-        <div><dt>Guides</dt><dd>17</dd></div>
-        <div><dt>Files uploaded</dt><dd>0</dd></div>
-        <div><dt>Price</dt><dd>Free</dd></div>
-      </dl>
+      <div class="preview" aria-hidden="true">
+        <div class="preview-head"><span></span><span></span><span></span><b>Merge PDF</b></div>
+        <div class="preview-row"><i>1</i><span>report-q1.pdf</span><em>3 pages</em></div>
+        <div class="preview-row"><i>2</i><span>invoice.pdf</span><em>1 page</em></div>
+        <div class="preview-row"><i>3</i><span>appendix.pdf</span><em>6 pages</em></div>
+        <div class="preview-btn">Merge and download</div>
+      </div>
     </section>
 
-    <section id="tools" data-filter-group>
-      <div class="section-head"><h2>PDF tools</h2><span class="note">5 tools</span></div>
+    <!-- Formats strip (in place of partner logos) -->
+    <section class="formats" aria-label="Supported file types">
+      <p>Works with</p>
+      <ul>
+        <li>PDF</li><li>JPG</li><li>PNG</li><li>WebP</li><li>PSD</li><li>MP4</li><li>MP3</li><li>JSON</li>
+      </ul>
+    </section>
+
+    <!-- Highlighted tools -->
+    <section class="block">
+      <h2 class="block-title">Our most-used tools</h2>
+      <div class="feature-grid">
+        <a class="feature" href="/tools/merge-pdf.html">
+          <h3>Merge PDF</h3>
+          <p>Combine several PDF files into one, in the order you choose. Reorder, remove and download in a few clicks.</p>
+          <span class="link">Open tool &rarr;</span>
+        </a>
+        <a class="feature" href="/tools/image-compressor.html">
+          <h3>Image Compressor</h3>
+          <p>Shrink JPEG, PNG and WebP files and convert between formats.</p>
+          <span class="link">Open tool &rarr;</span>
+        </a>
+        <a class="feature" href="/tools/loan-calculator.html">
+          <h3>Loan EMI Calculator</h3>
+          <p>See the monthly payment and total interest on any loan.</p>
+          <span class="link">Open tool &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Why choose us -->
+    <section class="block">
+      <h2 class="block-title">Why people choose Toolkit Lab</h2>
+      <div class="why-grid">
+        <div><span class="why-icon">&#128274;</span><h3>Private by design</h3><p>Files are processed in your browser and never uploaded to us.</p></div>
+        <div><span class="why-icon">&#127873;</span><h3>Free, no sign-up</h3><p>Use every tool without creating an account or paying.</p></div>
+        <div><span class="why-icon">&#9889;</span><h3>Fast to start</h3><p>Open a tool and start working. Nothing to install.</p></div>
+        <div><span class="why-icon">&#128241;</span><h3>Works on any device</h3><p>Use the same tools on a laptop, tablet or phone.</p></div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="block">
+      <h2 class="block-title">How it works</h2>
+      <ol class="steps">
+        <li><span>1</span><h3>Pick a tool</h3><p>Choose from PDF, image, text, calculator and developer tools.</p></li>
+        <li><span>2</span><h3>Add your file or numbers</h3><p>Choose a file from your device, or type your values.</p></li>
+        <li><span>3</span><h3>Download the result</h3><p>Save the output straight to your device.</p></li>
+      </ol>
+    </section>
+
+    <!-- All tools, grouped (filterable) -->
+    <section id="tools" class="block" data-filter-group>
+      <h2 class="block-title">All tools</h2>
+      <div class="cat-head"><h3>PDF tools</h3><span class="note">5 tools</span></div>
       <div class="grid">
         <a class="card" data-searchable href="/tools/merge-pdf.html" data-reveal><span class="card-icon">PDF</span><h3>Merge PDF</h3><p>Combine several PDF files into one, in the order you choose.</p></a>
         <a class="card" data-searchable href="/tools/split-pdf.html" data-reveal><span class="card-icon">PDF</span><h3>Split PDF</h3><p>Pull selected pages out of a PDF into a new file.</p></a>
@@ -44,7 +98,7 @@ const description = "Free browser-based tools: merge and split PDFs, compress im
     </section>
 
     <section data-filter-group>
-      <div class="section-head"><h2>Images and media</h2><span class="note">3 tools</span></div>
+      <div class="cat-head"><h3>Images and media</h3><span class="note">3 tools</span></div>
       <div class="grid">
         <a class="card" data-searchable href="/tools/image-compressor.html" data-reveal><span class="card-icon">IMG</span><h3>Image Compressor</h3><p>Shrink JPEG, PNG and WebP files and convert between formats.</p></a>
         <a class="card" data-searchable href="/tools/psd-converter.html" data-reveal><span class="card-icon">PSD</span><h3>PSD to PNG / JPG</h3><p>Convert Photoshop files to PNG or JPG. Your file stays on your device.</p></a>
@@ -53,7 +107,7 @@ const description = "Free browser-based tools: merge and split PDFs, compress im
     </section>
 
     <section data-filter-group>
-      <div class="section-head"><h2>Calculators</h2><span class="note">5 tools</span></div>
+      <div class="cat-head"><h3>Calculators</h3><span class="note">5 tools</span></div>
       <div class="grid">
         <a class="card" data-searchable href="/tools/loan-calculator.html" data-reveal><span class="card-icon">EMI</span><h3>Loan EMI Calculator</h3><p>See the monthly payment and total interest on a loan.</p></a>
         <a class="card" data-searchable href="/tools/bmi-calculator.html" data-reveal><span class="card-icon">BMI</span><h3>BMI Calculator</h3><p>Work out your Body Mass Index in metric or imperial units.</p></a>
@@ -64,7 +118,7 @@ const description = "Free browser-based tools: merge and split PDFs, compress im
     </section>
 
     <section data-filter-group>
-      <div class="section-head"><h2>Text and developer tools</h2><span class="note">10 tools</span></div>
+      <div class="cat-head"><h3>Text and developer tools</h3><span class="note">10 tools</span></div>
       <div class="grid">
         <a class="card" data-searchable href="/tools/word-counter.html" data-reveal><span class="card-icon">Aa</span><h3>Word Counter</h3><p>Words, characters, sentences and estimated reading time, live.</p></a>
         <a class="card" data-searchable href="/tools/case-converter.html" data-reveal><span class="card-icon">Tt</span><h3>Case Converter</h3><p>Switch text to UPPERCASE, Title Case, camelCase, snake_case and more.</p></a>
@@ -79,18 +133,37 @@ const description = "Free browser-based tools: merge and split PDFs, compress im
       </div>
     </section>
 
-    <section data-filter-group>
-      <div class="section-head"><h2>Guides</h2><a href="/guides.html">See all 17 guides &rarr;</a></div>
-      <div class="grid">
-        <a class="card" data-searchable href="guides/how-to-compress-images-for-the-web.html" data-reveal><span class="card-icon">01</span><h3>How to Compress Images for the Web</h3><p>Format, quality and size settings explained.</p></a>
-        <a class="card" data-searchable href="guides/how-to-create-a-strong-password.html" data-reveal><span class="card-icon">02</span><h3>How to Create a Strong Password</h3><p>Why length and uniqueness matter most.</p></a>
-        <a class="card" data-searchable href="guides/how-a-loan-emi-is-calculated.html" data-reveal><span class="card-icon">03</span><h3>How a Loan EMI Is Calculated</h3><p>The EMI formula and why early payments are mostly interest.</p></a>
-      </div>
-    </section>
-
     <p id="filter-empty" class="empty-state" hidden>No tools or guides match that search. Try &ldquo;image&rdquo; or &ldquo;password&rdquo;.</p>
 
     <div class="ad-slot" aria-label="Advertisement"></div>
+
+    <!-- FAQ -->
+    <section class="block faq-block">
+      <div>
+        <h2 class="block-title">Questions, answered</h2>
+        <p class="lead">Quick answers about how Toolkit Lab works. More detail is in our <a href="/guides.html">guides</a>.</p>
+      </div>
+      <div class="faq">
+        <details><summary>Are my files uploaded anywhere?</summary><p>No. The tools run in your browser, so your files and text stay on your device. The only data our pages load comes from public libraries such as PDF and image engines.</p></details>
+        <details><summary>Do I need an account?</summary><p>No. You can use every tool without signing up.</p></details>
+        <details><summary>Is it free?</summary><p>Yes. All tools are free to use.</p></details>
+        <details><summary>Why does Video to MP3 take a while the first time?</summary><p>The converter engine is large, about 30 MB. It downloads the first time you convert, then conversions are faster.</p></details>
+        <details><summary>Does it work on a phone?</summary><p>Yes. Every page is designed to work on phones, tablets and desktops.</p></details>
+      </div>
+    </section>
+
+    <!-- Closing call to action -->
+    <section class="cta-band">
+      <div>
+        <h2>Ready when you are</h2>
+        <p>Pick a tool and get your result in seconds.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="#tools">Browse all tools</a>
+        <a class="btn btn-ghost" href="/guides.html">Read the guides</a>
+      </div>
+    </section>
+
   </div>
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
 </Base>
