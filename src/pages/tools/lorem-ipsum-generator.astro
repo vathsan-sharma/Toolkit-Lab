@@ -10,6 +10,7 @@ const description = "Generate placeholder text in paragraphs, sentences or words
         <p class="crumbs"><a href="../index.html">Tools</a> / Lorem Ipsum Generator</p>
         <h1>Lorem Ipsum Generator</h1>
         <p class="lead">Placeholder text for mockups, slides and layouts. Choose how much you need.</p>
+      <p class="how-to"><strong>How to use:</strong> Choose paragraphs, sentences or words and a count. Press Generate, then copy the text.</p>
       </div>
 
       <!-- AdSense: place your ad unit code here once your site is approved. -->
@@ -28,7 +29,7 @@ const description = "Generate placeholder text in paragraphs, sentences or words
           <label style="margin:0 0 0 12px;display:inline-flex;align-items:center;gap:6px;font-weight:500"><input type="checkbox" id="start" checked> Start with "Lorem ipsum"</label>
         </div>
 
-        <textarea id="output" readonly style="margin-top:18px;min-height:260px"></textarea>
+        <textarea id="output" aria-label="Generated text" readonly style="margin-top:18px;min-height:260px"></textarea>
 
         <div class="row">
           <button id="generate" type="button">Generate</button>

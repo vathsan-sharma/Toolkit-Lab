@@ -1005,3 +1005,25 @@ footer.site p { margin: 0 0 0 auto; }
 @media (max-width: 520px) {
   .why-grid { grid-template-columns: 1fr; }
 }
+
+/* Tool forms use inline column layouts. Stack them on phones so fields stay readable. */
+@media (max-width: 600px) {
+  .panel .grid[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  .panel .row > button, .panel .row > .button { flex: 1 1 auto; }
+}
+
+/* Result figures on phones: two columns and smaller numbers so long amounts fit. */
+@media (max-width: 600px) {
+  .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat strong { font-size: 1.15rem; overflow-wrap: anywhere; }
+  .stat { padding: 12px; }
+}
+
+/* "How to use" line under each tool's introduction. */
+.how-to {
+  font-size: 0.93rem;
+  color: var(--muted);
+  border-left: 3px solid var(--accent);
+  padding: 2px 0 2px 12px;
+  margin: 14px 0 0;
+}

@@ -8,6 +8,7 @@ const description = "Calculate your Body Mass Index (BMI) from height and weight
     <div class="wrap">
       <h1>BMI Calculator</h1>
       <p class="lead">Body Mass Index is a rough screening measure. It does not account for muscle, age or body composition.</p>
+      <p class="how-to"><strong>How to use:</strong> Choose metric or imperial units, enter your height and weight, and the BMI and category update as you type.</p>
       <div class="ad-slot" aria-label="Advertisement"></div>
 
       <div class="panel">
@@ -85,7 +86,7 @@ const description = "Calculate your Body Mass Index (BMI) from height and weight
       return 'Obesity';
     }
 
-    document.getElementById('calculate').addEventListener('click', () => {
+    const calculate = () => {
       const { heightM, weightKg } = heightAndWeight();
       if (!(heightM > 0) || !(weightKg > 0) || !isFinite(heightM) || !isFinite(weightKg)) {
         errorEl.textContent = 'Please enter a valid height and weight.';
@@ -104,6 +105,10 @@ const description = "Calculate your Body Mass Index (BMI) from height and weight
       document.getElementById('range').textContent =
         Math.round(lowKg) + ' to ' + Math.round(highKg) + ' kg';
       resultsEl.hidden = false;
-    });
+    };
+    // Update as the person types, and keep the button working as a fallback.
+    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculate));
+    document.getElementById('calculate').addEventListener('click', calculate);
+    calculate();
   </script>
 </Base>

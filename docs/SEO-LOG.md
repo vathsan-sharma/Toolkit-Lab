@@ -132,3 +132,10 @@ Total tools: 55. Total guides: 49.
 - [x] Colour Contrast Checker, Data Size Converter, Download Time Calculator
 - [x] What Is Colour Contrast, Bits vs Bytes, How to Estimate How Long a Download Takes
 Total tools: 58. Total guides: 52.
+
+## Phase 15: Tool quality pass (client view)
+- [x] Audited all 58 tools at phone width: labels, empty results, overflow, JavaScript errors
+- [x] BMI updates as you type (was button-only); labels added to unit selects and lorem output
+- [x] Shared phone rules: inline form columns stack, result figures fit
+- [x] Every tool has a "How to use" line under its introduction
+- [x] Re-check: all 58 tools load with no JavaScript errors
