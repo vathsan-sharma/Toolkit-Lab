@@ -18,15 +18,15 @@ const description = "What Unix epoch time is, how seconds since 1 January 1970 r
 <p>You may see these numbers in a web address, a file's details or an app's data. The converter turns them back into dates.</p>
       <section class="worked">
         <h2>Worked example</h2>
-        <p>The timestamp 1,000,000,000 is 9 September 2001 at 01:46:40 UTC. The timestamp 1,793,004,000 is 26 October 2026 at 08:40 UTC. Both count seconds from the start of 1 January 1970.</p>
+        <p>The number 1,793,004,000 counts the seconds since 1 January 1970. That moment is 26 October 2026 at 08:40 UTC, which is the same time everywhere in the world.</p>
       </section>
       <section class="faq-list">
         <h2>Frequently asked questions</h2>
-        <details><summary>How do I tell seconds from milliseconds?</summary><p>A seconds value for a current date has 10 digits, such as 1793004000. A milliseconds value has 13 digits, such as 1793004000000.</p></details>
-        <details><summary>Why does UTC matter?</summary><p>UTC has no daylight saving changes, so the same timestamp always means the same moment. Local time depends on the time zone.</p></details>
-        <details><summary>What is the 2038 problem?</summary><p>Systems that store the timestamp in a signed 32-bit number will overflow after 19 January 2038 at 03:14:07 UTC. Modern systems use 64-bit values.</p></details>
+        <details><summary>How can I tell a seconds number from a milliseconds number?</summary><p>A seconds number for today has 10 digits. A milliseconds number has 13.</p></details>
+        <details><summary>What is UTC?</summary><p>It is a standard world time with no daylight saving changes.</p></details>
+        <details><summary>Is there a problem coming in 2038?</summary><p>Older systems that store the number in a limited space stop working on 19 January 2038. Most current devices are not affected.</p></details>
       </section>
-      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I tell seconds from milliseconds?", "acceptedAnswer": {"@type": "Answer", "text": "A seconds value for a current date has 10 digits, such as 1793004000. A milliseconds value has 13 digits, such as 1793004000000."}}, {"@type": "Question", "name": "Why does UTC matter?", "acceptedAnswer": {"@type": "Answer", "text": "UTC has no daylight saving changes, so the same timestamp always means the same moment. Local time depends on the time zone."}}, {"@type": "Question", "name": "What is the 2038 problem?", "acceptedAnswer": {"@type": "Answer", "text": "Systems that store the timestamp in a signed 32-bit number will overflow after 19 January 2038 at 03:14:07 UTC. Modern systems use 64-bit values."}}]}</script>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How can I tell a seconds number from a milliseconds number?", "acceptedAnswer": {"@type": "Answer", "text": "A seconds number for today has 10 digits. A milliseconds number has 13."}}, {"@type": "Question", "name": "What is UTC?", "acceptedAnswer": {"@type": "Answer", "text": "It is a standard world time with no daylight saving changes."}}, {"@type": "Question", "name": "Is there a problem coming in 2038?", "acceptedAnswer": {"@type": "Answer", "text": "Older systems that store the number in a limited space stop working on 19 January 2038. Most current devices are not affected."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

@@ -26,15 +26,15 @@ const description = "The differences between CSV and JSON, when each one is the 
 </ul>
       <section class="worked">
         <h2>Worked example</h2>
-        <p>The CSV row "Ravi, Jr.",Colombo,27 under the header name,city,age becomes &#123;"name": "Ravi, Jr.", "city": "Colombo", "age": "27"&#125;. The comma inside the quotes stays part of the name, and 27 is kept as the text "27" because CSV stores every value as text.</p>
+        <p>A row in a spreadsheet holds a name 'Ravi, Jr.', a city 'Colombo' and an age of 27. Saved as CSV, the name must be in quotation marks so the comma inside it is not read as a column break. Converted to JSON, each value gets a label, and the age is kept as text.</p>
       </section>
       <section class="faq-list">
         <h2>Frequently asked questions</h2>
-        <details><summary>Can I open JSON in a spreadsheet?</summary><p>Most spreadsheets need an import step or a plug-in for nested JSON. Flat JSON arrays of objects can often be converted to CSV first.</p></details>
-        <details><summary>Is CSV an official standard?</summary><p>CSV is described in RFC 4180, but many programs vary in how they handle quotes, line endings and separators, so check the format before importing.</p></details>
-        <details><summary>Why do my numbers become text after converting?</summary><p>CSV has no types, so every value starts as text. Your code or the tool must change values such as 27 to a number if you need that.</p></details>
+        <details><summary>Can I open a data file in Excel?</summary><p>Yes. For a simple table, you can open a CSV file directly. Other data files may need to be imported first.</p></details>
+        <details><summary>Why did my numbers turn into text?</summary><p>A CSV file does not say what kind of value each cell holds. Your program decides. Check the cells you need as numbers.</p></details>
+        <details><summary>Which one should a beginner use?</summary><p>For a list you want to open in a spreadsheet, use CSV. Only use JSON when a program asks for it.</p></details>
       </section>
-      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I open JSON in a spreadsheet?", "acceptedAnswer": {"@type": "Answer", "text": "Most spreadsheets need an import step or a plug-in for nested JSON. Flat JSON arrays of objects can often be converted to CSV first."}}, {"@type": "Question", "name": "Is CSV an official standard?", "acceptedAnswer": {"@type": "Answer", "text": "CSV is described in RFC 4180, but many programs vary in how they handle quotes, line endings and separators, so check the format before importing."}}, {"@type": "Question", "name": "Why do my numbers become text after converting?", "acceptedAnswer": {"@type": "Answer", "text": "CSV has no types, so every value starts as text. Your code or the tool must change values such as 27 to a number if you need that."}}]}</script>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I open a data file in Excel?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. For a simple table, you can open a CSV file directly. Other data files may need to be imported first."}}, {"@type": "Question", "name": "Why did my numbers turn into text?", "acceptedAnswer": {"@type": "Answer", "text": "A CSV file does not say what kind of value each cell holds. Your program decides. Check the cells you need as numbers."}}, {"@type": "Question", "name": "Which one should a beginner use?", "acceptedAnswer": {"@type": "Answer", "text": "For a list you want to open in a spreadsheet, use CSV. Only use JSON when a program asks for it."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

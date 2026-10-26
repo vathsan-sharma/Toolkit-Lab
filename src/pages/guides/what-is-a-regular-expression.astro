@@ -22,15 +22,15 @@ const description = "What a regular expression (regex) is, the building blocks s
 <p>Programmers use patterns to check that an email address looks right, to find every date in a document, or to tidy up text. Many word processors and search tools support simple patterns too.</p>
       <section class="worked">
         <h2>Worked example</h2>
-        <p>The pattern \d&#123;3&#125;-\d&#123;4&#125; matches a seven-digit phone number written with a dash. In the text "Call 555-1234 today", it finds 555-1234. The \d means any digit, &#123;3&#125; means exactly three of them, and the dash must appear between the two groups.</p>
+        <p>A pattern for a phone number with a dash: three digits, a dash, then four digits. In the sentence 'Call 555-1234 today', the pattern finds 555-1234.</p>
       </section>
       <section class="faq-list">
         <h2>Frequently asked questions</h2>
-        <details><summary>What does a greedy match mean?</summary><p>A quantifier such as .* grabs as much text as it can. Add a question mark, as in .*?, to match as little as possible.</p></details>
-        <details><summary>What do the flags g and i mean?</summary><p>g finds every match instead of stopping at the first. i ignores upper and lower case.</p></details>
-        <details><summary>How do I match a literal dot or bracket?</summary><p>Escape it with a backslash, so \. matches a full stop and \( matches an opening bracket.</p></details>
+        <details><summary>What is the difference between greedy and lazy matching?</summary><p>A greedy pattern takes as much text as it can. A lazy one takes as little as possible. Add a question mark to make a pattern lazy.</p></details>
+        <details><summary>What do the letters after a pattern mean?</summary><p>They are options. 'g' finds every match, and 'i' ignores capital letters.</p></details>
+        <details><summary>How do I search for a real full stop?</summary><p>Put a backslash in front of it, so the pattern looks for a dot rather than any character.</p></details>
       </section>
-      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does a greedy match mean?", "acceptedAnswer": {"@type": "Answer", "text": "A quantifier such as .* grabs as much text as it can. Add a question mark, as in .*?, to match as little as possible."}}, {"@type": "Question", "name": "What do the flags g and i mean?", "acceptedAnswer": {"@type": "Answer", "text": "g finds every match instead of stopping at the first. i ignores upper and lower case."}}, {"@type": "Question", "name": "How do I match a literal dot or bracket?", "acceptedAnswer": {"@type": "Answer", "text": "Escape it with a backslash, so \\. matches a full stop and \\( matches an opening bracket."}}]}</script>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between greedy and lazy matching?", "acceptedAnswer": {"@type": "Answer", "text": "A greedy pattern takes as much text as it can. A lazy one takes as little as possible. Add a question mark to make a pattern lazy."}}, {"@type": "Question", "name": "What do the letters after a pattern mean?", "acceptedAnswer": {"@type": "Answer", "text": "They are options. 'g' finds every match, and 'i' ignores capital letters."}}, {"@type": "Question", "name": "How do I search for a real full stop?", "acceptedAnswer": {"@type": "Answer", "text": "Put a backslash in front of it, so the pattern looks for a dot rather than any character."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

@@ -164,3 +164,7 @@ Total tools: 58. Total guides: 52.
 - [x] Rewrote the body of 13 technical guides in plain English, keeping their examples and FAQs
 - [ ] Owner: check the plain-English guides read naturally to a non-technical reader
 - [ ] Edge-case test of calculators with empty, zero, negative and very large numbers (not finished)
+
+## Phase 20: Plainer worked examples and FAQs
+- [x] Worked examples and FAQs rewritten in plain English for the 13 technical guides, with the same numbers
+- [x] FAQ structured data regenerated to match the new wording (all blocks validated)

@@ -20,15 +20,15 @@ const description = "What URL encoding does, why spaces become %20, which charac
 <p>Type a sentence into the converter to see the safe version, then convert it back to check.</p>
       <section class="worked">
         <h2>Worked example</h2>
-        <p>The text a b&amp;c becomes a%20b%26c when encoded for a query value. The space becomes %20 and the ampersand becomes %26, so the ampersand is not read as a separator.</p>
+        <p>The text 'a b&amp;c' has a space and an ampersand in it. Written safely for a web address, it becomes a%20b%26c. The %20 stands for a space, and %26 stands for the ampersand.</p>
       </section>
       <section class="faq-list">
         <h2>Frequently asked questions</h2>
-        <details><summary>Why does a space become %20 in some places and + in others?</summary><p>%20 is always a space in a URL path. In HTML form submissions, + is often used for spaces inside query strings.</p></details>
-        <details><summary>Should I use encodeURI or encodeURIComponent?</summary><p>Use encodeURI for a whole address, and encodeURIComponent for a single value that goes inside it.</p></details>
-        <details><summary>What is double encoding?</summary><p>Encoding text that is already encoded turns %20 into %2520. Encode once, at the point where the value is added to the URL.</p></details>
+        <details><summary>Why does a space sometimes show as a plus sign?</summary><p>Some web forms use a plus sign for a space. Both mean a space in an address, depending on the website.</p></details>
+        <details><summary>Which version should I use?</summary><p>Use the whole-address version for a complete link. Use the single-part version for one word or value that goes inside a link.</p></details>
+        <details><summary>Why do I see strange codes like %2520?</summary><p>The text was made safe twice, so each code turned into another code. Make the change only once.</p></details>
       </section>
-      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does a space become %20 in some places and + in others?", "acceptedAnswer": {"@type": "Answer", "text": "%20 is always a space in a URL path. In HTML form submissions, + is often used for spaces inside query strings."}}, {"@type": "Question", "name": "Should I use encodeURI or encodeURIComponent?", "acceptedAnswer": {"@type": "Answer", "text": "Use encodeURI for a whole address, and encodeURIComponent for a single value that goes inside it."}}, {"@type": "Question", "name": "What is double encoding?", "acceptedAnswer": {"@type": "Answer", "text": "Encoding text that is already encoded turns %20 into %2520. Encode once, at the point where the value is added to the URL."}}]}</script>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does a space sometimes show as a plus sign?", "acceptedAnswer": {"@type": "Answer", "text": "Some web forms use a plus sign for a space. Both mean a space in an address, depending on the website."}}, {"@type": "Question", "name": "Which version should I use?", "acceptedAnswer": {"@type": "Answer", "text": "Use the whole-address version for a complete link. Use the single-part version for one word or value that goes inside a link."}}, {"@type": "Question", "name": "Why do I see strange codes like %2520?", "acceptedAnswer": {"@type": "Answer", "text": "The text was made safe twice, so each code turned into another code. Make the change only once."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>
