@@ -1051,3 +1051,18 @@ footer.site p { margin: 0 0 0 auto; }
 .faq-list details p { margin: 10px 0 0; color: var(--muted); font-size: 0.95rem; }
 
 .tool-actions { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+/* Larger text and easier-to-tap controls for all visitors. */
+body { font-size: 18px; line-height: 1.7; }
+.lead { font-size: 1.15rem; }
+label { font-size: 1rem; }
+button, .button { min-height: 46px; font-size: 1.02rem; padding: 12px 22px; }
+textarea, input[type="number"], input[type="text"], input[type="date"], input[type="time"], input[type="datetime-local"], input[type="password"], select, input[type="file"] { min-height: 48px; font-size: 1.05rem; }
+.stat strong { font-size: 1.45rem; }
+.stat span { font-size: 0.95rem; }
+nav.site a { font-size: 1rem; }
+.how-to { font-size: 1.02rem; }
+.card p, .feature p { font-size: 1rem; }
+@media (max-width: 600px) {
+  .stat strong { font-size: 1.25rem; }
+}

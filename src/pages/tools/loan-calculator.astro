@@ -1,14 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-const title = "Loan EMI Calculator - Monthly Payment and Interest - Toolkit Lab";
+const title = "Loan Payment Calculator - Monthly Payment and Interest - Toolkit Lab";
 const description = "Work out a loan's monthly EMI, total interest and total payment from the amount, rate and term. Free and private.";
 ---
 <Base title={title} description={description} path="/tools/loan-calculator.html">
 <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
     <div class="wrap">
       <div class="tool-head">
-        <p class="crumbs"><a href="../index.html">Tools</a> / Loan EMI Calculator</p>
-        <h1>Loan EMI Calculator</h1>
+        <p class="crumbs"><a href="../index.html">Tools</a> / Loan Payment Calculator</p>
+        <h1>Loan Payment Calculator</h1>
         <p class="lead">Enter the loan amount, interest rate and term to see your monthly payment and the total interest.</p>
       <p class="how-to"><strong>How to use:</strong> Enter the loan amount, the annual interest rate and the term in years. The payment and totals update as you type.</p>
       </div>
@@ -47,7 +47,7 @@ const description = "Work out a loan's monthly EMI, total interest and total pay
     </div>
     <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
 <script is:inline>
-    const money = n => n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+    const money = n => n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD', maximumFractionDigits: 2 });
 
     function update() {
       const P = parseFloat(document.getElementById('principal').value);

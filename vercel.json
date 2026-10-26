@@ -1,6 +1,7 @@
 {
   "cleanUrls": false,
   "redirects": [
-    { "source": "/guides/index.html", "destination": "/guides.html", "permanent": true }
+    { "source": "/guides/index.html", "destination": "/guides.html", "permanent": true },
+    { "source": "/tools/gst-calculator.html", "destination": "/tools/sales-tax-vat-calculator.html", "permanent": true }
   ]
 }

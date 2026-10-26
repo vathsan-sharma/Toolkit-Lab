@@ -46,7 +46,7 @@ const description = "Work out the sale price, the amount you save and the total 
 
   <script is:inline>
     (function () {
-      var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+      var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
       function update() {
         var price = parseFloat(document.getElementById('price').value);
         var discount = parseFloat(document.getElementById('discount').value);

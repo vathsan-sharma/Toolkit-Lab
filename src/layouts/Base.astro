@@ -51,6 +51,13 @@ const favicon = "/favicon.svg";
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1766259744738866" crossorigin="anonymous"></script>
+    <script is:inline>
+      // Show money in the visitor's own currency: pounds for UK English, dollars for other English, euros elsewhere.
+      (function () {
+        var lang = (navigator.language || 'en-US').toLowerCase();
+        window.QTH_CURRENCY = lang === 'en-gb' ? 'GBP' : lang.indexOf('en') === 0 ? 'USD' : 'EUR';
+      })();
+    </script>
     <script is:inline src="/assets/app.js" defer></script>
     <slot name="head" />
     {schema.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)}></script>)}

@@ -1,36 +1,36 @@
 ---
 import Base from '../../layouts/Base.astro';
-const title = "How GST Is Calculated: Adding and Removing Tax - Toolkit Lab";
+const title = "How Sales Tax and VAT Are Calculated: Adding and Removing Tax - Toolkit Lab";
 const description = "How goods and services tax is calculated when it is added to a price, and how to work backwards from a total that already includes it.";
 ---
 <Base title={title} description={description} path="/guides/how-gst-is-calculated.html">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <div class="wrap article">
     <p class="note"><a href="/guides.html">Guides</a> / Tax basics</p>
-    <h1>How GST Is Calculated: Adding and Removing Tax</h1>
-    <p class="lead">GST is a tax added to the price of many goods and services. Sometimes you start with a price before tax, and sometimes you start with a total that already includes it. The two directions use different formulas.</p>
+    <h1>How Sales Tax and VAT Are Calculated: Adding and Removing Tax</h1>
+    <p class="lead">Sales tax and VAT are taxes added to the price of many goods and services. The names and rules differ by country. Sometimes you start with a price before tax, and sometimes with a total that already includes it. The two directions use different formulas.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
-<h2>Adding GST to a price</h2>
-<p>Multiply the price before tax by the GST rate, then add the result. A price of 1,000 with an 18% rate gives a GST amount of 180, and a total of 1,180.</p>
-<h2>Removing GST from a total</h2>
-<p>If the price already includes GST, divide it by 1 plus the rate. A total of 1,180 at 18% gives a price before GST of 1,000, and a GST amount of 180. Do not subtract 18% of the total, because that gives the wrong answer.</p>
+<h2>Adding sales tax or VAT to a price</h2>
+<p>Multiply the price before tax by the sales tax or VAT rate, then add the result. A price of 1,000 with an 18% rate gives a sales tax or VAT amount of 180, and a total of 1,180.</p>
+<h2>Removing sales tax or VAT from a total</h2>
+<p>If the price already includes sales tax or VAT, divide it by 1 plus the rate. A total of 1,180 at 18% gives a price before sales tax or VAT of 1,000, and a sales tax or VAT amount of 180. Do not subtract 18% of the total, because that gives the wrong answer.</p>
 <h2>Check the rate</h2>
 <p>Different goods and services can have different rates, and rules change. Check the rate that applies to your item in your country before you use a figure for a bill, invoice or return.</p>
 <h2>Rounding</h2>
 <p>Tax amounts are often rounded to the nearest cent or paisa. Small differences can appear if you round at different steps, so follow the rounding rules your invoice system uses.</p>
 <h2>Try it yourself</h2>
-<p>The <a href="/tools/gst-calculator.html">GST Calculator</a> works in both directions and shows the price before GST, the GST amount and the total.</p>
+<p>The <a href="/tools/sales-tax-vat-calculator.html">Sales Tax and VAT Calculator</a> works in both directions and shows the price before sales tax or VAT, the sales tax or VAT amount and the total.</p>
       <section class="worked">
         <h2>Worked example</h2>
-        <p>A price of 1,000 with GST at 18%: GST is 1,000 × 0.18 = 180, so the total is 1,180. If a total of 1,180 already includes GST, the price before GST is 1,180 ÷ 1.18 = 1,000, and the GST is 180.</p>
+        <p>A price of 1,000 with sales tax or VAT at 18%: sales tax or VAT is 1,000 × 0.18 = 180, so the total is 1,180. If a total of 1,180 already includes sales tax or VAT, the price before sales tax or VAT is 1,180 ÷ 1.18 = 1,000, and the sales tax or VAT is 180.</p>
       </section>
       <section class="faq-list">
         <h2>Frequently asked questions</h2>
-        <details><summary>Is GST the same as VAT?</summary><p>They are similar consumption taxes that are added at each stage of sale. The name, rules and rates depend on the country, so check the local rules.</p></details>
+        <details><summary>Is sales tax or VAT the same as VAT?</summary><p>They are similar consumption taxes that are added at each stage of sale. The name, rules and rates depend on the country, so check the local rules.</p></details>
         <details><summary>Do all goods have the same rate?</summary><p>No. Many countries apply different rates to different goods and services, and some items may be exempt.</p></details>
-        <details><summary>Should I round GST to the cent?</summary><p>Usually yes. Follow the rounding rules that your invoice software or the tax authority uses.</p></details>
+        <details><summary>Should I round sales tax or VAT to the cent?</summary><p>Usually yes. Follow the rounding rules that your invoice software or the tax authority uses.</p></details>
       </section>
-      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is GST the same as VAT?", "acceptedAnswer": {"@type": "Answer", "text": "They are similar consumption taxes that are added at each stage of sale. The name, rules and rates depend on the country, so check the local rules."}}, {"@type": "Question", "name": "Do all goods have the same rate?", "acceptedAnswer": {"@type": "Answer", "text": "No. Many countries apply different rates to different goods and services, and some items may be exempt."}}, {"@type": "Question", "name": "Should I round GST to the cent?", "acceptedAnswer": {"@type": "Answer", "text": "Usually yes. Follow the rounding rules that your invoice software or the tax authority uses."}}]}</script>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is sales tax or VAT the same as VAT?", "acceptedAnswer": {"@type": "Answer", "text": "They are similar consumption taxes that are added at each stage of sale. The name, rules and rates depend on the country, so check the local rules."}}, {"@type": "Question", "name": "Do all goods have the same rate?", "acceptedAnswer": {"@type": "Answer", "text": "No. Many countries apply different rates to different goods and services, and some items may be exempt."}}, {"@type": "Question", "name": "Should I round sales tax or VAT to the cent?", "acceptedAnswer": {"@type": "Answer", "text": "Usually yes. Follow the rounding rules that your invoice software or the tax authority uses."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

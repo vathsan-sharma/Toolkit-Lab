@@ -38,7 +38,7 @@ const description = "See how a savings amount grows with compound interest. Ente
 
   <script is:inline>
 (function () {
-  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
   function update() {
     var P = parseFloat(document.getElementById('principal').value);
     var r = parseFloat(document.getElementById('rate').value) / 100;

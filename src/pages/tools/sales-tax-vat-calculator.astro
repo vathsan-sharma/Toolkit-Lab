@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Sales Tax and VAT Calculator: Add or Remove Tax - Toolkit Lab";
+const description = "Work out sales tax or VAT on a price, or find the price before tax from a total that includes it. Enter your tax rate. Free, simple and private.";
+---
+<Base title={title} description={description} path="/tools/sales-tax-vat-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Sales Tax and VAT</p>
+      <h1>Sales Tax and VAT Calculator</h1>
+      <p class="lead">Find out how much tax you pay on a purchase, or how much a price was before tax was added.</p>
+      <p class="how-to"><strong>How to use:</strong> Type the price and the tax rate, then choose whether the price is before tax or already includes it. The answer updates as you type.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+    <div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="amount">Price</label><input type="number" id="amount" min="0" step="0.01" value="100"></div>
+        <div><label for="rate">Tax rate (%)</label><input type="number" id="rate" min="0" step="0.01" value="20"></div>
+      </div>
+      <label for="mode">Is the price before tax or including tax?</label>
+      <select id="mode">
+        <option value="add" selected>Before tax (add the tax)</option>
+        <option value="remove">Includes tax already (take the tax out)</option>
+      </select>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="taxAmt">-</strong><span>Tax</span></div>
+        <div class="stat"><strong id="before">-</strong><span>Price before tax</span></div>
+        <div class="stat"><strong id="total">-</strong><span>Total to pay</span></div>
+      </div>
+      <p class="note">Common examples: 20% is the standard VAT rate in the UK. US sales tax varies by state and city, so enter the rate that applies to you.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+    (function () {
+      var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
+      function update() {
+        var price = parseFloat(document.getElementById('amount').value), rate = parseFloat(document.getElementById('rate').value);
+        var mode = document.getElementById('mode').value, errorEl = document.getElementById('error');
+        if (!(price >= 0) || !(rate >= 0)) { errorEl.textContent = 'Enter a price and a tax rate of zero or more.'; errorEl.hidden = false; return; }
+        errorEl.hidden = true;
+        var before, tax;
+        if (mode === 'add') { before = price; tax = price * rate / 100; }
+        else { before = price / (1 + rate / 100); tax = price - before; }
+        document.getElementById('before').textContent = money(before);
+        document.getElementById('taxAmt').textContent = money(tax);
+        document.getElementById('total').textContent = money(before + tax);
+      }
+      document.querySelectorAll('input, select').forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+      update();
+    })();
+  </script>
+</Base>

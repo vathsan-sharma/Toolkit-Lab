@@ -31,7 +31,7 @@ const description = "Work out simple interest from a principal, an annual rate a
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <script is:inline>
 (function () {
-  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
   function update() {
     var P = parseFloat(document.getElementById('p').value), r = parseFloat(document.getElementById('r').value), t = parseFloat(document.getElementById('t').value);
     var errorEl = document.getElementById('error');

@@ -35,7 +35,7 @@ const description = "Work out the tip, the total and each person's share of a bi
 
   <script is:inline>
 (function () {
-  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
   function update() {
     var bill = parseFloat(document.getElementById('bill').value);
     var tip = parseFloat(document.getElementById('tip').value);

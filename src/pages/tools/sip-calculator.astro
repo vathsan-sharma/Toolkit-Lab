@@ -1,14 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-const title = "SIP Calculator: Monthly Investment Growth - Toolkit Lab";
+const title = "Monthly Investment Calculator: Monthly Investment Growth - Toolkit Lab";
 const description = "Estimate how a monthly SIP investment grows at an expected annual return over a number of years. Free, private and runs in your browser.";
 ---
 <Base title={title} description={description} path="/tools/sip-calculator.html">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <div class="wrap">
     <div class="tool-head">
-      <p class="crumbs"><a href="/index.html">Tools</a> / SIP Calculator</p>
-      <h1>SIP Calculator</h1>
+      <p class="crumbs"><a href="/index.html">Tools</a> / Monthly Investment Calculator</p>
+      <h1>Monthly Investment Calculator</h1>
       <p class="lead">See how much a fixed monthly investment could grow at an assumed yearly return.</p>
       <p class="how-to"><strong>How to use:</strong> Enter the monthly amount, the expected yearly return and the number of years. The estimated value updates.</p>
     </div>
@@ -36,7 +36,7 @@ const description = "Estimate how a monthly SIP investment grows at an expected 
 
   <script is:inline>
 (function () {
-  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
   function update() {
     var P = parseFloat(document.getElementById('monthly').value);
     var annual = parseFloat(document.getElementById('rate').value);

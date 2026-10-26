@@ -32,7 +32,7 @@ const description = "Convert an annual salary into an hourly rate, weekly and mo
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <script is:inline>
 (function () {
-  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: window.QTH_CURRENCY || 'USD' }); };
   function update() {
     var salary = parseFloat(document.getElementById('salary').value);
     var hours = parseFloat(document.getElementById('hours').value);
