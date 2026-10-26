@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Salary to Hourly Pay Converter - Toolkit Lab";
+const description = "Convert an annual salary into an hourly rate, weekly and monthly pay, based on your hours per week and weeks worked. Free and private.";
+---
+<Base title={title} description={description} path="/tools/salary-to-hourly-converter.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Salary to Hourly</p>
+      <h1>Salary to Hourly Pay Converter</h1>
+      <p class="lead">Enter your yearly salary and your working hours to see the hourly, weekly and monthly equivalent.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div><label for="salary">Annual salary (before tax)</label><input type="number" id="salary" min="0" step="100" value="52000"></div>
+        <div><label for="hours">Hours per week</label><input type="number" id="hours" min="1" max="168" step="0.5" value="40"></div>
+        <div><label for="weeks">Weeks per year</label><input type="number" id="weeks" min="1" max="52" step="1" value="52"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="hourly">-</strong><span>Per hour</span></div>
+        <div class="stat"><strong id="weekly">-</strong><span>Per week</span></div>
+        <div class="stat"><strong id="monthly">-</strong><span>Per month</span></div>
+      </div>
+      <p class="note">These figures are before tax and deductions. Unpaid leave, holidays and overtime change the real hourly rate.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  function update() {
+    var salary = parseFloat(document.getElementById('salary').value);
+    var hours = parseFloat(document.getElementById('hours').value);
+    var weeks = parseFloat(document.getElementById('weeks').value);
+    var errorEl = document.getElementById('error');
+    if (!(salary >= 0) || !(hours > 0) || !(weeks > 0)) { errorEl.textContent = 'Enter a salary of zero or more, and hours and weeks above zero.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var hourly = salary / (hours * weeks);
+    document.getElementById('hourly').textContent = money(hourly);
+    document.getElementById('weekly').textContent = money(salary / weeks);
+    document.getElementById('monthly').textContent = money(salary / 12);
+  }
+  document.querySelectorAll('input').forEach(function (el) { el.addEventListener('input', update); });
+  update();
+})();
+  </script>
+</Base>

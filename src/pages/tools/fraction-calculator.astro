@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Fraction Calculator: Add, Subtract, Multiply and Divide - Toolkit Lab";
+const description = "Add, subtract, multiply or divide two fractions and get the simplified answer. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/fraction-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Fraction Calculator</p>
+      <h1>Fraction Calculator</h1>
+      <p class="lead">Enter two fractions and an operation. The answer is shown in lowest terms.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr auto 1fr;gap:14px;align-items:end">
+        <div><label for="an">Numerator</label><input type="number" id="an" step="1" value="1"><label for="ad">Denominator</label><input type="number" id="ad" step="1" value="2"></div>
+        <div><label for="op">Operation</label><select id="op"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select></div>
+        <div><label for="bn">Numerator</label><input type="number" id="bn" step="1" value="1"><label for="bd">Denominator</label><input type="number" id="bd" step="1" value="3"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="result">-</strong><span>Answer in lowest terms</span></div>
+        <div class="stat"><strong id="decimal">-</strong><span>As a decimal</span></div>
+      </div>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = b; b = a % b; a = t; } return a || 1; }
+  function get(id) { return parseInt(document.getElementById(id).value, 10); }
+  function update() {
+    var an = get('an'), ad = get('ad'), bn = get('bn'), bd = get('bd'), op = document.getElementById('op').value;
+    var errorEl = document.getElementById('error');
+    if (!isFinite(an) || !isFinite(ad) || !isFinite(bn) || !isFinite(bd)) { errorEl.textContent = 'Enter whole numbers in every box.'; errorEl.hidden = false; return; }
+    if (ad === 0 || bd === 0) { errorEl.textContent = 'A denominator cannot be zero.'; errorEl.hidden = false; return; }
+    if (op === '/' && bn === 0) { errorEl.textContent = 'You cannot divide by zero.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var n, d;
+    if (op === '+') { n = an * bd + bn * ad; d = ad * bd; }
+    else if (op === '-') { n = an * bd - bn * ad; d = ad * bd; }
+    else if (op === '*') { n = an * bn; d = ad * bd; }
+    else { n = an * bd; d = ad * bn; }
+    if (d < 0) { n = -n; d = -d; }
+    var g = gcd(n, d); n = n / g; d = d / g;
+    document.getElementById('result').textContent = d === 1 ? String(n) : n + '/' + d;
+    document.getElementById('decimal').textContent = Number((n / d).toPrecision(10)).toString();
+  }
+  document.querySelectorAll('input, select').forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+  update();
+})();
+  </script>
+</Base>

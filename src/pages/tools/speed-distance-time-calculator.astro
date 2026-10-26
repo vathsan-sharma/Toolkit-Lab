@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Speed, Distance and Time Calculator - Toolkit Lab";
+const description = "Work out speed, distance or time from the other two. Enter any two values and the third is calculated. Free and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/speed-distance-time-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Speed, Distance and Time</p>
+      <h1>Speed, Distance and Time Calculator</h1>
+      <p class="lead">Fill in any two boxes and the third is worked out for you.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div><label for="speed">Speed</label><input type="number" id="speed" min="0" step="any" placeholder="for example 60"></div>
+        <div><label for="dist">Distance</label><input type="number" id="dist" min="0" step="any" placeholder="for example 120"></div>
+        <div><label for="time">Time (hours)</label><input type="number" id="time" min="0" step="any" placeholder="for example 2"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <p class="note" id="hint">Leave exactly one box empty. The empty one is calculated: distance = speed × time, speed = distance ÷ time, time = distance ÷ speed.</p>
+      <div class="stats"><div class="stat"><strong id="answer">-</strong><span>Calculated value</span></div></div>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var ids = ['speed', 'dist', 'time'];
+  function update() {
+    var v = {}, empty = [];
+    ids.forEach(function (id) { var raw = document.getElementById(id).value; if (raw === '') empty.push(id); else v[id] = parseFloat(raw); });
+    var errorEl = document.getElementById('error'), answer = document.getElementById('answer');
+    answer.textContent = '-';
+    if (empty.length !== 1) { errorEl.textContent = empty.length === 0 ? 'Clear one box so the calculator can work it out.' : 'Fill in two of the three boxes.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    if (v.speed !== undefined && v.time !== undefined && empty[0] === 'dist') answer.textContent = Number((v.speed * v.time).toPrecision(10)) + ' (same distance unit as your speed)';
+    if (v.dist !== undefined && v.time !== undefined && empty[0] === 'speed') { if (v.time === 0) { errorEl.textContent = 'Time cannot be zero.'; errorEl.hidden = false; return; } answer.textContent = Number((v.dist / v.time).toPrecision(10)) + ' per hour'; }
+    if (v.dist !== undefined && v.speed !== undefined && empty[0] === 'time') { if (v.speed === 0) { errorEl.textContent = 'Speed cannot be zero.'; errorEl.hidden = false; return; } answer.textContent = Number((v.dist / v.speed).toPrecision(10)) + ' hours'; }
+  }
+  ids.forEach(function (id) { document.getElementById(id).addEventListener('input', update); });
+  update();
+})();
+  </script>
+</Base>

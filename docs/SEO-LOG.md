@@ -103,3 +103,10 @@ Bugs found by browser tests and fixed: regex default pattern had doubled backsla
 - [x] /pdf-tools.html, /image-tools.html, /calculators.html, /text-and-developer-tools.html, each with a unique intro, tool grid and questions
 - [x] Linked from the home page section headings, search and llms.txt. Included in the sitemap automatically.
 - [ ] Check Search Console in about a week for these pages.
+
+## Phase 10: More tools and guides
+- [x] Fraction Calculator, Speed Distance Time Calculator, Salary to Hourly Pay Converter (Calculators)
+- [x] How to Add and Subtract Fractions, How Speed Distance and Time Are Related, How to Convert a Salary to an Hourly Rate
+- [x] Fixed: three text tools were placed in the Images section on the home page; moved to Text and developer tools
+- [x] Fixed: section counts on the home page and the Calculators category page
+Total tools: 46. Total guides: 40. Category pages: 4.
