@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Estimate How Long a Download Takes - Toolkit Lab";
+const description = "How to estimate download time from file size and connection speed, why real downloads are slower than the advertised speed, and what affects them.";
+---
+<Base title={title} description={description} path="/guides/how-to-estimate-how-long-a-download-takes.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Internet</p>
+    <h1>How to Estimate How Long a Download Takes</h1>
+    <p class="lead">Download time is file size divided by speed, but the result is an estimate. Your connection, the server and other devices on your network all change the real time.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>The basic formula</h2>
+<p>Convert the file size to megabits by multiplying megabytes by 8, then divide by your speed in megabits per second. A 100 MB file at 50 Mbps takes 800 ÷ 50 = 16 seconds.</p>
+<h2>Why real downloads take longer</h2>
+<ul>
+<li>Speeds are often a maximum, and your share may be lower at busy times.</li>
+<li>The server may limit how fast it sends the file.</li>
+<li>Other devices streaming or updating use part of the same connection.</li>
+<li>Wi-Fi is usually slower than a wired connection, and distance from the router matters.</li>
+</ul>
+<h2>Plan for the slow case</h2>
+<p>If you need a file by a certain time, allow extra time. Test your speed at the time you plan to download, and compare with the estimate.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/download-time-calculator.html">Download Time Calculator</a> works out the estimate from any file size and speed, in the units you use.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

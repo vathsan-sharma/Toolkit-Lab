@@ -1,6 +1,6 @@
 # Toolkit Lab
 
-> Toolkit Lab is a free website with 55 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
+> Toolkit Lab is a free website with 58 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
 
 ## Categories
 - [PDF tools](https://www.toolkitlab.xyz/pdf-tools.html)
@@ -63,6 +63,9 @@
 - [Mean, Median and Mode Calculator](https://www.toolkitlab.xyz/tools/mean-median-mode-calculator.html)
 - [Fuel Economy Converter](https://www.toolkitlab.xyz/tools/fuel-economy-converter.html): mpg and litres per 100 km
 - [Text to Speech](https://www.toolkitlab.xyz/tools/text-to-speech.html): read pasted text aloud in the browser
+- [Data Size Converter](https://www.toolkitlab.xyz/tools/data-size-converter.html): bits, bytes, KB, MB and GB
+- [Download Time Calculator](https://www.toolkitlab.xyz/tools/download-time-calculator.html): estimate download time
+- [Colour Contrast Checker](https://www.toolkitlab.xyz/tools/color-contrast-checker.html): WCAG contrast ratios
 - [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
 
 ## Guides

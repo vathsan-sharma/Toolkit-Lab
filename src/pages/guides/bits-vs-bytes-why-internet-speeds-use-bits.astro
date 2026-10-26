@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Bits vs Bytes: Why Internet Speeds Use Bits - Toolkit Lab";
+const description = "The difference between bits and bytes, why internet speeds are advertised in megabits while file sizes use megabytes, and how to convert between them.";
+---
+<Base title={title} description={description} path="/guides/bits-vs-bytes-why-internet-speeds-use-bits.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Data basics</p>
+    <h1>Bits vs Bytes: Why Internet Speeds Use Bits</h1>
+    <p class="lead">A bit is the smallest unit of digital data, and a byte is eight bits. Internet speeds are quoted in bits per second, but file sizes are in bytes, which is why a 100 MB file does not download at 100 Mbps.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Bits and bytes</h2>
+<p>A bit holds a single 0 or 1. Eight bits make one byte. A file of 100 megabytes contains 800 megabits.</p>
+<h2>Why speeds use bits</h2>
+<p>Network speeds have long been measured in bits per second, which is a convention rather than a technical need. When you see a 100 Mbps connection, the best case is about 12.5 megabytes per second.</p>
+<h2>Converting</h2>
+<ul>
+<li>To go from megabytes to megabits, multiply by 8.</li>
+<li>To go from megabits per second to megabytes per second, divide by 8.</li>
+</ul>
+<h2>Decimal and binary sizes</h2>
+<p>Storage makers often use 1 KB = 1,000 bytes, while some systems use 1 KiB = 1,024 bytes. The difference is small at kilobytes but adds up at gigabytes, which is why a drive can seem smaller than advertised.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/data-size-converter.html">Data Size Converter</a> shows any size in bits, bytes, KB, MB, GB and TB, in decimal or binary units.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

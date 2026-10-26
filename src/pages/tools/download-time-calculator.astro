@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Download Time Calculator: How Long a File Takes - Toolkit Lab";
+const description = "Work out how long a file will take to download at a given internet speed. Enter the file size and speed in any units. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/download-time-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Download Time Calculator</p>
+      <h1>Download Time Calculator</h1>
+      <p class="lead">Enter a file size and your connection speed to estimate the download time.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;align-items:end">
+        <div><label for="size">File size</label><input type="number" id="size" min="0" step="any" value="100"></div>
+        <div><label for="sunit">Unit</label><select id="sunit"><option value="MB" selected>MB</option><option value="GB">GB</option><option value="KB">KB</option></select></div>
+        <div><label for="speed">Speed</label><input type="number" id="speed" min="0" step="any" value="50"></div>
+        <div><label for="bunit">Speed unit</label><select id="bunit"><option value="Mbps" selected>Mbps</option><option value="Kbps">Kbps</option><option value="Gbps">Gbps</option></select></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="time">-</strong><span>Estimated time</span></div>
+        <div class="stat"><strong id="secs">-</strong><span>Seconds</span></div>
+      </div>
+      <p class="note">Speeds are in bits per second (megabits, kilobits or gigabits), while file sizes are in bytes. The estimate assumes a steady speed, so real downloads can be slower.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var sizeToMB = { KB: 1 / 1000, MB: 1, GB: 1000 };
+  var speedToMbps = { Kbps: 1 / 1000, Mbps: 1, Gbps: 1000 };
+  function update() {
+    var size = parseFloat(document.getElementById('size').value), speed = parseFloat(document.getElementById('speed').value);
+    var errorEl = document.getElementById('error');
+    if (!(size >= 0) || !(speed > 0)) { errorEl.textContent = 'Enter a file size of zero or more and a speed above zero.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var megabits = size * sizeToMB[document.getElementById('sunit').value] * 8;
+    var seconds = megabits / (speed * speedToMbps[document.getElementById('bunit').value]);
+    document.getElementById('secs').textContent = Math.round(seconds).toLocaleString();
+    var h = Math.floor(seconds / 3600), m = Math.floor((seconds % 3600) / 60), s = Math.round(seconds % 60);
+    document.getElementById('time').textContent = (h ? h + 'h ' : '') + (m ? m + 'm ' : '') + s + 's';
+  }
+  document.querySelectorAll('input, select').forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+  update();
+})();
+  </script>
+</Base>

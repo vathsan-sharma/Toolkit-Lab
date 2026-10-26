@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Colour Contrast Checker: WCAG Text Contrast Ratio - Toolkit Lab";
+const description = "Check the contrast ratio between text and background colours against WCAG accessibility levels. Enter HEX colours and see if they pass. Free, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/color-contrast-checker.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Colour Contrast Checker</p>
+      <h1>Colour Contrast Checker</h1>
+      <p class="lead">Enter a text colour and a background colour to see the contrast ratio and whether it meets WCAG guidelines.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="fg">Text colour (HEX)</label><input type="text" id="fg" value="#1c1917" spellcheck="false"></div>
+        <div><label for="bg">Background colour (HEX)</label><input type="text" id="bg" value="#ffffff" spellcheck="false"></div>
+      </div>
+      <div id="sample" style="margin-top:16px;padding:20px;border-radius:10px;border:1px solid var(--border)"><p style="font-size:1.2rem;margin:0">The quick brown fox jumps over the lazy dog.</p><p style="margin:6px 0 0">Smaller body text sample.</p></div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="ratio">-</strong><span>Contrast ratio</span></div>
+        <div class="stat"><strong id="aa">-</strong><span>Normal text (AA, 4.5:1)</span></div>
+        <div class="stat"><strong id="aaa">-</strong><span>Normal text (AAA, 7:1)</span></div>
+      </div>
+      <p class="note">Large text (18 pt or 14 pt bold and larger) needs 3:1 for AA and 4.5:1 for AAA. Check the final design, because contrast can change with images and gradients.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  function parse(hex) {
+    var m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(hex.trim());
+    if (!m) return null;
+    var h = m[1].length === 3 ? m[1].split('').map(function (c) { return c + c; }).join('') : m[1];
+    return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); });
+  }
+  function lum(rgb) {
+    var c = rgb.map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function badge(el, pass) { el.textContent = pass ? 'Pass' : 'Fail'; el.style.color = pass ? 'var(--accent)' : '#b42318'; }
+  function update() {
+    var fg = parse(document.getElementById('fg').value), bg = parse(document.getElementById('bg').value);
+    var errorEl = document.getElementById('error');
+    if (!fg || !bg) { errorEl.textContent = 'Enter colours as HEX codes, such as #1c1917 or #fff.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var a = lum(fg), b = lum(bg);
+    var ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    document.getElementById('ratio').textContent = ratio.toFixed(2) + ':1';
+    badge(document.getElementById('aa'), ratio >= 4.5);
+    badge(document.getElementById('aaa'), ratio >= 7);
+    var s = document.getElementById('sample');
+    s.style.color = '#' + document.getElementById('fg').value.replace('#', '');
+    s.style.background = '#' + document.getElementById('bg').value.replace('#', '');
+  }
+  document.querySelectorAll('input').forEach(function (el) { el.addEventListener('input', update); });
+  update();
+})();
+  </script>
+</Base>

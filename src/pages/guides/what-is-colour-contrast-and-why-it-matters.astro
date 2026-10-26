@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "What Is Colour Contrast? WCAG Ratios Explained - Toolkit Lab";
+const description = "What colour contrast ratio means, the WCAG 4.5:1 and 7:1 guidelines for text, and how to check text colours before publishing a website.";
+---
+<Base title={title} description={description} path="/guides/what-is-colour-contrast-and-why-it-matters.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Accessibility</p>
+    <h1>What Is Colour Contrast? WCAG Ratios Explained</h1>
+    <p class="lead">Contrast is the difference in brightness between text and its background. Low contrast makes text hard to read for many people, including those with low vision, and on bright screens.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>The ratio</h2>
+<p>Contrast is written as a ratio from 1:1 (no difference) to 21:1 (black on white). The ratio is calculated from the brightness of each colour, so it measures what the eye sees rather than how far apart two colour codes are.</p>
+<h2>The WCAG guidelines</h2>
+<ul>
+<li>Normal text should reach 4.5:1 for the AA level, and 7:1 for AAA.</li>
+<li>Large text, such as 18 pt or 14 pt bold, needs 3:1 for AA.</li>
+</ul>
+<h2>Common mistakes</h2>
+<p>Light grey text on a white background is a frequent failure, even when it looks clean. Placeholder text in form fields and text on photos are also often too faint.</p>
+<h2>Check before you publish</h2>
+<p>Test every text and background pair you use, including hover and button states. Changing a single colour can fix several pages at once if your site uses shared styles.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/color-contrast-checker.html">Colour Contrast Checker</a> shows the ratio and whether it passes each level.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

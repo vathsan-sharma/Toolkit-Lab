@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Data Size Converter: Bytes, KB, MB, GB and Bits - Toolkit Lab";
+const description = "Convert data sizes between bits, bytes, KB, MB, GB and TB, using decimal (1000) or binary (1024) units. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/data-size-converter.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Data Size Converter</p>
+      <h1>Data Size Converter</h1>
+      <p class="lead">Enter a size in any unit to see it in the others. Choose decimal units (1 KB = 1,000 bytes) or binary units (1 KiB = 1,024 bytes).</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:2fr 1fr 1fr;gap:14px;align-items:end">
+        <div><label for="val">Size</label><input type="number" id="val" min="0" step="any" value="1"></div>
+        <div><label for="unit">Unit</label><select id="unit"><option>bit</option><option>byte</option><option>KB</option><option selected>MB</option><option>GB</option><option>TB</option></select></div>
+        <div><label for="sys">System</label><select id="sys"><option value="1000" selected>Decimal (1000)</option><option value="1024">Binary (1024)</option></select></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats" id="out"></div>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var order = ['bit', 'byte', 'KB', 'MB', 'GB', 'TB'];
+  function toBytes(v, unit, base) {
+    var i = order.indexOf(unit);
+    if (unit === 'bit') return v / 8;
+    return v * Math.pow(base, i - 1);
+  }
+  function fmt(n) { return Number(n.toPrecision(6)).toLocaleString(undefined, { maximumSignificantDigits: 6 }); }
+  function update() {
+    var v = parseFloat(document.getElementById('val').value), unit = document.getElementById('unit').value, base = parseInt(document.getElementById('sys').value, 10);
+    var errorEl = document.getElementById('error'), out = document.getElementById('out');
+    out.innerHTML = '';
+    if (!(v >= 0)) { errorEl.textContent = 'Enter a size of zero or more.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var bytes = toBytes(v, unit, base);
+    var rows = [['bits', bytes * 8], ['bytes', bytes]].concat(order.slice(2).map(function (u, idx) { return [u, bytes / Math.pow(base, idx + 1)]; }));
+    rows.forEach(function (r) {
+      var d = document.createElement('div'); d.className = 'stat';
+      d.innerHTML = '<strong></strong><span></span>';
+      d.firstChild.textContent = fmt(r[1]);
+      d.lastChild.textContent = r[0];
+      out.appendChild(d);
+    });
+  }
+  document.querySelectorAll('input, select').forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+  update();
+})();
+  </script>
+</Base>

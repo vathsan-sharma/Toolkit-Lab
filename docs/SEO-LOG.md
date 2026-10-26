@@ -127,3 +127,8 @@ Total tools: 52. Total guides: 46.
 - [x] Mean Median and Mode Explained, How to Convert MPG to Litres per 100 km, How Text to Speech Works in Your Browser
 - [x] Fixed a wrong claim in the fuel guide (both 8 to 7 and 12 to 11 save one litre per 100 km)
 Total tools: 55. Total guides: 49.
+
+## Phase 14: More tools and guides
+- [x] Colour Contrast Checker, Data Size Converter, Download Time Calculator
+- [x] What Is Colour Contrast, Bits vs Bytes, How to Estimate How Long a Download Takes
+Total tools: 58. Total guides: 52.
