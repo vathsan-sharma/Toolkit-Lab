@@ -3,18 +3,18 @@ import Base from '../../layouts/Base.astro';
 const title = "QR Code Generator - Toolkit Lab";
 const description = "Create a QR code from a link or text, then download it as a PNG. Generated in your browser.";
 ---
-<Base title={title} description={description} path="/tools/qr-code-generator.html">
+<Base title={title} description={description} path="/tools/qr-code-generator">
   <Fragment slot="head">
     <script is:inline src="https://cdn.jsdelivr.net/npm/qr-creator@1.0.0/dist/qr-creator.min.js" defer></script>
   </Fragment>
 <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
     <div class="wrap">
       <div class="tool-head">
-        <p class="crumbs"><a href="../index.html">Tools</a> / QR Code Generator</p>
+        <p class="crumbs"><a href="../">Tools</a> / QR Code Generator</p>
         <h1>QR Code Generator</h1>
         <p class="lead">Type a link or some text and get a QR code you can download. Nothing is sent to a server.</p>
       <p class="how-to"><strong>How to use:</strong> Type a link or text, adjust the size and error correction, and download the QR code as a PNG.</p>
-      <p class="learn-more">Want more detail? <a href="/guides/how-qr-codes-work.html">How QR Codes Work and How to Make a Good One</a></p>
+      <p class="learn-more">Want more detail? <a href="/guides/how-qr-codes-work">How QR Codes Work and How to Make a Good One</a></p>
       </div>
 
       <!-- AdSense: place your ad unit code here once your site is approved. -->

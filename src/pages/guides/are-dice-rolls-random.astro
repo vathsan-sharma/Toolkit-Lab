@@ -3,10 +3,10 @@ import Base from '../../layouts/Base.astro';
 const title = "Are Dice Rolls Really Random? How Fair Randomness Works - Toolkit Lab";
 const description = "What makes a dice roll fair, why a random generator must avoid bias, and how the browser dice roller uses secure random numbers.";
 ---
-<Base title={title} description={description} path="/guides/are-dice-rolls-random.html">
+<Base title={title} description={description} path="/guides/are-dice-rolls-random">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <div class="wrap article">
-    <p class="note"><a href="/guides.html">Guides</a> / Probability</p>
+    <p class="note"><a href="/guides">Guides</a> / Probability</p>
     <h1>Are Dice Rolls Really Random? How Fair Randomness Works</h1>
     <p class="lead">A fair die gives each face the same chance on every roll, and the rolls do not depend on each other. Computers imitate this with random number generators, and the quality of that generator decides whether the results are fair.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
@@ -17,7 +17,7 @@ const description = "What makes a dice roll fair, why a random generator must av
 <h2>Secure random numbers</h2>
 <p>The dice roller uses the browser's cryptographic random source, and it applies this rejection step. That makes the results suitable for games and fair draws, though not a substitute for a physical die in a formal competition.</p>
 <h2>Try it yourself</h2>
-<p>The <a href="/tools/dice-roller.html">Dice Roller</a> rolls up to twenty dice with 4 to 100 sides, and shows each result and the total.</p>
+<p>The <a href="/tools/dice-roller">Dice Roller</a> rolls up to twenty dice with 4 to 100 sides, and shows each result and the total.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>Roll two six-sided dice. There are 36 equally likely pairs. Only six pairs add up to 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), so a total of 7 comes up in 6 out of 36 rolls, about 17%. A total of 2 comes up only once in 36, which is about 3%.</p>
@@ -32,9 +32,9 @@ const description = "What makes a dice roll fair, why a random generator must av
     <section class="related">
       <h2>Related guides</h2>
       <ul>
-        <li><a href="/guides/binary-decimal-and-hexadecimal-explained.html">Computer Number Systems Explained (Binary and Hex)</a></li>
-        <li><a href="/guides/bits-vs-bytes-why-internet-speeds-use-bits.html">Bits and Bytes: Why Internet Speeds Look Different From File Sizes</a></li>
-        <li><a href="/guides/csv-vs-json-which-to-use.html">Spreadsheet Files vs Data Files: Which to Use?</a></li>
+        <li><a href="/guides/binary-decimal-and-hexadecimal-explained">Computer Number Systems Explained (Binary and Hex)</a></li>
+        <li><a href="/guides/bits-vs-bytes-why-internet-speeds-use-bits">Bits and Bytes: Why Internet Speeds Look Different From File Sizes</a></li>
+        <li><a href="/guides/csv-vs-json-which-to-use">Spreadsheet Files vs Data Files: Which to Use?</a></li>
       </ul>
     </section>
 

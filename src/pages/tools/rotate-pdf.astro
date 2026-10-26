@@ -3,14 +3,14 @@ import Base from '../../layouts/Base.astro';
 const title = "Rotate PDF Pages Online - Toolkit Lab";
 const description = "Rotate every page of a PDF by 90, 180 or 270 degrees and download the result. Runs in your browser.";
 ---
-<Base title={title} description={description} path="/tools/rotate-pdf.html">
+<Base title={title} description={description} path="/tools/rotate-pdf">
   <Fragment slot="head">
     <script is:inline src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
   </Fragment>
 <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
     <div class="wrap">
       <div class="tool-head">
-        <p class="crumbs"><a href="../index.html">Tools</a> / Rotate PDF</p>
+        <p class="crumbs"><a href="../">Tools</a> / Rotate PDF</p>
         <h1>Rotate PDF</h1>
         <p class="lead">Turn every page of a PDF on its side or upside down, then download the corrected file.</p>
       <p class="how-to"><strong>How to use:</strong> Choose a PDF, pick the rotation, and press Rotate and download.</p>

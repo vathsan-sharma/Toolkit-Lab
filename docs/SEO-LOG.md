@@ -201,4 +201,6 @@ Total tools: 58. Total guides: 52.
 - [ ] Owner: verify the Search Console property and submit the sitemap; confirm the site is verified in Bing Webmaster Tools.
 
 ## Phase 24: URL migration (planned, not started)
-- [ ] Owner approval needed. Plan in docs/URL-MIGRATION-PLAN.md
+- [~] Running on branch clean-urls (preview only, not merged). Plan in docs/URL-MIGRATION-PLAN.md
+- [x] Internal links, canonicals, schema, llms.txt, palette and sitemap use clean addresses
+- [x] cleanUrls on; old .html addresses redirect (Vercel) and the old guides and GST addresses have explicit redirects

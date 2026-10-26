@@ -3,14 +3,14 @@ import Base from '../../layouts/Base.astro';
 const title = "JPG and PNG to PDF Converter - Toolkit Lab";
 const description = "Turn JPG and PNG images into one PDF, one image per page, in the order you choose. Runs in your browser.";
 ---
-<Base title={title} description={description} path="/tools/image-to-pdf.html">
+<Base title={title} description={description} path="/tools/image-to-pdf">
   <Fragment slot="head">
     <script is:inline src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
   </Fragment>
 <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
     <div class="wrap">
       <div class="tool-head">
-        <p class="crumbs"><a href="../index.html">Tools</a> / JPG and PNG to PDF</p>
+        <p class="crumbs"><a href="../">Tools</a> / JPG and PNG to PDF</p>
         <h1>JPG and PNG to PDF</h1>
         <p class="lead">Add photos or scans, arrange them, and save them as a single PDF with one image per page.</p>
       <p class="how-to"><strong>How to use:</strong> Add JPG or PNG files, put them in order with Up and Down, choose a page size, and create the PDF.</p>
