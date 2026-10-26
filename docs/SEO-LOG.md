@@ -199,3 +199,6 @@ Total tools: 58. Total guides: 52.
 - [ ] Core Web Vitals: not measured with a speed tool in this session. Page weight is small and scripts are deferred; measure with PageSpeed Insights after deployment.
 - [ ] Compress images: only one image (the social image, 63 KB). Nothing else to compress.
 - [ ] Owner: verify the Search Console property and submit the sitemap; confirm the site is verified in Bing Webmaster Tools.
+
+## Phase 24: URL migration (planned, not started)
+- [ ] Owner approval needed. Plan in docs/URL-MIGRATION-PLAN.md
