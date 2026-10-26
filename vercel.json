@@ -12,11 +12,6 @@
       "permanent": true
     },
     {
-      "source": "/tools/gst-calculator.html",
-      "destination": "/tools/sales-tax-vat-calculator",
-      "permanent": true
-    },
-    {
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
       "permanent": true
