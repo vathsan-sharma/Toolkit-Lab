@@ -1,13 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
-const title = "What Is URL Encoding (Percent-Encoding)? - Toolkit Lab";
+const title = "What Is Web Address Text Encoding? A Plain Guide - Toolkit Lab";
 const description = "What URL encoding does, why spaces become %20, which characters need encoding, and when to use encodeURI or encodeURIComponent.";
 ---
 <Base title={title} description={description} path="/guides/what-is-url-encoding-and-percent-encoding.html">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <div class="wrap article">
     <p class="note"><a href="/guides.html">Guides</a> / Web basics</p>
-    <h1>What Is URL Encoding (Percent-Encoding)?</h1>
+    <h1>What Is Web Address Text Encoding? A Plain Guide</h1>
     <p class="lead">Web addresses can only contain a limited set of characters. URL encoding replaces anything else with a percent sign and two hex digits, so a space becomes %20.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
 <h2>Why encoding is needed</h2>
@@ -22,7 +22,7 @@ const description = "What URL encoding does, why spaces become %20, which charac
 <h2>Plus signs and spaces in forms</h2>
 <p>HTML forms often encode spaces as + rather than %20. Both mean a space in query strings, but a plus sign inside a path is taken literally, so check which form the receiving site expects.</p>
 <h2>Try it yourself</h2>
-<p>The <a href="/tools/url-encoder.html">URL Encoder and Decoder</a> converts text in both directions. Nothing you type is sent to a server.</p>
+<p>The <a href="/tools/url-encoder.html">Web Address Text Converter</a> converts text in both directions. Nothing you type is sent to a server.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>The text a b&amp;c becomes a%20b%26c when encoded for a query value. The space becomes %20 and the ampersand becomes %26, so the ampersand is not read as a separator.</p>
@@ -38,8 +38,8 @@ const description = "What URL encoding does, why spaces become %20, which charac
       <h2>Related guides</h2>
       <ul>
         <li><a href="/guides/are-dice-rolls-random.html">Are Dice Rolls Really Random? How Fair Randomness Works</a></li>
-        <li><a href="/guides/binary-decimal-and-hexadecimal-explained.html">Binary, Decimal and Hexadecimal Explained</a></li>
-        <li><a href="/guides/bits-vs-bytes-why-internet-speeds-use-bits.html">Bits vs Bytes: Why Internet Speeds Use Bits</a></li>
+        <li><a href="/guides/binary-decimal-and-hexadecimal-explained.html">Computer Number Systems Explained (Binary and Hex)</a></li>
+        <li><a href="/guides/bits-vs-bytes-why-internet-speeds-use-bits.html">Bits and Bytes: Why Internet Speeds Look Different From File Sizes</a></li>
       </ul>
     </section>
 

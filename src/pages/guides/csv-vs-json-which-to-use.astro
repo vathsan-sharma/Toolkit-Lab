@@ -1,13 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
-const title = "CSV vs JSON: Which Format Should You Use? - Toolkit Lab";
+const title = "Spreadsheet Files vs Data Files: Which to Use? - Toolkit Lab";
 const description = "The differences between CSV and JSON, when each one is the better choice, and the common mistakes when converting between them.";
 ---
 <Base title={title} description={description} path="/guides/csv-vs-json-which-to-use.html">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
   <div class="wrap article">
     <p class="note"><a href="/guides.html">Guides</a> / Data formats</p>
-    <h1>CSV vs JSON: Which Format Should You Use?</h1>
+    <h1>Spreadsheet Files vs Data Files: Which to Use?</h1>
     <p class="lead">CSV and JSON both store data as text, but they suit different jobs. CSV is a table in plain text, and JSON is a structured format that can hold nested data.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
 <h2>What CSV is good at</h2>
@@ -21,7 +21,7 @@ const description = "The differences between CSV and JSON, when each one is the 
 <li><strong>Empty cells:</strong> decide whether an empty cell becomes an empty string or null, and keep the choice consistent.</li>
 </ul>
 <h2>Try it yourself</h2>
-<p>The <a href="/tools/csv-to-json.html">CSV to JSON Converter</a> uses the first row as field names and handles quoted commas. Your data stays in your browser.</p>
+<p>The <a href="/tools/csv-to-json.html">Spreadsheet to Data File Converter</a> uses the first row as field names and handles quoted commas. Your data stays in your browser.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>The CSV row "Ravi, Jr.",Colombo,27 under the header name,city,age becomes &#123;"name": "Ravi, Jr.", "city": "Colombo", "age": "27"&#125;. The comma inside the quotes stays part of the name, and 27 is kept as the text "27" because CSV stores every value as text.</p>
@@ -37,8 +37,8 @@ const description = "The differences between CSV and JSON, when each one is the 
       <h2>Related guides</h2>
       <ul>
         <li><a href="/guides/are-dice-rolls-random.html">Are Dice Rolls Really Random? How Fair Randomness Works</a></li>
-        <li><a href="/guides/binary-decimal-and-hexadecimal-explained.html">Binary, Decimal and Hexadecimal Explained</a></li>
-        <li><a href="/guides/bits-vs-bytes-why-internet-speeds-use-bits.html">Bits vs Bytes: Why Internet Speeds Use Bits</a></li>
+        <li><a href="/guides/binary-decimal-and-hexadecimal-explained.html">Computer Number Systems Explained (Binary and Hex)</a></li>
+        <li><a href="/guides/bits-vs-bytes-why-internet-speeds-use-bits.html">Bits and Bytes: Why Internet Speeds Look Different From File Sizes</a></li>
       </ul>
     </section>
 

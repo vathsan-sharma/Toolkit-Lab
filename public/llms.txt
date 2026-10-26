@@ -27,35 +27,35 @@
 - [Unit Converter](https://www.toolkitlab.xyz/tools/unit-converter.html): length, weight and temperature
 - [Word Counter](https://www.toolkitlab.xyz/tools/word-counter.html)
 - [Case Converter](https://www.toolkitlab.xyz/tools/case-converter.html)
-- [JSON Formatter](https://www.toolkitlab.xyz/tools/json-formatter.html)
-- [Base64 Encoder](https://www.toolkitlab.xyz/tools/base64.html)
-- [Lorem Ipsum Generator](https://www.toolkitlab.xyz/tools/lorem-ipsum-generator.html)
-- [Hash Generator](https://www.toolkitlab.xyz/tools/hash-generator.html): SHA-256, SHA-512 and more
+- [Data File Formatter](https://www.toolkitlab.xyz/tools/json-formatter.html)
+- [Text to Code Converter (Base64)](https://www.toolkitlab.xyz/tools/base64.html)
+- [Placeholder Text Generator](https://www.toolkitlab.xyz/tools/lorem-ipsum-generator.html)
+- [File Fingerprint Generator](https://www.toolkitlab.xyz/tools/hash-generator.html): SHA-256, SHA-512 and more
 - [Password Generator](https://www.toolkitlab.xyz/tools/password-generator.html)
 - [QR Code Generator](https://www.toolkitlab.xyz/tools/qr-code-generator.html)
-- [Color Converter](https://www.toolkitlab.xyz/tools/color-converter.html): HEX, RGB and HSL
+- [Colour Code Converter](https://www.toolkitlab.xyz/tools/color-converter.html): HEX, RGB and HSL
 - [Text Diff Checker](https://www.toolkitlab.xyz/tools/text-diff-checker.html): compare two texts line by line
 - [Discount Calculator](https://www.toolkitlab.xyz/tools/discount-calculator.html): sale price, savings and tax
 - [Tip Calculator](https://www.toolkitlab.xyz/tools/tip-calculator.html): tip, total and split between people
 - [Random Number Generator](https://www.toolkitlab.xyz/tools/random-number-generator.html): random numbers in a range
-- [URL Encoder and Decoder](https://www.toolkitlab.xyz/tools/url-encoder.html): percent-encode and decode text
+- [Web Address Text Converter](https://www.toolkitlab.xyz/tools/url-encoder.html): percent-encode and decode text
 - [Compound Interest Calculator](https://www.toolkitlab.xyz/tools/compound-interest-calculator.html): savings growth over time
 - [Monthly Investment Calculator](https://www.toolkitlab.xyz/tools/sip-calculator.html): monthly investment growth
 - [Sales Tax and VAT Calculator](https://www.toolkitlab.xyz/tools/sales-tax-vat-calculator.html): add or remove sales tax or VAT
-- [Unix Timestamp Converter](https://www.toolkitlab.xyz/tools/unix-timestamp-converter.html): epoch time and dates
-- [URL Slug Generator](https://www.toolkitlab.xyz/tools/url-slug-generator.html): clean URL slugs from titles
+- [Computer Date Converter](https://www.toolkitlab.xyz/tools/unix-timestamp-converter.html): epoch time and dates
+- [Web Page Name Maker](https://www.toolkitlab.xyz/tools/url-slug-generator.html): clean URL slugs from titles
 - [Roman Numeral Converter](https://www.toolkitlab.xyz/tools/roman-numeral-converter.html)
-- [Regex Tester](https://www.toolkitlab.xyz/tools/regex-tester.html): test regular expressions
+- [Text Pattern Tester](https://www.toolkitlab.xyz/tools/regex-tester.html): test regular expressions
 - [Typing Speed Test](https://www.toolkitlab.xyz/tools/typing-speed-test.html): words per minute and accuracy
-- [Image to Base64](https://www.toolkitlab.xyz/tools/image-to-base64.html): data URI for small images
-- [CSV to JSON Converter](https://www.toolkitlab.xyz/tools/csv-to-json.html): turn CSV into JSON
-- [Markdown Preview](https://www.toolkitlab.xyz/tools/markdown-preview.html): see Markdown formatted
+- [Image to Code Converter](https://www.toolkitlab.xyz/tools/image-to-base64.html): data URI for small images
+- [Spreadsheet to Data File Converter](https://www.toolkitlab.xyz/tools/csv-to-json.html): turn CSV into JSON
+- [Simple Text Formatting Preview](https://www.toolkitlab.xyz/tools/markdown-preview.html): see Markdown formatted
 - [Password Strength Checker](https://www.toolkitlab.xyz/tools/password-strength-checker.html): estimate password strength on your device
 - [Fraction Calculator](https://www.toolkitlab.xyz/tools/fraction-calculator.html): add, subtract, multiply and divide fractions
 - [Speed, Distance and Time Calculator](https://www.toolkitlab.xyz/tools/speed-distance-time-calculator.html)
 - [Salary to Hourly Pay Converter](https://www.toolkitlab.xyz/tools/salary-to-hourly-converter.html)
 - [Time Duration Calculator](https://www.toolkitlab.xyz/tools/time-duration-calculator.html): hours between two times
-- [Number Base Converter](https://www.toolkitlab.xyz/tools/number-base-converter.html): binary, decimal, hex and octal
+- [Number System Converter](https://www.toolkitlab.xyz/tools/number-base-converter.html): binary, decimal, hex and octal
 - [Simple Interest Calculator](https://www.toolkitlab.xyz/tools/simple-interest-calculator.html)
 - [Running Pace Calculator](https://www.toolkitlab.xyz/tools/running-pace-calculator.html)
 - [Remove Duplicate Lines](https://www.toolkitlab.xyz/tools/remove-duplicate-lines.html)
@@ -63,9 +63,9 @@
 - [Mean, Median and Mode Calculator](https://www.toolkitlab.xyz/tools/mean-median-mode-calculator.html)
 - [Fuel Economy Converter](https://www.toolkitlab.xyz/tools/fuel-economy-converter.html): mpg and litres per 100 km
 - [Text to Speech](https://www.toolkitlab.xyz/tools/text-to-speech.html): read pasted text aloud in the browser
-- [Data Size Converter](https://www.toolkitlab.xyz/tools/data-size-converter.html): bits, bytes, KB, MB and GB
+- [File Size Converter](https://www.toolkitlab.xyz/tools/data-size-converter.html): bits, bytes, KB, MB and GB
 - [Download Time Calculator](https://www.toolkitlab.xyz/tools/download-time-calculator.html): estimate download time
-- [Colour Contrast Checker](https://www.toolkitlab.xyz/tools/color-contrast-checker.html): WCAG contrast ratios
+- [Text Readability Checker](https://www.toolkitlab.xyz/tools/color-contrast-checker.html): WCAG contrast ratios
 - [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
 
 ## Guides

@@ -154,3 +154,11 @@ Total tools: 58. Total guides: 52.
 - [x] Reset button on every tool with inputs (restores starting values; skipped on tools with a file picker)
 - [x] Copy results button on every tool with a results panel
 - [x] Result areas announce changes to screen readers (aria-live)
+
+## Phase 19: Plain language for non-technical visitors
+- [x] Audience: US, UK and European adults who are not confident with technology
+- [x] Larger text and controls; money in the visitor's currency
+- [x] Sales Tax and VAT Calculator replaces GST (redirect from the old address)
+- [x] Plainer names for 16 technical tools and 11 guide titles. Web addresses unchanged for search.
+- [ ] Rewrite the guide introductions and body text in plainer English (next)
+- [ ] Edge-case test of calculators with empty, zero, negative and very large numbers (not finished)
