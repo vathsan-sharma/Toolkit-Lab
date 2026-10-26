@@ -463,6 +463,10 @@ button.secondary:hover:not(:disabled) { background: var(--surface-2); border-col
   background: var(--surface);
 }
 
+/* An ad slot with no ad inside takes no space, so visitors never see an empty box. */
+.ad-slot:empty { display: none; }
+.ad-rail:has(.ad-slot:empty) { visibility: hidden; }
+
 /* ---------- Footer ---------- */
 footer.site {
   border-top: 1px solid var(--border);
