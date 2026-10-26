@@ -168,3 +168,9 @@ Total tools: 58. Total guides: 52.
 ## Phase 20: Plainer worked examples and FAQs
 - [x] Worked examples and FAQs rewritten in plain English for the 13 technical guides, with the same numbers
 - [x] FAQ structured data regenerated to match the new wording (all blocks validated)
+
+## Phase 21: Plain language across the site
+- [x] Scanned visible text for technical terms (counts recorded above)
+- [x] Rewrote 11 tool introductions in plain words
+- [x] Added a Plain-English Glossary page (22 terms), linked from the footer and search
+- [ ] Remaining: label text such as "HEX" and "bits" on the tools themselves, and the guides not yet rewritten (explained in the glossary)

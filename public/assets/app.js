@@ -71,6 +71,7 @@
   /* ---------- Command palette (Ctrl/Cmd + K) ---------- */
   var ENTRIES = [
     { title: 'Home', kind: 'Page', href: 'index.html' },
+    { title: 'Plain-English Glossary', kind: 'Page', href: 'glossary.html' },
     { title: 'PDF Tools', kind: 'Category', href: 'pdf-tools.html' },
     { title: 'Image Tools', kind: 'Category', href: 'image-tools.html' },
     { title: 'Calculators', kind: 'Category', href: 'calculators.html' },

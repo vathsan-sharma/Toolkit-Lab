@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Plain-English Glossary: Computer and Money Words Explained - Toolkit Lab";
+const description = "What the technical words on Toolkit Lab mean, in plain English: HEX, Base64, JSON, MB, Mbps, VAT, EMI, UTC and more.";
+const terms = [
+  ["Base64", "A way of turning text or a file into ordinary letters and numbers, so it can be sent through systems that only handle plain text."],
+  ["Binary", "The way computers count, using only 0 and 1. Each place is worth double the place to its right."],
+  ["Bit", "The smallest unit of computer data. Eight bits make one byte."],
+  ["Byte", "A unit of computer data, made of eight bits. One letter of plain text is usually one byte."],
+  ["Colour code (HEX)", "A short code made of letters and numbers that names a colour, such as #5B5BD6."],
+  ["CSV", "A simple table saved as plain text, where commas separate the columns. Spreadsheets can open and save it."],
+  ["EMI", "Equated monthly instalment. The fixed amount you pay each month to repay a loan."],
+  ["File fingerprint (hash)", "A short code worked out from a whole file. If the file changes, the code changes too."],
+  ["GB, MB, KB", "Units of file size. A kilobyte (KB) is about a thousand bytes, a megabyte (MB) about a million, and a gigabyte (GB) about a billion."],
+  ["JSON", "A data file that labels each item, such as name or city. Websites and apps often use it."],
+  ["Lossy and lossless", "Lossy makes a file smaller by throwing away detail you may not notice. Lossless keeps every detail, so the file is larger."],
+  ["Markdown", "A simple way to add headings, bold text and links by typing a few easy symbols."],
+  ["Mbps", "Megabits per second. A way of measuring internet speed. Eight megabits make one megabyte."],
+  ["Regular expression (pattern)", "A short description of text, such as three digits followed by a dash. Used to search and check text."],
+  ["RGB", "A colour described as amounts of red, green and blue, each from 0 to 255."],
+  ["SIP", "Systematic investment plan. A way of investing a fixed amount each month."],
+  ["Slug", "The short, readable name at the end of a web address, such as how-to-save-money."],
+  ["UTC", "Coordinated Universal Time. The standard world time, which does not change for daylight saving."],
+  ["Unix time", "A way of storing a date as the number of seconds since 1 January 1970."],
+  ["URL", "A web address, such as https://www.toolkitlab.xyz."],
+  ["VAT", "Value added tax. A tax added to many goods and services in the UK and Europe."],
+  ["WCAG", "Web Content Accessibility Guidelines. Rules for making websites easier to use, including for people with weaker eyesight."]
+];
+---
+<Base title={title} description={description} path="/glossary.html">
+  <div class="wrap article">
+    <h1>Plain-English glossary</h1>
+    <p class="lead">Some of our tools and guides use technical words. Here is what they mean, in everyday language.</p>
+    <dl class="glossary">
+      {terms.map(([term, meaning]) => (
+        <div><dt>{term}</dt><dd>{meaning}</dd></div>
+      ))}
+    </dl>
+  </div>
+</Base>

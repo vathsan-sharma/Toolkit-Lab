@@ -1066,3 +1066,8 @@ nav.site a { font-size: 1rem; }
 @media (max-width: 600px) {
   .stat strong { font-size: 1.25rem; }
 }
+
+/* Glossary page. */
+.glossary div { border-bottom: 1px solid var(--border); padding: 14px 0; }
+.glossary dt { font-weight: 700; margin-bottom: 4px; }
+.glossary dd { margin: 0; color: var(--muted); }
