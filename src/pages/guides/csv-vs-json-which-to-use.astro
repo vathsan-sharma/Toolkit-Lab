@@ -10,18 +10,20 @@ const description = "The differences between CSV and JSON, when each one is the 
     <h1>Spreadsheet Files vs Data Files: Which to Use?</h1>
     <p class="lead">Spreadsheets and computer programs often save data in different kinds of file. CSV is a simple table saved as plain text. JSON is a more flexible format that programs use. This guide helps you choose the right one.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
-<h2>What CSV is good at</h2>
-<p>CSV is a list of rows, with commas between the values. Spreadsheets export it and import it easily, and people can read it at a glance. It works best for flat tables with one value per cell.</p>
-<h2>What JSON is good at</h2>
-<p>JSON stores named fields and can nest objects and lists inside each other. Web apps and APIs use it because programs can read it directly. It handles data that does not fit neatly into rows.</p>
-<h2>Common mistakes when converting</h2>
+<h2>CSV: a simple table</h2>
+<p>A CSV file is a table saved as plain text. Each line is a row, and commas separate the columns. Spreadsheets can open and save CSV files, which makes them easy to share.</p>
+<h2>JSON: data with labels</h2>
+<p>A JSON file stores each item with a label, such as name or city. It can also hold lists inside lists. Websites and apps often use JSON to send information to each other.</p>
+<h2>Which should you choose?</h2>
 <ul>
-<li><strong>Commas inside values:</strong> a value such as Ravi, Jr. must be wrapped in double quotes in CSV. A converter that ignores quotes will split it into two fields.</li>
-<li><strong>Types:</strong> every CSV value is text. The number 34 becomes the text "34" in JSON unless the converter or your code changes it.</li>
-<li><strong>Empty cells:</strong> decide whether an empty cell becomes an empty string or null, and keep the choice consistent.</li>
+<li>Use CSV for a simple list or table that you want to open in a spreadsheet.</li>
+<li>Use JSON when a program needs to read the file, or the data has groups inside groups.</li>
 </ul>
-<h2>Try it yourself</h2>
-<p>The <a href="/tools/csv-to-json.html">Spreadsheet to Data File Converter</a> uses the first row as field names and handles quoted commas. Your data stays in your browser.</p>
+<h2>Common problems when changing one into the other</h2>
+<ul>
+<li><strong>Commas inside a name:</strong> a name such as Ravi, Jr. must be wrapped in quotation marks in a CSV file, or it will be split in two.</li>
+<li><strong>Numbers:</strong> CSV does not say whether a value is a number or text, so 27 may come out as text.</li>
+</ul>
       <section class="worked">
         <h2>Worked example</h2>
         <p>The CSV row "Ravi, Jr.",Colombo,27 under the header name,city,age becomes &#123;"name": "Ravi, Jr.", "city": "Colombo", "age": "27"&#125;. The comma inside the quotes stays part of the name, and 27 is kept as the text "27" because CSV stores every value as text.</p>

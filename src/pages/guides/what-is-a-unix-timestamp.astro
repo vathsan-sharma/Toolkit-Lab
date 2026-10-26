@@ -10,19 +10,12 @@ const description = "What Unix epoch time is, how seconds since 1 January 1970 r
     <h1>What Is a Computer Date Number? A Plain Guide</h1>
     <p class="lead">Many computers store a date as one large number: the count of seconds since 1 January 1970. This guide explains that number and why you might see it.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
-<h2>Examples</h2>
-<ul>
-<li>0 is 1 January 1970 at 00:00:00 UTC, the start of the epoch.</li>
-<li>1,000,000,000 is 9 September 2001 at 01:46:40 UTC.</li>
-</ul>
-<h2>Seconds or milliseconds?</h2>
-<p>Many systems use seconds, but JavaScript and some databases use milliseconds. A millisecond value looks about a thousand times larger. If a date shows as the year 50000, the value is probably in milliseconds.</p>
-<h2>Time zones</h2>
-<p>A Unix timestamp is always in UTC, so it does not change with time zones. Convert it to local time only when you display it to a person.</p>
-<h2>The 2038 limit</h2>
-<p>Systems that store the timestamp in a signed 32-bit integer run out at 2,147,483,647, which is 19 January 2038 at 03:14:07 UTC. Modern systems use 64-bit numbers, which avoid the limit.</p>
-<h2>Try it yourself</h2>
-<p>The <a href="/tools/unix-timestamp-converter.html">Computer Date Converter</a> turns a timestamp into a date and a date into a timestamp, with times shown in UTC.</p>
+<h2>One number for one moment</h2>
+<p>Computers often store a date as the number of seconds since 1 January 1970 at midnight in London. This is called a Unix timestamp. It is easy for a computer to store and compare, even though it is hard for a person to read.</p>
+<h2>How to read one</h2>
+<p>A timestamp like 1,793,004,000 is a moment in time. Converting it gives a readable date and time, such as 26 October 2026 at 08:40, in UTC (the same time everywhere in the world, without daylight saving).</p>
+<h2>Why you might see one</h2>
+<p>You may see these numbers in a web address, a file's details or an app's data. The converter turns them back into dates.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>The timestamp 1,000,000,000 is 9 September 2001 at 01:46:40 UTC. The timestamp 1,793,004,000 is 26 October 2026 at 08:40 UTC. Both count seconds from the start of 1 January 1970.</p>

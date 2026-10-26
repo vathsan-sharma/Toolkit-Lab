@@ -10,20 +10,15 @@ const description = "The difference between lossy and lossless image compression
     <h1>Lossy vs Lossless Compression: What Changes in Your Images</h1>
     <p class="lead">Some ways of making picture files smaller remove detail you may not notice. Others keep every detail but leave the file larger. This guide explains the two approaches in plain words.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
-<h2>Lossless compression</h2>
-<p>Lossless methods find patterns in the data and store them more compactly. When the file is opened, every pixel is restored exactly. PNG is lossless. WebP and other formats also offer lossless modes. Lossless files are usually larger, which is why they suit screenshots, text and logos.</p>
-<h2>Lossy compression</h2>
-<p>Lossy methods, such as those used for JPEG and lossy WebP, discard information that is hard to see. Smaller files come at the cost of some detail, and at low quality you may see blocky patches or blurred edges. Lossy compression suits photographs.</p>
-<h2>Choosing a quality setting</h2>
+<h2>Two ways to make a picture smaller</h2>
+<p>One way throws away some detail that the eye is unlikely to notice, and the picture becomes much smaller. The other way keeps every detail, so the picture is only a little smaller.</p>
+<h2>Which to choose</h2>
 <ul>
-<li>For photos, 70 to 85 is a common range. Compare the result at full size before you publish.</li>
-<li>Below about 60, artifacts become visible on most photos.</li>
-<li>For images with text or hard edges, lossy compression shows more damage. Prefer PNG or lossless WebP.</li>
+<li><strong>For photos:</strong> the first way works well. A setting of about 75 to 85 usually looks fine.</li>
+<li><strong>For screenshots, logos and text:</strong> the second way keeps edges sharp.</li>
 </ul>
-<h2>Do not compress twice</h2>
-<p>Each lossy save removes more detail. Keep the original file, and compress from it each time you need a smaller version.</p>
-<h2>Try it yourself</h2>
-<p>The <a href="/tools/image-compressor.html">Image Compressor</a> lets you choose the format and quality, and shows the file size before and after.</p>
+<h2>A warning</h2>
+<p>Each time you save a photo the first way, it loses a little more detail. Keep your original picture and make a smaller copy from it.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>Take a photo of a sunset with smooth gradients. A lossy JPG at quality 80 might be 300 KB and look almost identical to the original. A lossless PNG of the same photo is usually much larger, often several times bigger, because it keeps every pixel.</p>

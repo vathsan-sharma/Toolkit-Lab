@@ -9,29 +9,19 @@ const description = "Base64 explained in plain language: what it is, how it work
       <p class="note"><a href="/guides.html">Guides</a> / Base64</p>
       <h1>What Is Base64? A Plain Guide to Text Codes</h1>
       <p class="lead">Base64 turns a file or piece of text into ordinary letters and numbers. It lets data travel safely through systems that only handle plain text. This guide explains what it is and where you will see it.</p>
-      <div class="ad-slot" aria-label="Advertisement"></div>
-
-      <h2>How Base64 works</h2>
-      <p>Computers store data as bytes. Some places, such as email bodies, JSON fields and URLs, are designed for text and can break on raw bytes. Base64 solves this by taking every three bytes (24 bits), splitting them into four groups of six bits, and mapping each group to one of 64 safe characters: A to Z, a to z, 0 to 9, plus <code>+</code> and <code>/</code>. Padding with <code>=</code> fills out the end.</p>
-
-      <h2>Why the output is bigger</h2>
-      <p>Every three input bytes become four output characters. Base64 data is therefore about 33 percent larger than the original. This is the main trade-off. It is fine for small icons or tokens, but it is wasteful for large files.</p>
-
-      <h2>Where you will see it</h2>
-      <ul>
-        <li><strong>Data URLs</strong>: small images embedded directly in HTML or CSS, such as <code>data:image/png;base64,...</code>.</li>
-        <li><strong>Email attachments</strong>: the MIME standard encodes attachments in Base64.</li>
-        <li><strong>API credentials</strong>: HTTP Basic authentication encodes <code>username:password</code> in Base64.</li>
-        <li><strong>JSON or XML payloads</strong>: binary content is often carried as a Base64 string.</li>
-      </ul>
-
-      <h2>Base64 is not encryption</h2>
-      <p>Base64 is an encoding, not a security measure. Anyone can decode it instantly. Never rely on it to hide passwords or private information.</p>
-
-      <h2>Try it yourself</h2>
-      <p>Use the <a href="../tools/base64.html">Text to Code Converter (Base64)</a> to encode text or decode a string. It handles UTF-8, so accented letters and emoji round-trip correctly. The work happens in your browser.</p>
-
-      <!-- AdSense: place your ad unit code here once your site is approved. -->
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>What Base64 does</h2>
+<p>Some systems can only carry plain letters and numbers. Base64 changes any file or text into a set of such characters, so it can travel through those systems safely. It does not make the data smaller or secret.</p>
+<h2>Why the result is larger</h2>
+<p>Every three bytes of the original become four characters. The result is about a third larger than the original.</p>
+<h2>Where you will see it</h2>
+<ul>
+<li>Small pictures built into a web page.</li>
+<li>Email attachments.</li>
+<li>Login details passed between websites.</li>
+</ul>
+<h2>Base64 is not a lock</h2>
+<p>Anyone can change Base64 back to the original straight away. Never use it to hide a password or private information.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>The text Hi is two bytes, 48 and 69 in hex. Written in binary and regrouped into six-bit chunks, they become the four Base64 characters SGk=, where the equals sign pads the end.</p>

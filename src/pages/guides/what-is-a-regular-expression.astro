@@ -10,19 +10,16 @@ const description = "What a regular expression (regex) is, the building blocks s
     <h1>What Is a Text Pattern? A Plain Guide</h1>
     <p class="lead">A pattern is a short description of text, such as three digits, a dash and then four digits. Programmers use patterns to search and check text. This guide explains the basics in everyday terms.</p>
     <div class="ad-slot" aria-label="Advertisement"></div>
-<h2>The building blocks</h2>
+<h2>A pattern for text</h2>
+<p>A pattern describes what text should look like, rather than the exact words. For example, the pattern for a phone number might say: three digits, a dash, then four digits. Any text that fits that shape matches.</p>
+<h2>The main parts</h2>
 <ul>
-<li><strong>Literal text:</strong> cat matches the letters c, a and t.</li>
-<li><strong>Character classes:</strong> \d matches a digit, \w matches a letter, digit or underscore, and [aeiou] matches any one listed character.</li>
-<li><strong>Quantifiers:</strong> + means one or more, * means zero or more, and {2,4} means between two and four.</li>
-<li><strong>Anchors:</strong> ^ matches the start of the text and $ matches the end. \b matches a word boundary.</li>
+<li><strong>A letter or number</strong> matches itself.</li>
+<li><strong>A digit</strong> (written as \d) matches any number from 0 to 9.</li>
+<li><strong>A count</strong> such as &#123;3&#125; means exactly that many of the item before it.</li>
 </ul>
-<h2>Flags</h2>
-<p>Flags change how the pattern works. g finds every match rather than the first, i ignores upper and lower case, and m makes ^ and $ match at each line.</p>
-<h2>Why email patterns are tricky</h2>
-<p>Email addresses have many valid forms, and a short pattern will either reject some real addresses or accept some invalid ones. A simple pattern is fine for spotting a likely address in text. For checking that an address works, send a confirmation email instead.</p>
-<h2>Try it yourself</h2>
-<p>The <a href="/tools/regex-tester.html">Text Pattern Tester</a> highlights each match in your text as you type. Your text is not sent to a server.</p>
+<h2>Where patterns are used</h2>
+<p>Programmers use patterns to check that an email address looks right, to find every date in a document, or to tidy up text. Many word processors and search tools support simple patterns too.</p>
       <section class="worked">
         <h2>Worked example</h2>
         <p>The pattern \d&#123;3&#125;-\d&#123;4&#125; matches a seven-digit phone number written with a dash. In the text "Call 555-1234 today", it finds 555-1234. The \d means any digit, &#123;3&#125; means exactly three of them, and the dash must appear between the two groups.</p>
