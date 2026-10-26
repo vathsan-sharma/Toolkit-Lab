@@ -95,4 +95,6 @@ Total tools: 40. Total guides: 34.
 Bugs found by browser tests and fixed: regex default pattern had doubled backslashes; typing test allowed pasting.
 
 ## Owner actions
-- [!] Google Search Console verification: add the TXT record google-site-verification=... to the DNS for toolkitlab.xyz, then verify.
+- [x] Google Search Console: TXT verification record added in Vercel DNS (checked live via 8.8.8.8 and 1.1.1.1). Sitemap submitted (owner confirmed).
+- [~] Bing Webmaster Tools: owner says added. Confirm the property is verified and the sitemap is submitted.
+- [ ] Check Search Console Pages report in about a week, and fix any errors listed.
