@@ -26,6 +26,17 @@ const description = "How to spot what changed between two versions of a document
 </ul>
 <h2>Try it yourself</h2>
 <p>The <a href="/tools/text-diff-checker.html">Text Diff Checker</a> runs in your browser. The text you paste is not saved or sent anywhere.</p>
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>Original: apple, banana, cherry. New version: apple, blueberry, cherry, date. The comparison marks apple and cherry as unchanged, banana as removed, and blueberry and date as added. The result shows 2 unchanged lines, 1 removed and 2 added.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>Why does a moved paragraph show as removed and added?</summary><p>The comparison matches lines in order. If a line moves, it appears as a removal in its old place and an addition in its new place.</p></details>
+        <details><summary>Does it ignore extra spaces?</summary><p>Not by default. Trim spaces and tidy formatting before comparing for the cleanest result.</p></details>
+        <details><summary>Can I compare Word documents?</summary><p>Copy the text from each version and paste it into the tool. Formatting such as bold or tables is not compared.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does a moved paragraph show as removed and added?", "acceptedAnswer": {"@type": "Answer", "text": "The comparison matches lines in order. If a line moves, it appears as a removal in its old place and an addition in its new place."}}, {"@type": "Question", "name": "Does it ignore extra spaces?", "acceptedAnswer": {"@type": "Answer", "text": "Not by default. Trim spaces and tidy formatting before comparing for the cleanest result."}}, {"@type": "Question", "name": "Can I compare Word documents?", "acceptedAnswer": {"@type": "Answer", "text": "Copy the text from each version and paste it into the tool. Formatting such as bold or tables is not compared."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

@@ -23,6 +23,17 @@ const description = "What a regular expression (regex) is, the building blocks s
 <p>Email addresses have many valid forms, and a short pattern will either reject some real addresses or accept some invalid ones. A simple pattern is fine for spotting a likely address in text. For checking that an address works, send a confirmation email instead.</p>
 <h2>Try it yourself</h2>
 <p>The <a href="/tools/regex-tester.html">Regex Tester</a> highlights each match in your text as you type. Your text is not sent to a server.</p>
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>The pattern \d&#123;3&#125;-\d&#123;4&#125; matches a seven-digit phone number written with a dash. In the text "Call 555-1234 today", it finds 555-1234. The \d means any digit, &#123;3&#125; means exactly three of them, and the dash must appear between the two groups.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>What does a greedy match mean?</summary><p>A quantifier such as .* grabs as much text as it can. Add a question mark, as in .*?, to match as little as possible.</p></details>
+        <details><summary>What do the flags g and i mean?</summary><p>g finds every match instead of stopping at the first. i ignores upper and lower case.</p></details>
+        <details><summary>How do I match a literal dot or bracket?</summary><p>Escape it with a backslash, so \. matches a full stop and \( matches an opening bracket.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does a greedy match mean?", "acceptedAnswer": {"@type": "Answer", "text": "A quantifier such as .* grabs as much text as it can. Add a question mark, as in .*?, to match as little as possible."}}, {"@type": "Question", "name": "What do the flags g and i mean?", "acceptedAnswer": {"@type": "Answer", "text": "g finds every match instead of stopping at the first. i ignores upper and lower case."}}, {"@type": "Question", "name": "How do I match a literal dot or bracket?", "acceptedAnswer": {"@type": "Answer", "text": "Escape it with a backslash, so \\. matches a full stop and \\( matches an opening bracket."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

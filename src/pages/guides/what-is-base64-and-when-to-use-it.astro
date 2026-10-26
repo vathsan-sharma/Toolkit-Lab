@@ -32,6 +32,17 @@ const description = "Base64 explained in plain language: what it is, how it work
       <p>Use the <a href="../tools/base64.html">Base64 Encoder</a> to encode text or decode a string. It handles UTF-8, so accented letters and emoji round-trip correctly. The work happens in your browser.</p>
 
       <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>The text Hi is two bytes, 48 and 69 in hex. Written in binary and regrouped into six-bit chunks, they become the four Base64 characters SGk=, where the equals sign pads the end.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>Is Base64 a form of encryption?</summary><p>No. Anyone can decode Base64 instantly, so it must not be used to hide passwords or private data.</p></details>
+        <details><summary>Why does Base64 make files bigger?</summary><p>Every three bytes become four characters, so the text is about a third larger than the original.</p></details>
+        <details><summary>Where is Base64 used?</summary><p>In data URLs for small images, in email attachments, in some API tokens and in HTTP basic authentication headers.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Base64 a form of encryption?", "acceptedAnswer": {"@type": "Answer", "text": "No. Anyone can decode Base64 instantly, so it must not be used to hide passwords or private data."}}, {"@type": "Question", "name": "Why does Base64 make files bigger?", "acceptedAnswer": {"@type": "Answer", "text": "Every three bytes become four characters, so the text is about a third larger than the original."}}, {"@type": "Question", "name": "Where is Base64 used?", "acceptedAnswer": {"@type": "Answer", "text": "In data URLs for small images, in email attachments, in some API tokens and in HTTP basic authentication headers."}}]}</script>
       <section class="related">
         <h2>Related guides</h2>
         <ul>

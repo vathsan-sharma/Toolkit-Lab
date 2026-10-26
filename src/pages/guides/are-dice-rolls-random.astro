@@ -18,6 +18,17 @@ const description = "What makes a dice roll fair, why a random generator must av
 <p>The dice roller uses the browser's cryptographic random source, and it applies this rejection step. That makes the results suitable for games and fair draws, though not a substitute for a physical die in a formal competition.</p>
 <h2>Try it yourself</h2>
 <p>The <a href="/tools/dice-roller.html">Dice Roller</a> rolls up to twenty dice with 4 to 100 sides, and shows each result and the total.</p>
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>Roll two six-sided dice. There are 36 equally likely pairs. Only six pairs add up to 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), so a total of 7 comes up in 6 out of 36 rolls, about 17%. A total of 2 comes up only once in 36, which is about 3%.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>Why does 7 come up more often than 2 with two dice?</summary><p>There are more pairs of faces that add up to 7 than to any other total. A total of 2 can only be made by rolling two 1s.</p></details>
+        <details><summary>Is a dice roller on a website fair?</summary><p>It is fair if the random source is unbiased and every face is equally likely. The Dice Roller uses the browser's secure random numbers and avoids the bias that a simple remainder calculation can cause.</p></details>
+        <details><summary>Can I use a dice roller for real money bets?</summary><p>Check the rules that apply where you live and to the game. Online tools are useful for games and decisions, but they are not a substitute for a regulated gambling service.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does 7 come up more often than 2 with two dice?", "acceptedAnswer": {"@type": "Answer", "text": "There are more pairs of faces that add up to 7 than to any other total. A total of 2 can only be made by rolling two 1s."}}, {"@type": "Question", "name": "Is a dice roller on a website fair?", "acceptedAnswer": {"@type": "Answer", "text": "It is fair if the random source is unbiased and every face is equally likely. The Dice Roller uses the browser's secure random numbers and avoids the bias that a simple remainder calculation can cause."}}, {"@type": "Question", "name": "Can I use a dice roller for real money bets?", "acceptedAnswer": {"@type": "Answer", "text": "Check the rules that apply where you live and to the game. Online tools are useful for games and decisions, but they are not a substitute for a regulated gambling service."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

@@ -34,6 +34,17 @@ const description = "A practical guide to JSON syntax, the most common errors, a
       <p>Paste your data into the <a href="../tools/json-formatter.html">JSON Formatter</a> to beautify, minify or validate it. Everything runs in your browser, so sensitive API responses are never sent to a server.</p>
 
       <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>This text is invalid JSON: &#123;'name': 'Asha'&#125;. It uses single quotes, which JSON does not allow. The valid version is &#123;"name": "Asha"&#125;, with double quotes around both the key and the value.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>Why are trailing commas invalid?</summary><p>JSON does not allow a comma after the last item in an object or array. Remove it and the file will validate.</p></details>
+        <details><summary>Can JSON have comments?</summary><p>No. JSON has no comment syntax. Some tools accept comments in other formats, such as JSON with Comments, but a strict parser will reject them.</p></details>
+        <details><summary>Why do very large numbers change when I format them?</summary><p>Many programs store numbers as 64-bit floating point values, which lose precision above about 15 to 16 digits. Store such IDs as strings.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why are trailing commas invalid?", "acceptedAnswer": {"@type": "Answer", "text": "JSON does not allow a comma after the last item in an object or array. Remove it and the file will validate."}}, {"@type": "Question", "name": "Can JSON have comments?", "acceptedAnswer": {"@type": "Answer", "text": "No. JSON has no comment syntax. Some tools accept comments in other formats, such as JSON with Comments, but a strict parser will reject them."}}, {"@type": "Question", "name": "Why do very large numbers change when I format them?", "acceptedAnswer": {"@type": "Answer", "text": "Many programs store numbers as 64-bit floating point values, which lose precision above about 15 to 16 digits. Store such IDs as strings."}}]}</script>
       <section class="related">
         <h2>Related guides</h2>
         <ul>

@@ -144,3 +144,8 @@ Total tools: 58. Total guides: 52.
 - [x] Measured all 52 guides: 333 to 513 words each, none below 300
 - [x] Added a Related guides section (up to three guides on the same topic) to all 52 guides, linking them together
 - [x] Desktop tool pass: fixed overflow, date fields and result sizing
+
+## Phase 17: Deeper guides
+- [x] All 52 guides have a Worked example with numbers checked by hand, and three FAQs
+- [x] FAQPage structured data on every guide (validated, 260 blocks across the site)
+- [ ] Owner: spot-check the worked examples against your own figures before publishing widely

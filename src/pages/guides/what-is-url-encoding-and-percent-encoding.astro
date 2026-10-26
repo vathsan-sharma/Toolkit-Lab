@@ -23,6 +23,17 @@ const description = "What URL encoding does, why spaces become %20, which charac
 <p>HTML forms often encode spaces as + rather than %20. Both mean a space in query strings, but a plus sign inside a path is taken literally, so check which form the receiving site expects.</p>
 <h2>Try it yourself</h2>
 <p>The <a href="/tools/url-encoder.html">URL Encoder and Decoder</a> converts text in both directions. Nothing you type is sent to a server.</p>
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>The text a b&amp;c becomes a%20b%26c when encoded for a query value. The space becomes %20 and the ampersand becomes %26, so the ampersand is not read as a separator.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>Why does a space become %20 in some places and + in others?</summary><p>%20 is always a space in a URL path. In HTML form submissions, + is often used for spaces inside query strings.</p></details>
+        <details><summary>Should I use encodeURI or encodeURIComponent?</summary><p>Use encodeURI for a whole address, and encodeURIComponent for a single value that goes inside it.</p></details>
+        <details><summary>What is double encoding?</summary><p>Encoding text that is already encoded turns %20 into %2520. Encode once, at the point where the value is added to the URL.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does a space become %20 in some places and + in others?", "acceptedAnswer": {"@type": "Answer", "text": "%20 is always a space in a URL path. In HTML form submissions, + is often used for spaces inside query strings."}}, {"@type": "Question", "name": "Should I use encodeURI or encodeURIComponent?", "acceptedAnswer": {"@type": "Answer", "text": "Use encodeURI for a whole address, and encodeURIComponent for a single value that goes inside it."}}, {"@type": "Question", "name": "What is double encoding?", "acceptedAnswer": {"@type": "Answer", "text": "Encoding text that is already encoded turns %20 into %2520. Encode once, at the point where the value is added to the URL."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

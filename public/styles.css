@@ -1037,3 +1037,15 @@ footer.site p { margin: 0 0 0 auto; }
 .related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .related a { color: var(--accent); text-decoration: none; font-weight: 500; }
 .related a:hover { text-decoration: underline; }
+
+/* Worked example and FAQ sections in guides. */
+.worked { margin-top: 32px; padding: 20px 22px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.worked h2 { margin-top: 0; font-size: 1.2rem; }
+.worked p { margin-bottom: 0; }
+.faq-list { margin-top: 32px; }
+.faq-list h2 { margin-top: 0; }
+.faq-list details { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); margin-bottom: 10px; padding: 14px 18px; }
+.faq-list summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq-list summary::after { content: "+"; color: var(--accent); font-size: 1.2rem; line-height: 1; }
+.faq-list details[open] summary::after { content: "−"; }
+.faq-list details p { margin: 10px 0 0; color: var(--muted); font-size: 0.95rem; }

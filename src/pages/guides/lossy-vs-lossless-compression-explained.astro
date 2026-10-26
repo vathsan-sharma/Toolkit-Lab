@@ -24,6 +24,17 @@ const description = "The difference between lossy and lossless image compression
 <p>Each lossy save removes more detail. Keep the original file, and compress from it each time you need a smaller version.</p>
 <h2>Try it yourself</h2>
 <p>The <a href="/tools/image-compressor.html">Image Compressor</a> lets you choose the format and quality, and shows the file size before and after.</p>
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>Take a photo of a sunset with smooth gradients. A lossy JPG at quality 80 might be 300 KB and look almost identical to the original. A lossless PNG of the same photo is usually much larger, often several times bigger, because it keeps every pixel.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>Which quality setting should I pick for photos?</summary><p>Start between 70 and 85 for photos. Below about 60, artifacts often become visible.</p></details>
+        <details><summary>Can a WebP file be lossless?</summary><p>Yes. WebP supports both lossy and lossless modes, so it can replace PNG for graphics as well as JPG for photos.</p></details>
+        <details><summary>Why does saving a JPG repeatedly make it worse?</summary><p>Each lossy save discards more detail. Keep the original and compress from it each time.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which quality setting should I pick for photos?", "acceptedAnswer": {"@type": "Answer", "text": "Start between 70 and 85 for photos. Below about 60, artifacts often become visible."}}, {"@type": "Question", "name": "Can a WebP file be lossless?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. WebP supports both lossy and lossless modes, so it can replace PNG for graphics as well as JPG for photos."}}, {"@type": "Question", "name": "Why does saving a JPG repeatedly make it worse?", "acceptedAnswer": {"@type": "Answer", "text": "Each lossy save discards more detail. Keep the original and compress from it each time."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>

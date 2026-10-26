@@ -22,6 +22,17 @@ const description = "Whether online PDF merge tools upload your files, what to c
 <p>The <a href="/tools/merge-pdf.html">Merge PDF</a> tool loads a small library into your browser and combines the pages on your device. Your files are not sent to our servers. You can check this yourself: open your browser's developer tools, switch to the network tab, merge a file, and see that no upload request is made.</p>
 <h2>Sensitive documents</h2>
 <p>For highly confidential documents, a desktop PDF app or the built-in tools on your computer keep the files entirely local. Whatever tool you use, check that you can access the merged file and delete the originals when you are finished.</p>
+      <section class="worked">
+        <h2>Worked example</h2>
+        <p>Suppose you merge a 2-page contract with a 1-page ID scan. A tool that uploads them sends all three pages to its servers. A tool that works in the browser combines the pages on your computer, and the network activity panel in your browser shows no upload.</p>
+      </section>
+      <section class="faq-list">
+        <h2>Frequently asked questions</h2>
+        <details><summary>How can I check whether a tool uploads my file?</summary><p>Open your browser's developer tools, go to the Network tab, and merge a file. If no request carries your file to another server, the work happens on your device.</p></details>
+        <details><summary>Is it safe to use free online tools for sensitive documents?</summary><p>For confidential documents, use a desktop app or a tool that clearly works locally, and delete the originals when you are done.</p></details>
+        <details><summary>What should a privacy policy say about files?</summary><p>It should state whether files are stored, for how long, and whether they are shared with anyone.</p></details>
+      </section>
+      <script is:inline type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How can I check whether a tool uploads my file?", "acceptedAnswer": {"@type": "Answer", "text": "Open your browser's developer tools, go to the Network tab, and merge a file. If no request carries your file to another server, the work happens on your device."}}, {"@type": "Question", "name": "Is it safe to use free online tools for sensitive documents?", "acceptedAnswer": {"@type": "Answer", "text": "For confidential documents, use a desktop app or a tool that clearly works locally, and delete the originals when you are done."}}, {"@type": "Question", "name": "What should a privacy policy say about files?", "acceptedAnswer": {"@type": "Answer", "text": "It should state whether files are stored, for how long, and whether they are shared with anyone."}}]}</script>
     <section class="related">
       <h2>Related guides</h2>
       <ul>
