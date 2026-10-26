@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 const title = "Text Readability Checker: WCAG Text Contrast Ratio - Toolkit Lab";
-const description = "Check the contrast ratio between text and background colours against WCAG accessibility levels. Enter HEX colours and see if they pass. Free, runs in your browser.";
+const description = "Check whether text is easy to read on its background colour. Enter two colours to see the contrast score and whether it passes the accessibility guidelines.";
 ---
 <Base title={title} description={description} path="/tools/color-contrast-checker.html">
   <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
@@ -11,6 +11,7 @@ const description = "Check the contrast ratio between text and background colour
       <h1>Text Readability Checker</h1>
       <p class="lead">Check whether text is easy to read on its background colour. Enter two colours to see the score and whether it passes.</p>
       <p class="how-to"><strong>How to use:</strong> Enter a text colour and a background colour as HEX codes. The ratio and the pass or fail results update instantly.</p>
+      <p class="learn-more">Want more detail? <a href="/guides/what-is-colour-contrast-and-why-it-matters.html">What Is Text Readability? WCAG Ratios Explained</a></p>
     </div>
     <div class="ad-slot" aria-label="Advertisement"></div>
 <div class="panel">

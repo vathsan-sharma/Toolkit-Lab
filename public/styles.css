@@ -1071,3 +1071,6 @@ nav.site a { font-size: 1rem; }
 .glossary div { border-bottom: 1px solid var(--border); padding: 14px 0; }
 .glossary dt { font-weight: 700; margin-bottom: 4px; }
 .glossary dd { margin: 0; color: var(--muted); }
+
+.learn-more { font-size: 1rem; color: var(--muted); margin: 10px 0 0; }
+.learn-more a { color: var(--accent); font-weight: 600; }

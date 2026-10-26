@@ -179,3 +179,23 @@ Total tools: 58. Total guides: 52.
 - [x] 28 tool labels and options renamed to plainer words (for example "Base 16 (hex)" with the plain word first, "Strength score (bits)")
 - [x] Loan guide now says "monthly payment" in place of EMI, and the JSON guide has a plainer title
 - [ ] Remaining: many guide bodies still use technical words such as bits, JSON and Base64 (they are the subject, and are explained in each guide)
+
+## Phase 23: SEO checklist (audit and fixes)
+- [x] Noindex: none found on any of 120 pages
+- [x] Canonical tags: present on every page (www domain)
+- [x] Titles: all within about 60 characters; short titles lengthened on 7 pages
+- [x] Descriptions: five outside the recommended length rewritten; no empty descriptions
+- [x] One H1 per page: all pages pass
+- [x] Heading order: no skipped levels on any page (category and guide index pages fixed)
+- [x] Image alt text: every image has alt text
+- [x] Schema markup: WebSite, Organization, SoftwareApplication, Article, BreadcrumbList and FAQPage in place
+- [x] Internal links: 51 tool pages link to their matching guide
+- [x] Broken links: none (one false alarm inside script text, checked)
+- [x] robots.txt points to the sitemap; /sitemap.xml redirects to /sitemap-index.xml
+- [x] HTTPS: HSTS, nosniff and referrer headers added in vercel.json (Vercel already serves HTTPS)
+- [x] Social image: 1200 x 630 PNG, 63 KB, tagged on every page
+- [x] Backlink plan written in docs/BACKLINKS.md
+- [ ] URL slugs: kept as they are (already short, lowercase, hyphenated). Changing to extensionless URLs would move every indexed page, so it is not done. Decide later with the owner.
+- [ ] Core Web Vitals: not measured with a speed tool in this session. Page weight is small and scripts are deferred; measure with PageSpeed Insights after deployment.
+- [ ] Compress images: only one image (the social image, 63 KB). Nothing else to compress.
+- [ ] Owner: verify the Search Console property and submit the sitemap; confirm the site is verified in Bing Webmaster Tools.

@@ -1,5 +1,9 @@
 ---
-const { title, description, path } = Astro.props;
+const { title: rawTitle, description, path } = Astro.props;
+const base = rawTitle.replace(/ - Toolkit Lab$/, '');
+const title = (base + ' | Toolkit Lab').length <= 60
+  ? base + ' | Toolkit Lab'
+  : base.length <= 60 ? base : base.slice(0, 60).replace(/\s+\S*$/, '');
 const origin = 'https://www.toolkitlab.xyz';
 const canonical = origin + path;
 const ogImage = origin + '/og-image.png';
