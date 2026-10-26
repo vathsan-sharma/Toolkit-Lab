@@ -16,16 +16,16 @@ const description = "Convert a Unix timestamp in seconds to a readable UTC date,
     <div class="ad-slot" aria-label="Advertisement"></div>
 
 <div class="panel">
-      <label for="ts">Unix timestamp (seconds since 1 January 1970 UTC)</label>
+      <label for="ts">Computer date number (seconds since 1 January 1970, world time)</label>
       <input type="number" id="ts" step="1" value="1793004000">
       <div class="row"><button id="now" type="button" class="secondary">Use current time</button></div>
-      <label for="dt">Date and time (UTC)</label>
+      <label for="dt">Date and time (world time)</label>
       <input type="datetime-local" id="dt">
       <p id="error" class="error" hidden></p>
       <div class="stats">
-        <div class="stat"><strong id="iso">-</strong><span>ISO 8601 (UTC)</span></div>
-        <div class="stat"><strong id="human">-</strong><span>Readable (UTC)</span></div>
-        <div class="stat"><strong id="back">-</strong><span>Timestamp for the date above</span></div>
+        <div class="stat"><strong id="iso">-</strong><span>Standard format (world time)</span></div>
+        <div class="stat"><strong id="human">-</strong><span>Written out (world time)</span></div>
+        <div class="stat"><strong id="back">-</strong><span>Computer date number for this date</span></div>
       </div>
     </div>
 

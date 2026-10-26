@@ -17,21 +17,21 @@ const description = "Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes for tex
       <div class="ad-slot" aria-label="Advertisement"></div>
 
       <div class="panel">
-        <label for="algo">Algorithm</label>
+        <label for="algo">Method</label>
         <select id="algo">
           <option value="SHA-256" selected>SHA-256</option>
           <option value="SHA-512">SHA-512</option>
           <option value="SHA-384">SHA-384</option>
-          <option value="SHA-1">SHA-1 (legacy, not for security)</option>
+          <option value="SHA-1">SHA-1 (old, not for security)</option>
         </select>
 
-        <label for="text">Text to hash</label>
+        <label for="text">Text to check</label>
         <textarea id="text" rows="4" style="min-height:0" placeholder="Type or paste text"></textarea>
 
         <label for="file">Or choose a file</label>
         <input type="file" id="file">
 
-        <label for="result">Hash (hex)</label>
+        <label for="result">Fingerprint code</label>
         <textarea id="result" rows="2" readonly style="min-height:0;font-size:0.85rem;word-break:break-all"></textarea>
 
         <div class="row">

@@ -174,3 +174,8 @@ Total tools: 58. Total guides: 52.
 - [x] Rewrote 11 tool introductions in plain words
 - [x] Added a Plain-English Glossary page (22 terms), linked from the footer and search
 - [ ] Remaining: label text such as "HEX" and "bits" on the tools themselves, and the guides not yet rewritten (explained in the glossary)
+
+## Phase 22: Plainer labels and remaining guides
+- [x] 28 tool labels and options renamed to plainer words (for example "Base 16 (hex)" with the plain word first, "Strength score (bits)")
+- [x] Loan guide now says "monthly payment" in place of EMI, and the JSON guide has a plainer title
+- [ ] Remaining: many guide bodies still use technical words such as bits, JSON and Base64 (they are the subject, and are explained in each guide)
