@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <title>Loan EMI Calculator - Monthly Payment and Interest - Toolkit Lab</title>
+  <meta name="description" content="Work out a loan's monthly EMI, total interest and total payment from the amount, rate and term. Free and private.">
+  <link rel="canonical" href="https://toolkitlab.xyz/tools/loan-calculator.html">
+  <meta property="og:site_name" content="Toolkit Lab">
+  <meta property="og:url" content="https://toolkitlab.xyz/tools/loan-calculator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">T</span>Toolkit Lab</a>
+      <nav class="site">
+        <a href="../index.html#tools">Tools</a>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../about.html">About</a>
+        <div class="nav-tools">
+          <button class="search-trigger" data-open-palette type="button" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle theme"></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Loan EMI Calculator</p>
+        <h1>Loan EMI Calculator</h1>
+        <p class="lead">Enter the loan amount, interest rate and term to see your monthly payment and the total interest.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+
+      <div class="panel">
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <label for="principal">Loan amount</label>
+            <input type="number" id="principal" value="250000" min="0" step="1000">
+          </div>
+          <div>
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" value="8.5" min="0" step="0.05">
+          </div>
+          <div>
+            <label for="years">Term (years)</label>
+            <input type="number" id="years" value="20" min="1" step="1">
+          </div>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+
+        <div class="stats">
+          <div class="stat"><strong id="emi">-</strong><span>Monthly payment</span></div>
+          <div class="stat"><strong id="interest">-</strong><span>Total interest</span></div>
+          <div class="stat"><strong id="total">-</strong><span>Total repaid</span></div>
+        </div>
+        <p class="note">This is an estimate. Lenders may add fees, insurance or different rounding.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../about.html">About</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../contact.html">Contact</a>
+      <p>&copy; 2026 Toolkit Lab</p>
+    </div>
+  </footer>
+
+  <script>
+    const money = n => n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+
+    function update() {
+      const P = parseFloat(document.getElementById('principal').value);
+      const annual = parseFloat(document.getElementById('rate').value);
+      const years = parseFloat(document.getElementById('years').value);
+      const errorEl = document.getElementById('error');
+
+      if (!(P > 0) || !(annual >= 0) || !(years > 0)) {
+        errorEl.textContent = 'Enter a loan amount above zero, a rate of zero or more, and a term above zero.';
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
+
+      const n = Math.round(years * 12);
+      const r = annual / 100 / 12;
+      // Standard EMI formula; a zero rate is just principal divided by months.
+      const emi = r === 0 ? P / n : P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+      const total = emi * n;
+
+      document.getElementById('emi').textContent = money(emi);
+      document.getElementById('interest').textContent = money(total - P);
+      document.getElementById('total').textContent = money(total);
+    }
+
+    document.querySelectorAll('input').forEach(input => input.addEventListener('input', update));
+    update();
+  </script>
+</body>
+</html>

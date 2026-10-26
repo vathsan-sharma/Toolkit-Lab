@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <title>Lorem Ipsum Generator - Toolkit Lab</title>
+  <meta name="description" content="Generate placeholder text in paragraphs, sentences or words for mockups and layouts. Copy it in one click.">
+  <link rel="canonical" href="https://toolkitlab.xyz/tools/lorem-ipsum-generator.html">
+  <meta property="og:site_name" content="Toolkit Lab">
+  <meta property="og:url" content="https://toolkitlab.xyz/tools/lorem-ipsum-generator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">T</span>Toolkit Lab</a>
+      <nav class="site">
+        <a href="../index.html#tools">Tools</a>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../about.html">About</a>
+        <div class="nav-tools">
+          <button class="search-trigger" data-open-palette type="button" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle theme"></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Lorem Ipsum Generator</p>
+        <h1>Lorem Ipsum Generator</h1>
+        <p class="lead">Placeholder text for mockups, slides and layouts. Choose how much you need.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+
+      <div class="panel">
+        <div class="row" style="margin-top:0">
+          <label for="unit" style="margin:0">Unit</label>
+          <select id="unit" style="width:auto">
+            <option value="paragraphs" selected>Paragraphs</option>
+            <option value="sentences">Sentences</option>
+            <option value="words">Words</option>
+          </select>
+          <label for="count" style="margin:0 0 0 12px">Count</label>
+          <input type="number" id="count" value="3" min="1" max="200" style="width:90px">
+          <label style="margin:0 0 0 12px;display:inline-flex;align-items:center;gap:6px;font-weight:500"><input type="checkbox" id="start" checked> Start with "Lorem ipsum"</label>
+        </div>
+
+        <textarea id="output" readonly style="margin-top:18px;min-height:260px"></textarea>
+
+        <div class="row">
+          <button id="generate" type="button">Generate</button>
+          <button id="copy" class="secondary" type="button">Copy text</button>
+        </div>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../about.html">About</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../contact.html">Contact</a>
+      <p>&copy; 2026 Toolkit Lab</p>
+    </div>
+  </footer>
+
+  <script>
+    const WORDS = ('a ac accumsan ante aliquam aliquet amet anim arcu at auctor augue bibendum blandit commodo consectetur ' +
+      'consequat convallis cras cursus dapibus diam dictum dignissim dolor dolore donec dui duis egestas eget eleifend elementum ' +
+      'elit enim erat eros est et etiam eu euismod ex facilisi faucibus felis fermentum feugiat fringilla fusce gravida habitant ' +
+      'hendrerit iaculis id imperdiet in integer interdum ipsum justo labore lacinia lacus laoreet lectus leo libero ligula lobortis ' +
+      'lorem luctus magna malesuada massa mattis maximus metus mi molestie mollis morbi nam neque nibh nisi nisl non nulla nunc ' +
+      'odio orci ornare pellentesque pharetra phasellus placerat porta porttitor posuere pretium proin pulvinar purus quam quis ' +
+      'rhoncus risus rutrum sagittis sapien scelerisque sed sem semper sit sociis sodales sollicitudin suscipit suspendisse tellus ' +
+      'tempor tincidunt tortor tristique turpis ut ultrices ultricies urna varius vehicula velit venenatis vestibulum vitae viverra vivamus ' +
+      'volutpat vulputate').split(' ');
+
+    const unitEl = document.getElementById('unit');
+    const countEl = document.getElementById('count');
+    const startEl = document.getElementById('start');
+    const outputEl = document.getElementById('output');
+
+    function pick() { return WORDS[Math.floor(Math.random() * WORDS.length)]; }
+
+    function sentence(min, max) {
+      const len = min + Math.floor(Math.random() * (max - min + 1));
+      const words = Array.from({ length: len }, pick);
+      words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+      return words.join(' ') + '.';
+    }
+
+    function paragraph() {
+      const count = 4 + Math.floor(Math.random() * 4);
+      return Array.from({ length: count }, () => sentence(6, 14)).join(' ');
+    }
+
+    function generate() {
+      const count = Math.min(200, Math.max(1, parseInt(countEl.value, 10) || 1));
+      let text;
+      if (unitEl.value === 'words') {
+        const words = Array.from({ length: count }, pick);
+        text = words.join(' ');
+      } else if (unitEl.value === 'sentences') {
+        text = Array.from({ length: count }, () => sentence(6, 14)).join(' ');
+      } else {
+        text = Array.from({ length: count }, paragraph).join('\n\n');
+      }
+      if (startEl.checked) {
+        text = 'Lorem ipsum dolor sit amet, ' + text.charAt(0).toLowerCase() + text.slice(1);
+      }
+      outputEl.value = text;
+    }
+
+    document.getElementById('generate').addEventListener('click', generate);
+    unitEl.addEventListener('change', generate);
+    countEl.addEventListener('input', generate);
+    startEl.addEventListener('change', generate);
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(outputEl.value); }
+      catch (err) { outputEl.select(); document.execCommand('copy'); }
+    });
+
+    generate();
+  </script>
+</body>
+</html>

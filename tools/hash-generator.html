@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <title>Hash Generator: SHA-256, SHA-512 and More - Toolkit Lab</title>
+  <meta name="description" content="Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes for text or files. Runs in your browser; nothing is uploaded.">
+  <link rel="canonical" href="https://toolkitlab.xyz/tools/hash-generator.html">
+  <meta property="og:site_name" content="Toolkit Lab">
+  <meta property="og:url" content="https://toolkitlab.xyz/tools/hash-generator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">T</span>Toolkit Lab</a>
+      <nav class="site">
+        <a href="../index.html#tools">Tools</a>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../about.html">About</a>
+        <div class="nav-tools">
+          <button class="search-trigger" data-open-palette type="button" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle theme"></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Hash Generator</p>
+        <h1>Hash Generator</h1>
+        <p class="lead">Calculate a SHA hash of some text or a file. Useful for checking that a download is intact.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+
+      <div class="panel">
+        <label for="algo">Algorithm</label>
+        <select id="algo">
+          <option value="SHA-256" selected>SHA-256</option>
+          <option value="SHA-512">SHA-512</option>
+          <option value="SHA-384">SHA-384</option>
+          <option value="SHA-1">SHA-1 (legacy, not for security)</option>
+        </select>
+
+        <label for="text">Text to hash</label>
+        <textarea id="text" rows="4" style="min-height:0" placeholder="Type or paste text"></textarea>
+
+        <label for="file">Or choose a file</label>
+        <input type="file" id="file">
+
+        <label for="result">Hash (hex)</label>
+        <textarea id="result" rows="2" readonly style="min-height:0;font-size:0.85rem;word-break:break-all"></textarea>
+
+        <div class="row">
+          <button id="copy" class="secondary" type="button">Copy hash</button>
+        </div>
+
+        <p id="error" class="error" hidden></p>
+        <p class="note">MD5 is not offered because the browser's built-in crypto does not support it. Files are read on your device and never uploaded.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../about.html">About</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../contact.html">Contact</a>
+      <p>&copy; 2026 Toolkit Lab</p>
+    </div>
+  </footer>
+
+  <script>
+    const algo = document.getElementById('algo');
+    const textEl = document.getElementById('text');
+    const fileEl = document.getElementById('file');
+    const result = document.getElementById('result');
+    const errorEl = document.getElementById('error');
+    let lastFile = null;
+
+    function toHex(buffer) {
+      return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function run() {
+      errorEl.hidden = true;
+      try {
+        if (lastFile) {
+          const data = await lastFile.arrayBuffer();
+          result.value = toHex(await crypto.subtle.digest(algo.value, data));
+        } else if (textEl.value) {
+          const data = new TextEncoder().encode(textEl.value);
+          result.value = toHex(await crypto.subtle.digest(algo.value, data));
+        } else {
+          result.value = '';
+        }
+      } catch (err) {
+        result.value = '';
+        errorEl.textContent = 'Could not calculate the hash. Your browser may not support this algorithm.';
+        errorEl.hidden = false;
+      }
+    }
+
+    textEl.addEventListener('input', () => {
+      if (textEl.value) { lastFile = null; fileEl.value = ''; }
+      run();
+    });
+    fileEl.addEventListener('change', () => {
+      lastFile = fileEl.files[0] || null;
+      if (lastFile) textEl.value = '';
+      run();
+    });
+    algo.addEventListener('change', run);
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      if (!result.value) return;
+      try { await navigator.clipboard.writeText(result.value); }
+      catch (err) { result.select(); document.execCommand('copy'); }
+    });
+  </script>
+</body>
+</html>

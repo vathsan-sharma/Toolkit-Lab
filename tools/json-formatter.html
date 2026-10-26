@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <title>JSON Formatter - Toolkit Lab</title>
+  <meta name="description" content="Beautify, minify and validate JSON online. Runs in your browser, so your data stays private.">
+  <link rel="canonical" href="https://toolkitlab.xyz/tools/json-formatter.html">
+  <meta property="og:site_name" content="Toolkit Lab">
+  <meta property="og:url" content="https://toolkitlab.xyz/tools/json-formatter.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">T</span>Toolkit Lab</a>
+      <nav class="site">
+        <a href="../index.html#tools">Tools</a>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../about.html">About</a>
+        <div class="nav-tools">
+          <button class="search-trigger" data-open-palette type="button" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle theme"></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+    <div class="wrap">
+      <h1>JSON Formatter</h1>
+      <p class="lead">Paste JSON, then beautify it, minify it, or just check that it is valid.</p>
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+
+      <div class="panel">
+        <label for="input">JSON input</label>
+        <textarea id="input" spellcheck="false" placeholder='{"name": "example", "items": [1, 2, 3]}'></textarea>
+
+        <label for="indent">Indent size</label>
+        <select id="indent" style="max-width:200px">
+          <option value="2" selected>2 spaces</option>
+          <option value="4">4 spaces</option>
+          <option value="tab">Tab</option>
+        </select>
+
+        <div class="row">
+          <button id="beautify">Beautify</button>
+          <button id="minify" class="secondary">Minify</button>
+          <button id="validate" class="secondary">Validate</button>
+          <button id="copy" class="secondary">Copy output</button>
+        </div>
+
+        <p id="status" class="note"></p>
+        <p id="error" class="error" hidden></p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../about.html">About</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../contact.html">Contact</a>
+      <p>&copy; 2026 Toolkit Lab</p>
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById('input');
+    const indentSelect = document.getElementById('indent');
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
+
+    function parse() {
+      try {
+        const value = JSON.parse(input.value);
+        errorEl.hidden = true;
+        return value;
+      } catch (err) {
+        errorEl.textContent = 'Invalid JSON: ' + err.message;
+        errorEl.hidden = false;
+        statusEl.textContent = '';
+        return undefined;
+      }
+    }
+
+    function indentValue() {
+      const choice = indentSelect.value;
+      return choice === 'tab' ? '\t' : Number(choice);
+    }
+
+    function output(text) {
+      input.value = text;
+      statusEl.textContent = 'Done. Output is in the box above.';
+    }
+
+    document.getElementById('beautify').addEventListener('click', () => {
+      const data = parse();
+      if (data === undefined) return;
+      output(JSON.stringify(data, null, indentValue()));
+    });
+
+    document.getElementById('minify').addEventListener('click', () => {
+      const data = parse();
+      if (data === undefined) return;
+      output(JSON.stringify(data));
+    });
+
+    document.getElementById('validate').addEventListener('click', () => {
+      const data = parse();
+      if (data === undefined) return;
+      const type = Array.isArray(data) ? 'array' : typeof data;
+      errorEl.hidden = true;
+      statusEl.textContent = 'Valid JSON (' + type + ').';
+    });
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(input.value);
+        statusEl.textContent = 'Copied to clipboard.';
+      } catch (err) {
+        input.select();
+        document.execCommand('copy');
+        statusEl.textContent = 'Copied to clipboard.';
+      }
+    });
+  </script>
+</body>
+</html>

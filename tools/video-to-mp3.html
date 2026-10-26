@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <title>Video to MP3 Converter - Toolkit Lab</title>
+  <meta name="description" content="Extract the audio from a video file you own and save it as an MP3. Runs in your browser; the video is never uploaded.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">T</span>Toolkit Lab</a>
+      <nav class="site">
+        <a href="../index.html#tools">Tools</a>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../about.html">About</a>
+        <div class="nav-tools">
+          <button class="search-trigger" data-open-palette type="button" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle theme"></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+    <div class="wrap">
+      <div class="tool-head">
+        <p class="crumbs"><a href="../index.html">Tools</a> / Video to MP3</p>
+        <h1>Video to MP3</h1>
+        <p class="lead">Pick a video file from your device and save its audio as an MP3. Only use this on videos you have the right to convert.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+
+      <div class="panel">
+        <label for="file">Video file (MP4, MOV, WebM, MKV)</label>
+        <input type="file" id="file" accept="video/*,.mp4,.mov,.webm,.mkv,.m4v">
+
+        <label for="quality">Audio quality</label>
+        <select id="quality">
+          <option value="2" selected>High (about 190 kbps)</option>
+          <option value="4">Medium (about 130 kbps)</option>
+          <option value="6">Small file (about 100 kbps)</option>
+        </select>
+
+        <div class="row">
+          <button id="convert" type="button" disabled>Convert to MP3</button>
+          <a id="download" class="button secondary" hidden>Download MP3</a>
+        </div>
+
+        <p id="status" class="note" hidden></p>
+        <p id="error" class="error" hidden></p>
+        <p class="note">The first conversion downloads the converter engine (about 30 MB), so it can take a minute. Your video stays on your device.</p>
+      </div>
+
+      <!-- AdSense: place your ad unit code here once your site is approved. -->
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../about.html">About</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../contact.html">Contact</a>
+      <p>&copy; 2026 Toolkit Lab</p>
+    </div>
+  </footer>
+
+  <script>
+    const CORE_BASE = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd/';
+    const fileInput = document.getElementById('file');
+    const qualitySelect = document.getElementById('quality');
+    const convertBtn = document.getElementById('convert');
+    const downloadLink = document.getElementById('download');
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
+
+    let file = null;
+    let ffmpeg = null;
+    let downloadUrl = null;
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+      statusEl.hidden = !message;
+    }
+
+    // Loads the ffmpeg core script, then starts it with the WebAssembly binary.
+    // This runs on the page itself, so no worker is needed.
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = () => reject(new Error('The converter could not load. Check your internet connection and try again.'));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function getEngine() {
+      if (ffmpeg) return ffmpeg;
+      setStatus('Loading the converter engine (first time only)...');
+      if (typeof window.createFFmpegCore !== 'function') {
+        await loadScript(CORE_BASE + 'ffmpeg-core.js');
+      }
+      const wasmBinary = new Uint8Array(await (await fetch(CORE_BASE + 'ffmpeg-core.wasm')).arrayBuffer());
+      ffmpeg = await window.createFFmpegCore({ wasmBinary });
+      return ffmpeg;
+    }
+
+    fileInput.addEventListener('change', () => {
+      showError('');
+      downloadLink.hidden = true;
+      file = fileInput.files[0] || null;
+      convertBtn.disabled = !file;
+    });
+
+    convertBtn.addEventListener('click', async () => {
+      if (!file) return;
+      showError('');
+      downloadLink.hidden = true;
+      convertBtn.disabled = true;
+      try {
+        const engine = await getEngine();
+        setStatus('Extracting audio...');
+        engine.FS.writeFile('input', new Uint8Array(await file.arrayBuffer()));
+        engine.exec('-i', 'input', '-vn', '-codec:a', 'libmp3lame', '-q:a', qualitySelect.value, 'output.mp3');
+        let data;
+        try {
+          data = engine.FS.readFile('output.mp3');
+        } catch (err) {
+          // ffmpeg writes no output file when the video has no audio track.
+          throw new Error('No audio was found in this video, so there is nothing to convert.');
+        }
+        engine.FS.unlink('input');
+        engine.FS.unlink('output.mp3');
+
+        if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+        downloadUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'audio/mpeg' }));
+        downloadLink.href = downloadUrl;
+        downloadLink.download = file.name.replace(/\.[^.]+$/, '') + '.mp3';
+        downloadLink.hidden = false;
+        setStatus('Done. Click Download MP3 to save the audio.');
+      } catch (err) {
+        setStatus('');
+        showError(err.message || 'This video could not be converted. Check that it has an audio track.');
+      } finally {
+        convertBtn.disabled = !file;
+      }
+    });
+  </script>
+</body>
+</html>

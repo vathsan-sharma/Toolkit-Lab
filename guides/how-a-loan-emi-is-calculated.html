@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4441f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <title>How a Loan EMI Is Calculated and Why Interest Front-Loads - Toolkit Lab</title>
+  <meta name="description" content="How the EMI formula works for a reducing-balance loan, why early payments mostly cover interest, and how the term changes the total cost.">
+  <link rel="canonical" href="https://toolkitlab.xyz/guides/how-a-loan-emi-is-calculated.html">
+  <meta property="og:site_name" content="Toolkit Lab">
+  <meta property="og:url" content="https://toolkitlab.xyz/guides/how-a-loan-emi-is-calculated.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">T</span>Toolkit Lab</a>
+      <nav class="site">
+        <a href="../index.html#tools">Tools</a>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../about.html">About</a>
+        <div class="nav-tools">
+          <button class="search-trigger" data-open-palette type="button" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle theme"></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+    <div class="wrap article">
+      <p class="note"><a href="index.html">Guides</a> / Loans</p>
+      <h1>How a Loan EMI Is Calculated</h1>
+      <p class="lead">An equated monthly instalment (EMI) is the fixed amount you pay each month to repay a loan. It stays the same every month, but the split between interest and principal changes over time.</p>
+
+      <h2>The formula</h2>
+      <p>For a loan of principal P, a monthly interest rate r (the annual rate divided by 12, as a decimal) and n monthly payments, the EMI is:</p>
+      <p><code>EMI = P × r × (1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)</code></p>
+      <p>If the rate is zero, the EMI is simply the principal divided by the number of months.</p>
+
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+
+      <h2>A worked example</h2>
+      <p>Borrowing 250,000 at 8.5% a year over 20 years gives a monthly payment of about 2,169.56. Over the full term you repay about 520,694, so the interest alone comes to about 270,694. Interest is the largest cost of a long loan.</p>
+
+      <h2>Why early payments are mostly interest</h2>
+      <p>Interest is charged on the balance that remains, not on the original amount. In the first years, the balance is high, so most of each payment goes to interest. Over time more goes to principal. This is why paying a little extra early, or refinancing, saves more than the same extra payment later.</p>
+
+      <h2>How the term changes the cost</h2>
+      <p>A longer term lowers the monthly payment but raises the total interest, because the balance stays high for longer. A shorter term does the reverse. Compare the total repaid, not just the monthly figure, before choosing.</p>
+
+      <h2>Check the real offer</h2>
+      <p>Lenders may charge processing fees, insurance or other costs that this simple calculation leaves out. Ask for the full schedule of payments and the total cost before you sign.</p>
+
+      <h2>Try it yourself</h2>
+      <p>The <a href="../tools/loan-calculator.html">Loan EMI Calculator</a> shows the monthly payment, total interest and total repaid for any amount, rate and term.</p>
+
+      <div class="ad-slot" aria-label="Advertisement">Ad space</div>
+    </div>
+    <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail">Ad space</div></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../about.html">About</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../contact.html">Contact</a>
+      <p>&copy; 2026 Toolkit Lab</p>
+    </div>
+  </footer>
+</body>
+</html>
