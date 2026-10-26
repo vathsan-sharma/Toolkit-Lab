@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Random Number Generator: Pick Numbers Between Any Range - Toolkit Lab";
+const description = "Generate random whole numbers between a minimum and maximum, with or without repeats. Uses your browser's secure random source.";
+---
+<Base title={title} description={description} path="/tools/random-number-generator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Random Number Generator</p>
+      <h1>Random Number Generator</h1>
+      <p class="lead">Choose a range and how many numbers you need. Numbers are generated on your device.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div><label for="min">Minimum</label><input type="number" id="min" step="1" value="1"></div>
+        <div><label for="max">Maximum</label><input type="number" id="max" step="1" value="100"></div>
+        <div><label for="count">How many</label><input type="number" id="count" min="1" max="1000" step="1" value="5"></div>
+      </div>
+      <label style="font-weight:500"><input type="checkbox" id="unique"> No repeats</label>
+      <div class="row"><button id="go" type="button">Generate</button><button id="copy" type="button" class="secondary">Copy</button></div>
+      <p id="error" class="error" hidden></p>
+      <p id="out" style="font-family:var(--serif);font-size:1.6rem;line-height:1.6;margin-top:18px;word-break:break-word"></p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  function randomInt(max) {
+    var limit = Math.floor(0x100000000 / max) * max;
+    var buf = new Uint32Array(1);
+    do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+    return buf[0] % max;
+  }
+  var outEl = document.getElementById('out');
+  var errorEl = document.getElementById('error');
+  document.getElementById('go').addEventListener('click', function () {
+    var min = parseInt(document.getElementById('min').value, 10);
+    var max = parseInt(document.getElementById('max').value, 10);
+    var count = parseInt(document.getElementById('count').value, 10);
+    var unique = document.getElementById('unique').checked;
+    var range = max - min + 1;
+    if (!(range >= 1) || !(count >= 1)) { errorEl.textContent = 'Maximum must be at least the minimum, and the count must be 1 or more.'; errorEl.hidden = false; return; }
+    if (unique && count > range) { errorEl.textContent = 'There are only ' + range + ' numbers in that range, so you cannot pick ' + count + ' without repeats.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    var picked = [];
+    var pool = null;
+    if (unique) { pool = []; for (var i = 0; i < range; i++) pool.push(min + i); }
+    for (var k = 0; k < count; k++) {
+      if (unique) { var idx = randomInt(pool.length); picked.push(pool[idx]); pool.splice(idx, 1); }
+      else { picked.push(min + randomInt(range)); }
+    }
+    outEl.textContent = picked.join(', ');
+  });
+  document.getElementById('copy').addEventListener('click', function () {
+    if (!outEl.textContent) return;
+    navigator.clipboard.writeText(outEl.textContent).catch(function () {});
+  });
+  document.getElementById('go').click();
+})();
+  </script>
+</Base>

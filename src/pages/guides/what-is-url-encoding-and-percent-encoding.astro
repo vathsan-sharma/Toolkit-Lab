@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "What Is URL Encoding (Percent-Encoding)? - Toolkit Lab";
+const description = "What URL encoding does, why spaces become %20, which characters need encoding, and when to use encodeURI or encodeURIComponent.";
+---
+<Base title={title} description={description} path="/guides/what-is-url-encoding-and-percent-encoding.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Web basics</p>
+    <h1>What Is URL Encoding (Percent-Encoding)?</h1>
+    <p class="lead">Web addresses can only contain a limited set of characters. URL encoding replaces anything else with a percent sign and two hex digits, so a space becomes %20.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Why encoding is needed</h2>
+<p>A URL uses characters such as ?, &amp;, = and / with a special meaning. If a value you put in a link contains one of those characters, the browser may read it as part of the address. Encoding turns the value into a safe form that can be passed through unchanged.</p>
+<h2>How it works</h2>
+<p>Each unsafe byte is written as a percent sign followed by its two-digit hex code. A space is %20, an ampersand is %26, and an equals sign is %3D. The receiving site decodes the value back to the original text.</p>
+<h2>Which function to use</h2>
+<ul>
+<li><strong>Whole address:</strong> encodeURI keeps the separators such as : / ? and &amp;, so the structure of the link survives.</li>
+<li><strong>A single value:</strong> encodeURIComponent escapes everything that is not a letter, digit or a few safe marks, so a value containing &amp; or = cannot break the query string.</li>
+</ul>
+<h2>Plus signs and spaces in forms</h2>
+<p>HTML forms often encode spaces as + rather than %20. Both mean a space in query strings, but a plus sign inside a path is taken literally, so check which form the receiving site expects.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/url-encoder.html">URL Encoder and Decoder</a> converts text in both directions. Nothing you type is sent to a server.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

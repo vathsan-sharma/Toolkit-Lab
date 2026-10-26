@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "URL Encoder and Decoder: Percent-Encode Text Online - Toolkit Lab";
+const description = "Encode text for use in a web address, or decode a percent-encoded URL back to readable text. Free and private, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/url-encoder.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / URL Encoder</p>
+      <h1>URL Encoder and Decoder</h1>
+      <p class="lead">Turn text with spaces or symbols into a safe web address string, or decode one back.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <label for="input">Text or URL</label>
+      <textarea id="input" rows="5" spellcheck="false" placeholder="for example: hello world & more?x=1"></textarea>
+      <div class="row">
+        <button id="encode" type="button">Encode</button>
+        <button id="decode" type="button" class="secondary">Decode</button>
+        <button id="copy" type="button" class="secondary">Copy result</button>
+      </div>
+      <label for="result">Result</label>
+      <textarea id="result" rows="5" readonly spellcheck="false"></textarea>
+      <p id="error" class="error" hidden></p>
+      <p class="note">Encoding a full URL with encodeURI keeps its structure. Encoding a single value, such as a query parameter, uses encodeURIComponent, which also escapes characters like &amp; and =.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var input = document.getElementById('input');
+  var result = document.getElementById('result');
+  var errorEl = document.getElementById('error');
+  var wholeUrl = false;
+  function show(text) { result.value = text; }
+  document.getElementById('encode').addEventListener('click', function () {
+    errorEl.hidden = true;
+    show(input.value.indexOf('://') !== -1 ? encodeURI(input.value) : encodeURIComponent(input.value));
+  });
+  document.getElementById('decode').addEventListener('click', function () {
+    errorEl.hidden = true;
+    try { show(decodeURIComponent(input.value)); }
+    catch (err) { show(''); errorEl.textContent = 'This text has an incomplete percent sign, for example % followed by letters that are not hex digits.'; errorEl.hidden = false; }
+  });
+  document.getElementById('copy').addEventListener('click', function () {
+    if (result.value) navigator.clipboard.writeText(result.value).catch(function () {});
+  });
+})();
+  </script>
+</Base>

@@ -25,7 +25,7 @@ Status key: [x] done, [~] in progress, [ ] not started, [!] blocked on the owner
 - [x] Discount Calculator (sale price, saving, tax)
 - [x] Image Converter (JPG, PNG, WebP)
 - [x] Age Calculator
-Total tools: 28
+Total tools: 28 (earlier phase)
 
 ## Phase 4: New guides
 - [x] How to Resize an Image to a Specific File Size
@@ -53,6 +53,16 @@ Total guides: 25
 - Built and tested Image Resizer, Image Converter and Age Calculator in the browser (age result checked by hand).
 - Added sitemap, robots.txt, llms.txt, structured data, favicon.svg, canonical domain set to www.
 - Added six guides and listed them on the guides index and in search.
+
+## Phase 6: More tools and guides
+- [x] Tip Calculator (in Calculators)
+- [x] Random Number Generator (no-repeat option)
+- [x] URL Encoder and Decoder
+- [x] Compound Interest Calculator (in Calculators)
+- [x] What Is URL Encoding (Percent-Encoding)?
+- [x] How Compound Interest Works, With a Worked Example
+- [x] How to Split a Bill Fairly, Including the Tip
+Total tools: 32. Total guides: 28.
 
 ## Log (continued)
 - Added BreadcrumbList data, the og:image, two tools and two guides. Tested both tools in the browser.

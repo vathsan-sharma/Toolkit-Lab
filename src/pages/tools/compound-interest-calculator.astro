@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Compound Interest Calculator: Growth Over Time - Toolkit Lab";
+const description = "See how a savings amount grows with compound interest. Enter the starting amount, interest rate, years and how often interest is added.";
+---
+<Base title={title} description={description} path="/tools/compound-interest-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Compound Interest Calculator</p>
+      <h1>Compound Interest Calculator</h1>
+      <p class="lead">Find the value of a savings amount after a number of years, and how much of it is interest.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="principal">Starting amount</label><input type="number" id="principal" min="0" step="100" value="10000"></div>
+        <div><label for="rate">Annual interest rate (%)</label><input type="number" id="rate" min="0" step="0.1" value="7"></div>
+        <div><label for="years">Years</label><input type="number" id="years" min="0" step="1" value="10"></div>
+        <div><label for="freq">Interest added</label>
+          <select id="freq"><option value="1" selected>Yearly</option><option value="4">Quarterly</option><option value="12">Monthly</option><option value="365">Daily</option></select>
+        </div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="future">-</strong><span>Value at the end</span></div>
+        <div class="stat"><strong id="interest">-</strong><span>Interest earned</span></div>
+      </div>
+      <p class="note">This assumes the rate stays the same and no money is added or withdrawn. It is an illustration, not a forecast.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  var money = function (n) { return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' }); };
+  function update() {
+    var P = parseFloat(document.getElementById('principal').value);
+    var r = parseFloat(document.getElementById('rate').value) / 100;
+    var t = parseFloat(document.getElementById('years').value);
+    var n = parseInt(document.getElementById('freq').value, 10);
+    var errorEl = document.getElementById('error');
+    if (!(P >= 0) || !(r >= 0) || !(t >= 0)) { errorEl.textContent = 'Enter values of zero or more.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    // A = P(1 + r/n)^(nt)
+    var A = P * Math.pow(1 + r / n, n * t);
+    document.getElementById('future').textContent = money(A);
+    document.getElementById('interest').textContent = money(A - P);
+  }
+  document.querySelectorAll('input, select').forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+  update();
+})();
+  </script>
+</Base>
