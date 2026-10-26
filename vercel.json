@@ -2,6 +2,11 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/tools/gst-calculator.html",
+      "destination": "/tools/sales-tax-vat-calculator",
+      "permanent": true
+    },
+    {
       "source": "/guides/index.html",
       "destination": "/guides",
       "permanent": true
@@ -14,6 +19,11 @@
     {
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
+      "permanent": true
+    },
+    {
+      "source": "/tools/gst-calculator",
+      "destination": "/tools/sales-tax-vat-calculator",
       "permanent": true
     }
   ],
