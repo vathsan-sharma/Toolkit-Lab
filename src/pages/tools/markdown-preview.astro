@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Markdown Preview: Write Markdown and See the Result - Toolkit Lab";
+const description = "Write Markdown and see headings, lists, links and bold text rendered as you type. Simple, free and private, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/markdown-preview.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Markdown Preview</p>
+      <h1>Markdown Preview</h1>
+      <p class="lead">Type Markdown on the left and see the formatted result on the right. Nothing is saved or sent.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="md">Markdown</label><textarea id="md" rows="16" spellcheck="false"># Hello
+
+Write **bold**, *italic*, a [link](https://www.toolkitlab.xyz) or a list:
+
+- first point
+- second point</textarea></div>
+        <div><label>Preview</label><div id="preview" style="border:1px solid var(--border);border-radius:8px;padding:14px;min-height:16rem;background:var(--surface);overflow-wrap:anywhere"></div></div>
+      </div>
+      <p class="note">This supports headings, bold, italic, links, lists, inline code and paragraphs. Some advanced Markdown features are not shown.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function inline(s) {
+    s = esc(s);
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" rel="nofollow noopener">$1</a>');
+    return s;
+  }
+  function render(md) {
+    var lines = md.split('\n'), html = [], list = null, para = [];
+    function flushPara() { if (para.length) { html.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } }
+    function closeList() { if (list) { html.push('</' + list + '>'); list = null; } }
+    lines.forEach(function (line) {
+      var h = /^(#{1,3})\s+(.*)$/.exec(line), li = /^\s*[-*]\s+(.*)$/.exec(line), ol = /^\s*\d+\.\s+(.*)$/.exec(line);
+      if (h) { flushPara(); closeList(); html.push('<h' + h[1].length + '>' + inline(h[2]) + '</h' + h[1].length + '>'); }
+      else if (li) { flushPara(); if (list !== 'ul') { closeList(); html.push('<ul>'); list = 'ul'; } html.push('<li>' + inline(li[1]) + '</li>'); }
+      else if (ol) { flushPara(); if (list !== 'ol') { closeList(); html.push('<ol>'); list = 'ol'; } html.push('<li>' + inline(ol[1]) + '</li>'); }
+      else if (line.trim() === '') { flushPara(); closeList(); }
+      else { closeList(); para.push(line.trim()); }
+    });
+    flushPara(); closeList();
+    return html.join('\n');
+  }
+  var mdEl = document.getElementById('md');
+  var preview = document.getElementById('preview');
+  mdEl.addEventListener('input', function () { preview.innerHTML = render(mdEl.value); });
+  preview.innerHTML = render(mdEl.value);
+})();
+  </script>
+</Base>

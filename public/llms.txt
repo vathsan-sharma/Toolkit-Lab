@@ -1,6 +1,6 @@
 # Toolkit Lab
 
-> Toolkit Lab is a free website with 40 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
+> Toolkit Lab is a free website with 43 browser-based tools for PDFs, images, video audio, calculators and text, plus practical guides. Files are processed on the user's device and are not uploaded.
 
 ## Tools
 - [Merge PDF](https://www.toolkitlab.xyz/tools/merge-pdf.html): combine PDF files in any order
@@ -42,6 +42,9 @@
 - [Regex Tester](https://www.toolkitlab.xyz/tools/regex-tester.html): test regular expressions
 - [Typing Speed Test](https://www.toolkitlab.xyz/tools/typing-speed-test.html): words per minute and accuracy
 - [Image to Base64](https://www.toolkitlab.xyz/tools/image-to-base64.html): data URI for small images
+- [CSV to JSON Converter](https://www.toolkitlab.xyz/tools/csv-to-json.html): turn CSV into JSON
+- [Markdown Preview](https://www.toolkitlab.xyz/tools/markdown-preview.html): see Markdown formatted
+- [Password Strength Checker](https://www.toolkitlab.xyz/tools/password-strength-checker.html): estimate password strength on your device
 - [Online Stopwatch](https://www.toolkitlab.xyz/tools/stopwatch.html)
 
 ## Guides

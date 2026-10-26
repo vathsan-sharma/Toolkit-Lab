@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "CSV to JSON Converter: Turn a Spreadsheet into JSON - Toolkit Lab";
+const description = "Convert CSV text, such as an export from a spreadsheet, into JSON objects. Handles quoted fields and a header row. Free and private.";
+---
+<Base title={title} description={description} path="/tools/csv-to-json.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / CSV to JSON</p>
+      <h1>CSV to JSON Converter</h1>
+      <p class="lead">Paste CSV with a header row and get a JSON array of objects. Nothing is uploaded.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+
+<div class="panel">
+      <label for="csv">CSV text (first row is the header)</label>
+      <textarea id="csv" rows="7" spellcheck="false">name,city,age
+"Asha Perera",Jaffna,34
+"Ravi, Jr.",Colombo,27</textarea>
+      <div class="row"><button id="convert" type="button">Convert to JSON</button><button id="copy" type="button" class="secondary">Copy JSON</button></div>
+      <p id="error" class="error" hidden></p>
+      <label for="json">JSON</label>
+      <textarea id="json" rows="10" readonly spellcheck="false"></textarea>
+      <p class="note">Commas inside double quotes stay inside the field. Two double quotes inside a quoted field mean one literal quote.</p>
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+
+  <script is:inline>
+(function () {
+  function parseCsv(text) {
+    var rows = [], row = [], field = '', inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQuotes) {
+        if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+        else if (c === '"') { inQuotes = false; }
+        else { field += c; }
+      } else if (c === '"') { inQuotes = true; }
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n' || c === '\r') {
+        if (c === '\r' && text[i + 1] === '\n') i++;
+        row.push(field); rows.push(row); row = []; field = '';
+      } else { field += c; }
+    }
+    if (inQuotes) throw new Error('A quoted field is missing its closing quote.');
+    if (field !== '' || row.length) { row.push(field); rows.push(row); }
+    return rows.filter(function (r) { return !(r.length === 1 && r[0] === ''); });
+  }
+  var csvEl = document.getElementById('csv');
+  var jsonEl = document.getElementById('json');
+  var errorEl = document.getElementById('error');
+  document.getElementById('convert').addEventListener('click', function () {
+    errorEl.hidden = true;
+    try {
+      var rows = parseCsv(csvEl.value);
+      if (rows.length < 2) throw new Error('Add a header row and at least one data row.');
+      var headers = rows[0];
+      var objects = rows.slice(1).map(function (r) {
+        var o = {};
+        headers.forEach(function (h, idx) { o[h] = r[idx] !== undefined ? r[idx] : ''; });
+        return o;
+      });
+      jsonEl.value = JSON.stringify(objects, null, 2);
+    } catch (err) {
+      jsonEl.value = '';
+      errorEl.textContent = err.message;
+      errorEl.hidden = false;
+    }
+  });
+  document.getElementById('copy').addEventListener('click', function () {
+    if (jsonEl.value) navigator.clipboard.writeText(jsonEl.value).catch(function () {});
+  });
+  document.getElementById('convert').click();
+})();
+  </script>
+</Base>

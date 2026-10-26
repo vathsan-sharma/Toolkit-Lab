@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "CSV vs JSON: Which Format Should You Use? - Toolkit Lab";
+const description = "The differences between CSV and JSON, when each one is the better choice, and the common mistakes when converting between them.";
+---
+<Base title={title} description={description} path="/guides/csv-vs-json-which-to-use.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Data formats</p>
+    <h1>CSV vs JSON: Which Format Should You Use?</h1>
+    <p class="lead">CSV and JSON both store data as text, but they suit different jobs. CSV is a table in plain text, and JSON is a structured format that can hold nested data.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>What CSV is good at</h2>
+<p>CSV is a list of rows, with commas between the values. Spreadsheets export it and import it easily, and people can read it at a glance. It works best for flat tables with one value per cell.</p>
+<h2>What JSON is good at</h2>
+<p>JSON stores named fields and can nest objects and lists inside each other. Web apps and APIs use it because programs can read it directly. It handles data that does not fit neatly into rows.</p>
+<h2>Common mistakes when converting</h2>
+<ul>
+<li><strong>Commas inside values:</strong> a value such as Ravi, Jr. must be wrapped in double quotes in CSV. A converter that ignores quotes will split it into two fields.</li>
+<li><strong>Types:</strong> every CSV value is text. The number 34 becomes the text "34" in JSON unless the converter or your code changes it.</li>
+<li><strong>Empty cells:</strong> decide whether an empty cell becomes an empty string or null, and keep the choice consistent.</li>
+</ul>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/csv-to-json.html">CSV to JSON Converter</a> uses the first row as field names and handles quoted commas. Your data stays in your browser.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>
