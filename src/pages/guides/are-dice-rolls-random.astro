@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Are Dice Rolls Really Random? How Fair Randomness Works - Toolkit Lab";
+const description = "What makes a dice roll fair, why a random generator must avoid bias, and how the browser dice roller uses secure random numbers.";
+---
+<Base title={title} description={description} path="/guides/are-dice-rolls-random.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Probability</p>
+    <h1>Are Dice Rolls Really Random? How Fair Randomness Works</h1>
+    <p class="lead">A fair die gives each face the same chance on every roll, and the rolls do not depend on each other. Computers imitate this with random number generators, and the quality of that generator decides whether the results are fair.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>What fair means</h2>
+<p>A fair six-sided die should show each face about one time in six over many rolls. The outcome of one roll should not change the odds for the next.</p>
+<h2>Why a simple approach can be biased</h2>
+<p>Taking a random number and using the remainder after dividing by the number of sides can favour some faces, if the range does not divide evenly. A fair generator discards the few values that would cause this, so every face has the same chance.</p>
+<h2>Secure random numbers</h2>
+<p>The dice roller uses the browser's cryptographic random source, and it applies this rejection step. That makes the results suitable for games and fair draws, though not a substitute for a physical die in a formal competition.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/dice-roller.html">Dice Roller</a> rolls up to twenty dice with 4 to 100 sides, and shows each result and the total.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

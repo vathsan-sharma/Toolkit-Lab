@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "How to Remove Duplicate Lines from a List - Toolkit Lab";
+const description = "How to remove repeated lines from a list or spreadsheet column, ignore case and extra spaces, and sort the result.";
+---
+<Base title={title} description={description} path="/guides/how-to-remove-duplicate-lines-from-a-list.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap article">
+    <p class="note"><a href="/guides.html">Guides</a> / Text cleanup</p>
+    <h1>How to Remove Duplicate Lines from a List</h1>
+    <p class="lead">Mailing lists, keyword lists and imported data often contain repeated entries. Removing duplicates before you use the list avoids sending the same message twice or counting items more than once.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<h2>Why duplicates appear</h2>
+<p>Lists are often merged from several sources, and the same item can appear with different capital letters or extra spaces. A simple comparison treats apple and Apple as different, so these need handling first.</p>
+<h2>Steps</h2>
+<ol>
+<li>Paste the list with one item per line.</li>
+<li>Turn on ignore case and ignore surrounding spaces if the list may contain those differences.</li>
+<li>Press the button. The first occurrence of each item is kept, and later copies are removed.</li>
+<li>Sort the result if you want it in alphabetical order.</li>
+</ol>
+<h2>Check the result</h2>
+<p>Compare the counts shown. If far more lines were removed than you expected, check whether the ignore case setting merged items that should stay separate.</p>
+<h2>Try it yourself</h2>
+<p>The <a href="/tools/remove-duplicate-lines.html">Remove Duplicate Lines</a> tool does this in your browser. Your list is not saved or sent anywhere.</p>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+</Base>

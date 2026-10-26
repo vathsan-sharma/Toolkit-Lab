@@ -116,3 +116,8 @@ Total tools: 46. Total guides: 40. Category pages: 4.
 - [x] How to Calculate the Time Between Two Times, Binary Decimal and Hexadecimal Explained, Simple vs Compound Interest
 - [x] Fixed a worked example in the time guide (22:00 to 06:00 is 8 hours)
 Total tools: 49. Total guides: 43.
+
+## Phase 12: More tools and guides
+- [x] Running Pace Calculator, Remove Duplicate Lines, Dice Roller
+- [x] How to Calculate Running Pace, How to Remove Duplicate Lines from a List, Are Dice Rolls Really Random?
+Total tools: 52. Total guides: 46.

@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Dice Roller: Roll Any Number of Dice Online - Toolkit Lab";
+const description = "Roll one or more dice with 4, 6, 8, 10, 12, 20 or 100 sides. Uses your browser's secure random source. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/dice-roller.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Dice Roller</p>
+      <h1>Dice Roller</h1>
+      <p class="lead">Choose how many dice and how many sides, then roll. Results are random and generated on your device.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div><label for="n">Number of dice</label><input type="number" id="n" min="1" max="20" step="1" value="2"></div>
+        <div><label for="s">Sides per die</label><select id="s"><option>4</option><option selected>6</option><option>8</option><option>10</option><option>12</option><option>20</option><option>100</option></select></div>
+      </div>
+      <div class="row"><button id="roll" type="button">Roll</button></div>
+      <p id="dice" style="font-family:var(--serif);font-size:2rem;margin-top:18px;word-break:break-word"></p>
+      <div class="stats"><div class="stat"><strong id="total">-</strong><span>Total</span></div></div>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  function randomInt(max) {
+    var limit = Math.floor(0x100000000 / max) * max, buf = new Uint32Array(1);
+    do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+    return buf[0] % max;
+  }
+  document.getElementById('roll').addEventListener('click', function () {
+    var n = Math.min(20, Math.max(1, parseInt(document.getElementById('n').value, 10) || 1));
+    var sides = parseInt(document.getElementById('s').value, 10), rolls = [], total = 0;
+    for (var i = 0; i < n; i++) { var r = randomInt(sides) + 1; rolls.push(r); total += r; }
+    document.getElementById('dice').textContent = rolls.join('  ');
+    document.getElementById('total').textContent = total;
+  });
+  document.getElementById('roll').click();
+})();
+  </script>
+</Base>

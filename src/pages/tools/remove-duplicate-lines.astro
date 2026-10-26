@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Remove Duplicate Lines: Clean Up a List - Toolkit Lab";
+const description = "Remove duplicate lines from a list, optionally ignoring case and spaces, and sort the result. Free, private and runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/remove-duplicate-lines.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Remove Duplicate Lines</p>
+      <h1>Remove Duplicate Lines</h1>
+      <p class="lead">Paste a list with one item per line. Duplicates are removed and the list is cleaned up.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <label for="in">Your list</label>
+      <textarea id="in" rows="8" spellcheck="false">apple
+Banana
+apple
+ banana
+cherry</textarea>
+      <div class="row">
+        <label style="font-weight:500"><input type="checkbox" id="ci" checked> Ignore upper and lower case</label>
+        <label style="font-weight:500"><input type="checkbox" id="trim" checked> Ignore surrounding spaces</label>
+        <label style="font-weight:500"><input type="checkbox" id="sort"> Sort A to Z</label>
+      </div>
+      <button id="go" type="button">Remove duplicates</button>
+      <label for="out">Result</label>
+      <textarea id="out" rows="8" readonly spellcheck="false"></textarea>
+      <p class="note" id="count"></p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  var inEl = document.getElementById('in'), outEl = document.getElementById('out'), countEl = document.getElementById('count');
+  document.getElementById('go').addEventListener('click', function () {
+    var ci = document.getElementById('ci').checked, trim = document.getElementById('trim').checked, sort = document.getElementById('sort').checked;
+    var lines = inEl.value.split('\n'), seen = {}, kept = [];
+    lines.forEach(function (line) {
+      var key = line;
+      if (trim) key = key.trim();
+      if (ci) key = key.toLowerCase();
+      if (!Object.prototype.hasOwnProperty.call(seen, key)) { seen[key] = true; kept.push(trim ? line.trim() : line); }
+    });
+    if (sort) kept.sort(function (a, b) { return a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0; });
+    outEl.value = kept.join('\n');
+    countEl.textContent = lines.length + ' lines in, ' + (lines.length - kept.length) + ' duplicates removed, ' + kept.length + ' lines out.';
+  });
+  document.getElementById('go').click();
+})();
+  </script>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = "Running Pace Calculator: Minutes per Kilometre and Mile - Toolkit Lab";
+const description = "Work out your running pace per kilometre or mile from your distance and time, and your average speed. Free and private, runs in your browser.";
+---
+<Base title={title} description={description} path="/tools/running-pace-calculator.html">
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <div class="wrap">
+    <div class="tool-head">
+      <p class="crumbs"><a href="/index.html">Tools</a> / Running Pace Calculator</p>
+      <h1>Running Pace Calculator</h1>
+      <p class="lead">Enter a distance and your finishing time to see your pace and average speed.</p>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+<div class="panel">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr 1fr;gap:14px">
+        <div><label for="dist">Distance</label><input type="number" id="dist" min="0" step="0.01" value="10"></div>
+        <div><label for="unit">Unit</label><select id="unit"><option value="km" selected>km</option><option value="mi">miles</option></select></div>
+        <div><label for="mins">Minutes</label><input type="number" id="mins" min="0" step="1" value="50"></div>
+        <div><label for="secs">Seconds</label><input type="number" id="secs" min="0" max="59" step="1" value="0"></div>
+      </div>
+      <p id="error" class="error" hidden></p>
+      <div class="stats">
+        <div class="stat"><strong id="pace">-</strong><span>Pace per unit</span></div>
+        <div class="stat"><strong id="speed">-</strong><span>Average speed</span></div>
+      </div>
+    </div>
+    <div class="ad-slot" aria-label="Advertisement"></div>
+  </div>
+  <aside class="ad-rail" aria-label="Advertisement"><div class="ad-slot ad-slot-rail"></div></aside>
+  <script is:inline>
+(function () {
+  function fmt(totalSeconds) {
+    var m = Math.floor(totalSeconds / 60), s = Math.round(totalSeconds % 60);
+    if (s === 60) { m += 1; s = 0; }
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  function update() {
+    var d = parseFloat(document.getElementById('dist').value), unit = document.getElementById('unit').value;
+    var mins = parseFloat(document.getElementById('mins').value) || 0, secs = parseFloat(document.getElementById('secs').value) || 0;
+    var errorEl = document.getElementById('error');
+    var total = mins * 60 + secs;
+    if (!(d > 0) || total <= 0) { errorEl.textContent = 'Enter a distance and a time above zero.'; errorEl.hidden = false; return; }
+    errorEl.hidden = true;
+    document.getElementById('pace').textContent = fmt(total / d) + ' per ' + unit;
+    document.getElementById('speed').textContent = (d / (total / 3600)).toFixed(2) + ' ' + unit + '/h';
+  }
+  document.querySelectorAll('input, select').forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+  update();
+})();
+  </script>
+</Base>
